@@ -1,0 +1,30 @@
+﻿@model KermesseApp.Models.tbl_rol
+
+@{
+    ViewBag.Title = "guardarRol";
+}
+
+<h2>Guardar Rol</h2>
+
+@using (Html.BeginForm("GuardarRol", "Tbl_rol", FormMethod.Post))
+{
+    <div class="container">
+        <div class="form-group">
+            <label> Descripcion del Rol</label>
+            @Html.ValidationMessageFor(x => x.rol_desc, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(x => x.rol_desc, new { @class = "form-control" })
+        </div>
+        @*<div class="form-group">
+            <label>Contraseña</label>
+            @Html.TextBoxFor(x => x.estado, new { @class = "form-control" })
+        </div>*@
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Guardar </button>
+            <button type="reset" class="btn btn-danger">Cancelar </button>
+        </div>
+    </div>
+
+}
+<div>
+    @Html.ActionLink("Regresar", "ListRol")
+</div>

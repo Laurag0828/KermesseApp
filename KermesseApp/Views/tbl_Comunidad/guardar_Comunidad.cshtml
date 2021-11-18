@@ -1,0 +1,52 @@
+﻿@model KermesseApp.Models.tbl_comunidad
+
+@{
+    ViewBag.Title = "Comunidad";
+}
+
+<div class="card border-secondary formulario">
+    @using (Html.BeginForm("guardar_Comunidad", "tbl_Comunidad", FormMethod.Post))
+    {
+        <div class="card-header">
+            <h2>Nueva Comunidad</h2>
+        </div>
+
+        <div class="card-body form-horizontal container-fluid">
+
+            <div class="form-group row">
+                @Html.LabelFor(x => x.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.ValidationMessageFor(x => x.nombre, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(x => x.nombre, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(x => x.responsable, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.ValidationMessageFor(x => x.responsable, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(x => x.responsable, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(x => x.desc_contribucion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.ValidationMessageFor(x => x.desc_contribucion, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(x => x.desc_contribucion, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group row justify-content-center">
+                <input type="submit" value="Guardar" class="btn btn-success col-md-2" />
+                <input type="reset" value="Cancelar" class="btn btn-danger col-md-2" />
+            </div>
+        </div>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Regresar", "listar_Comunidad")
+</div>

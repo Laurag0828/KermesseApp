@@ -1,0 +1,113 @@
+﻿@model KermesseApp.Models.tbl_gastos
+
+@{
+    ViewBag.Title = "Gasto";
+}
+
+<h2>Ver Gastos</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_kermesse.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_kermesse.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_cat_gastos.nombre_cat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_cat_gastos.nombre_cat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_gasto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_gasto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.concepto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.concepto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.monto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.monto)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario_creacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario_creacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario_modificacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario_modificacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usuario_eliminacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usuario_eliminacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_creacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_creacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_modificacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_modificacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_eliminacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_eliminacion)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Regresar", "ListGastos")
+</p>

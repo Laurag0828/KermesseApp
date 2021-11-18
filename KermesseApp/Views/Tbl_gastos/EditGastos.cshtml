@@ -1,0 +1,75 @@
+﻿@model KermesseApp.Models.tbl_gastos
+
+@{
+    ViewBag.Title = "Gasto";
+}
+
+<div class="card border-secondary formulario">
+    @using (Html.BeginForm("UpdateGasto", "Tbl_gastos", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="card-header">
+            <h2>Editar Gasto</h2>
+        </div>
+
+        <div class="card-body form-horizontal container-fluid">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.id_gasto)
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.id_kermesse, "Kermesse", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.DropDownList("id_kermesse", null, htmlAttributes: new { @class = "form-control" })*@
+                    @Html.DropDownListFor(model => model.id_kermesse, null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.id_kermesse, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.id_cat_gasto, "Categoria", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.DropDownList("id_cat_gasto", null, htmlAttributes: new { @class = "form-control" })*@
+                    @Html.DropDownListFor(model => model.id_cat_gasto, null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.id_cat_gasto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.fecha_gasto, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fecha_gasto, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.fecha_gasto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.concepto, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.concepto, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.concepto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.monto, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.monto, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.monto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group row justify-content-center">
+                <input type="submit" value="Guardar" class="btn btn-success col-md-2" />
+                <input type="reset" value="Cancelar" class="btn btn-danger col-md-2" />
+            </div>
+        </div>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Regresar", "ListGastos")
+</div>

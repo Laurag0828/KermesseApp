@@ -1,0 +1,51 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_denominacion>
+
+@{
+    ViewBag.Title = "Denominación";
+}
+
+<h2>tbl_Denominacion</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_moneda.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.valor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.valor_letras)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbl_moneda.nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.valor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.valor_letras)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.estado)
+        </td>*@
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id_denominacion }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id_denominacion }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id_denominacion })
+        </td>*@
+    </tr>
+}
+
+</table>

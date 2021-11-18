@@ -1,0 +1,57 @@
+﻿@model KermesseApp.Models.tbl_denominacion
+
+@{
+    ViewBag.Title = "Denominación";
+}
+
+<div class="card border-secondary formulario">
+    @using (Html.BeginForm("GuardarDen", "Tbl_denominacion", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="card-header">
+            <h2>Nueva Denominación</h2>
+        </div>
+
+        <div class="card-body form-horizontal container-fluid">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.id_moneda, "Moneda", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.DropDownList("id_moneda", null, htmlAttributes: new { @class = "form-control" })*@
+                    @Html.DropDownListFor(model => model.id_moneda, ViewBag.id_moneda as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.id_moneda, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.valor, "Valor", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.valor, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.valor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.valor_letras, "Valor en letras", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.valor_letras, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.valor_letras, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group row justify-content-center">
+                <input type="submit" value="Guardar" class="btn btn-success col-md-2" />
+                <input type="reset" value="Cancelar" class="btn btn-danger col-md-2" />
+            </div>
+        </div>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Regresar", "ListDen")
+</div>

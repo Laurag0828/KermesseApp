@@ -1,0 +1,79 @@
+﻿@model KermesseApp.Models.tbl_productos
+
+@{
+    ViewBag.Title = "Producto";
+}
+
+<div class="card border-secondary formulario">
+    @using (Html.BeginForm("guardar_Producto", "tbl_Producto", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="card-header">
+            <h2>Nuevo Producto</h2>
+        </div>
+
+        <div class="card-body form-horizontal container-fluid">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group row">
+                @Html.LabelFor(x => x.id_comunidad, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(x => x.id_comunidad, null, "Seleccione...", htmlAttributes: new { @class = "form-select" })
+                    @Html.ValidationMessageFor(x => x.id_comunidad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(x => x.id_cat_producto, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(x => x.id_cat_producto, null, "Seleccione...", htmlAttributes: new { @class = "form-select" })
+                    @Html.ValidationMessageFor(x => x.id_cat_producto, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(x => x.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(x => x.nombre, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(x => x.nombre, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(x => x.cantidad, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(x => x.cantidad, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(x => x.cantidad, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(x => x.precio_venta, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(x => x.precio_venta, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(x => x.precio_venta, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(x => x.desc_presentacion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(x => x.desc_presentacion, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.desc_presentacion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group row justify-content-center">
+                <input type="submit" value="Guardar" class="btn btn-success col-md-2" />
+                <input type="reset" value="Cancelar" class="btn btn-danger col-md-2" />
+            </div>
+        </div>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Regresar", "listar_Producto")
+</div>

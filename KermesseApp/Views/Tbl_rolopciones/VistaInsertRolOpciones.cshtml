@@ -1,0 +1,44 @@
+﻿@model KermesseApp.Models.tbl_rol_opciones
+
+@{
+    ViewBag.Title = "VistaInsertRolOpciones";
+}
+
+<h2>VistaInsertRolOpciones</h2>
+
+@using (Html.BeginForm("GuardarRolOpciones", "Tbl_rolopciones", FormMethod.Post)) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>tbl_rol_opciones</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_rol, "id_rol", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.id_rol, ViewBag.id_rol as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_rol, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_opcion, "id_opciones", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.id_opcion, ViewBag.id_opciones as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_opcion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary">Guardar </button>
+                <button type="reset" class="btn btn-danger">Cancelar </button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "ListRolOpciones")
+</div>

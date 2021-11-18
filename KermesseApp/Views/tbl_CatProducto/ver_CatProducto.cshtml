@@ -1,0 +1,41 @@
+﻿@model KermesseApp.Models.tbl_cat_producto
+
+@{
+    ViewBag.Title = "Categoría de Productos";
+}
+
+<h2>Detalle de Categoría de Productos</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>*@
+
+        @*<dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "editar_CatProducto", new { id = Model.id_cat_producto }) |
+    @Html.ActionLink("Regresar", "listar_CatProducto")
+</p>

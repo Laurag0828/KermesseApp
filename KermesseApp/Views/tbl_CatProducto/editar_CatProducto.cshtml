@@ -1,0 +1,48 @@
+﻿@model KermesseApp.Models.tbl_cat_producto
+
+@{
+    ViewBag.Title = "Categoría de Productos";
+}
+
+<div class="card border-secondary formulario">
+    @using (Html.BeginForm("actualizar_CatProducto", "tbl_CatProducto", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="card-header">
+            <h2>Editar Categoría de Productos</h2>
+        </div>
+
+        <div class="card-body form-horizontal container-fluid">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(x => x.id_cat_producto)
+
+            <div class="form-group row">
+                @Html.LabelFor(x => x.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.ValidationMessageFor(x => x.nombre, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(x => x.nombre, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(x => x.descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.ValidationMessageFor(x => x.descripcion, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(x => x.descripcion, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group row justify-content-center">
+                <input type="submit" value="Guardar" class="btn btn-success col-md-2" />
+                <input type="reset" value="Cancelar" class="btn btn-danger col-md-2" />
+            </div>
+        </div>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Regresar", "listar_CatProducto")
+</div>

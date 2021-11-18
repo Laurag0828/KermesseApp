@@ -1,0 +1,88 @@
+﻿@model IEnumerable<KermesseApp.Models.vw_productos>
+
+@{
+    ViewBag.Title = "Producto";
+}
+
+<h2>Lista de Productos</h2>
+
+<p>
+    @Html.ActionLink("Nuevo producto", "guardar_Producto")
+</p>
+
+@*Filtro de busqueda*@
+@using (Html.BeginForm("filtrar_Producto", "tbl_Producto", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="form-group col-xs-4 col-md-4">
+
+            @Html.ActionLink("PDF", "#", new { tipo = "PDF" }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Word", "#", new { tipo = "Word" }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Excel", "#", new { tipo = "Excel" }, new { @class = "btn btn-success" })
+
+        </div>
+
+        <div class="form-group col-xs-8 col-md-8">
+            <div class="input-group busqueda">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-6", @placeholder = "Buscar" })
+                <button type="submit" class="btn btn-light col-md-2">Buscar</button>
+            </div>
+        </div>
+    </div>
+}
+<br />
+
+<table class="table table-bordered table-hover">
+    <tr class="table-primary">
+        <th>
+            @Html.DisplayNameFor(model => model.comunidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.catprod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.precio_venta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.desc_presentacion)
+        </th>
+        <th>Acciones</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.comunidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.catprod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.precio_venta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.desc_presentacion)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "editar_Producto", new { id = item.id_producto }, new { @class = "btn btn-outline-success btn-sm" }) |
+                @Html.ActionLink("Detalle", "ver_Producto", new { id = item.id_producto }, new { @class = "btn btn-outline-info btn-sm" }) |
+                @Html.ActionLink("Eliminar", "eliminar_Producto", new { id = item.id_producto }, new { @class = "btn btn-outline-danger btn-sm" })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,34 @@
+﻿@model KermesseApp.Models.tbl_usuario
+
+@{
+    ViewBag.Title = "guardarUsuario";
+}
+
+<h2>guardarUsuario</h2>
+
+@using (Html.BeginForm("tbl_usuario", "Tbl_usuario", FormMethod.Post))
+{
+<div class="container">
+    <div class="form-group">
+        <label> Usuario:</label>
+        @Html.TextBoxFor(x => x.usuario, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Contraseña</label>
+        @Html.TextBoxFor(x => x.pwd, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label> Nombres del Usuario</label>
+        @Html.TextBoxFor(x => x.nombres, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label> Correo del usuario:</label>
+        @Html.TextBoxFor(x => x.email, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Guardar </button>
+        <button type="reset" class="btn btn-danger">Cancelar </button>
+    </div>
+</div>
+
+}

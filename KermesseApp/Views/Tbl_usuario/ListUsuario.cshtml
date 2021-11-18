@@ -1,0 +1,94 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_usuario>
+
+@{
+    ViewBag.Title = "Usuario";
+}
+
+<h1>Lista de Usuarios</h1>
+
+<p>
+    @Html.ActionLink("Nuevo Usuario", "VGuardarUsuario")
+</p>
+
+@*MANDAMOS A LLAMAR LA LISTA FILTRADA*@
+@using (Html.BeginForm("FiltrarUsuario", "Tbl_usuario", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="form-group col-xs-4 col-md-4">
+
+            @*Mandamos a llamar el reporte en los distintos formatos*@
+            @Html.ActionLink("PDF", "VerRptUsuario", new { tipo = "PDF" }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Word", "VerRptUsuario", new { tipo = "Word" }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Excel", "VerRptUsuario", new { tipo = "Excel" }, new { @class = "btn btn-success" })
+
+        </div>
+
+        <div class="form-group col-xs-8 col-md-8">
+            <div class="input-group busqueda">
+                @*<label for = "cadena" class= "form-label col-md-2">Busqueda:</label>*@
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-6", @placeholder = "Buscar" })
+                <button type="submit" class="btn btn-light col-md-2">Buscar</button>
+            </div>
+        </div>
+    </div>
+}
+<br />
+
+<table class="table table-bordered table-hover">
+    <tr class="table-primary">
+        <th>
+            @Html.DisplayNameFor(model => model.usuario)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.pwd)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.nombres)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.apellidos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.estado)
+        </th>*@
+        <th></th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuario)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.pwd)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.nombres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.estado)
+                </td>*@
+            <td class="col-4">
+                @Html.ActionLink("Editar", "EditUsuario", new { id = item.id_usuario }, new { @Class = "btn btn-outline-success btn-sm" }) |
+                @Html.ActionLink("Ver", "VerUsuario", new { id = item.id_usuario }, new { @Class = "btn btn-outline-info btn-sm" })   |
+                @Html.ActionLink("Eliminar", "DeleteUsuario", new { id = item.id_usuario }, new { @class = "btn btn-outline-danger btn-smr" }) |
+                @*<a href="@Url.Action("DeleteUsuario", new { id = item.id_usuario })" class=" btn btn-xs btn-danger">Eliminar </a>  |
+                    <a href="@Url.Action("DeleteUsuario", new { id = item.id_usuario })"><i class=" glyphicon glyphicon-trash" title="Eliminar"></i> </a>  |*@
+
+            </td>
+        </tr>
+    }
+
+</table>

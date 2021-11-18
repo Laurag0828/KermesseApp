@@ -1,0 +1,79 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_listaprecio>
+
+@{
+    ViewBag.Title = "ListListaPrecio";
+}
+
+<h2> Listas de Precio</h2>
+
+<p>
+    @Html.ActionLink("Crear Lista Precio", "VGuardarListaPrecio")
+</p>
+
+
+<h3>Buscar Lista Precio</h3>
+
+@using (Html.BeginForm("", "tbl_listaprecio", FormMethod.Post))
+{
+    <div class="row">
+        <div class="form-group col-xs-8 col-md-8">
+            @*<label for = "cadena" class= "form-label col-md-2">Busqueda:</label>*@
+            @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese aqui los datos de la busqueda" })
+            <span class="input-group">
+                <button type="submit" class="btn btn-block btn-success col-md-2">Buscar</button>
+            </span>
+        </div>
+
+        <div class="form-group col-xs-4 col-md-4">
+            @*Mandamos a llamar el reporte en los distintos formatos*@
+            @Html.ActionLink("PDF", "", new { tipo = "PDF" }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Excel", "", new { tipo = "Excel" }, new { @class = "btn btn-success" })
+
+
+
+        </div>
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descripcion)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>*@
+        @*<th>
+                @Html.DisplayNameFor(model => model.tbl_kermesse.nombre)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.nombre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.descripcion)
+    </td>
+    @*<td>
+            @Html.DisplayFor(modelItem => item.estado)
+        </td>*@
+    @*<td>
+            @Html.DisplayFor(modelItem => item.tbl_kermesse.nombre)
+        </td>*@
+    <td>
+        @Html.ActionLink("Editar", "", new { id = item.id_listaprecio }, new { @Class = "btn btn-xs btn-warning" }) |
+        @Html.ActionLink("Ver", "", new { id = item.id_listaprecio }, new { @Class = "btn btn-xs btn-default" })   |
+        @Html.ActionLink("Eliminar", "", new { id = item.id_listaprecio }, new { @class = "btn btn-xs btn-danger" }) |
+
+
+    </td>
+</tr>
+    }
+
+</table>

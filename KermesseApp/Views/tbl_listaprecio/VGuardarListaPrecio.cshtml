@@ -1,0 +1,31 @@
+﻿@model KermesseApp.Models.tbl_listaprecio
+
+@{
+    ViewBag.Title = "guardarListaPrecio";
+}
+
+<h2>Guardar Lista Precio</h2>
+
+@using (Html.BeginForm("guardarListaPrecio", "Tbl_listaPrecio", FormMethod.Post))
+{
+<div class="container">
+    <div class="form-group">
+        <label> Id de la kermesse:</label>
+        @Html.TextBoxFor(x => x.id_kermesse, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label> Nombre de la Lista del precio:</label>
+        @Html.TextBoxFor(x => x.nombre, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label> Descripcion de la Lista del precio:</label>
+        @Html.TextAreaFor(x => x.descripcion, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Guardar </button>
+        <button type="reset" class="btn btn-danger">Cancelar </button>
+    </div>
+</div>
+
+    }
+

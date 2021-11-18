@@ -1,0 +1,64 @@
+﻿@model KermesseApp.Models.vw_productos
+
+@{
+    ViewBag.Title = "Producto";
+}
+
+<h2>Detalle de Producto</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.comunidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comunidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.catprod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.catprod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.precio_venta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.precio_venta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.desc_presentacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.desc_presentacion)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "editar_Producto", new { id = Model.id_producto }) |
+    @Html.ActionLink("Regresar", "listar_Producto")
+</p>

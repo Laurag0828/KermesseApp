@@ -1,0 +1,54 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_rol_usuario>
+
+@{
+    ViewBag.Title = "Tbl_rol_usuario";
+}
+
+<h2>Tbl_rol_usuario</h2>
+<h3>Buscar Rol Usuario</h3>
+
+@using (Html.BeginForm("FiltrarRolUsuario", "Tbl_rolusuario", FormMethod.Post))
+{
+    <div class="row">
+        <div class="form-group col-xs-8 col-md-8">
+            @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese aqui los datos de la busqueda" })
+            <span class="input-group">
+                <button type="submit" class="btn btn-block btn-success col-md-2">Buscar</button>
+            </span>
+        </div>
+
+    </div>
+
+}
+<p>
+    @Html.ActionLink("Nuevo Rol Usuario", "VistaInsertRolUsuario")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_rol.rol_desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_usuario.usuario)
+        </th>
+        <th>Acciones</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tbl_rol.rol_desc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tbl_usuario.usuario)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "EditRolUsuario", new { id = item.id_rol }, new { @Class = "btn btn-xs btn-warning" }) | |
+                @Html.ActionLink("Ver", "VerRolUsuario", new { id = item.id_rol }, new { @Class = "btn btn-xs btn-default" }) |
+                <a href="@Url.Action("DeleteRolUsuario", new { id = item.id_rol })" class=" btn btn-xs btn-danger">Eliminar </a>
+            </td>
+        </tr>
+    }
+
+</table>

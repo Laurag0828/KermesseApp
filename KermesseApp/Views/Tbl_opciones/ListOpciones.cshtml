@@ -1,0 +1,61 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_opciones>
+
+@{
+    ViewBag.Title = "tbl_opciones";
+}
+
+<h2>tbl_opciones</h2>
+
+<p>
+    @Html.ActionLink("Nueva opción", "VGuardarOpciones")
+</p>
+
+<h3>Buscar Opciones</h3>
+
+@using (Html.BeginForm("FiltrarOpciones", "Tbl_opciones", FormMethod.Post))
+{
+    <div class="row">
+        <div class="form-group col-xs-8 col-md-8">
+            @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese aqui los datos de la busqueda" })
+            <span class="input-group">
+                <button type="submit" class="btn btn-block btn-success col-md-2">Buscar</button>
+            </span>
+        </div>
+
+    </div>
+
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.opcion)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.opcion)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.estado)
+                    </td>*@
+                <td>
+                    @Html.ActionLink("Editar", "EditOpciones", new { id = item.id_opciones }, new { @Class = "btn btn-xs btn-warning" }) |
+                    @Html.ActionLink("Ver", "VerOpciones", new { id = item.id_opciones }, new { @Class = "btn btn-xs btn-default" })  |
+                    @Html.ActionLink("Eliminar", "DeleteOpciones", new { id = item.id_opciones }, new { @class = "btn btn-xs btn-danger" }) |
+                    @*<a href="@Url.Action("DeleteUsuario", new { id = item.id_opciones })" class=" btn btn-xs btn-danger">Eliminar </a>  |
+                    <a href="@Url.Action("DeleteUsuario", new { id = item.id_opciones })"><i class=" glyphicon glyphicon-trash" title="Eliminar"></i> </a>  |*@
+                </td>
+            </tr>
+        }
+    }
+
+</table>

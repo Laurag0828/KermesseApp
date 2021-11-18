@@ -1,0 +1,77 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_denominacion>
+
+@{
+    ViewBag.Title = "Denominación";
+}
+
+<h2>Lista de Denominaciones</h2>
+
+<p>
+    @Html.ActionLink("Nueva Denominacion", "GuardarDen")
+</p>
+
+@using (Html.BeginForm("FiltroDen", "Tbl_denominacion", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="form-group col-xs-4 col-md-4">
+
+                @Html.ActionLink("PDF", "ReporteG", new { tipo = "PDF" }, new { @class = "btn btn-warning" })
+                @Html.ActionLink("Word", "ReporteG", new { tipo = "Word" }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Excel", "ReporteG", new { tipo = "Excel" }, new { @class = "btn btn-success" })
+
+        </div>
+
+        <div class="form-group col-xs-8 col-md-8">
+            <div class="input-group busqueda">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-6", @placeholder = "Buscar" })
+                <button type="submit" class="btn btn-light col-md-2">Buscar</button>
+            </div>
+        </div>
+
+    </div>
+}
+<br />
+
+<table class="table table-bordered table-hover">
+    <tr class="table-primary">
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_moneda.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.valor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.valor_letras)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>*@
+
+        <th>Acciones</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tbl_moneda.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.valor_letras)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.estado)
+                </td>*@
+            <td class="col-4">
+                @Html.ActionLink("Editar", "EditDen", new { id = item.id_denominacion }, new { @class = "btn btn-outline-success btn-sm" }) |
+                @Html.ActionLink("Ver", "VerDen", new { id = item.id_denominacion }, new { @class = "btn btn-outline-info btn-sm" }) |
+                @Html.ActionLink("Eliminar", "DeleteDen", new { id = item.id_denominacion }, new { @class = "btn btn-outline-danger btn-sm" })
+            </td>
+        </tr>
+    }
+
+</table>

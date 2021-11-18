@@ -1,0 +1,49 @@
+﻿@model KermesseApp.Models.tbl_comunidad
+
+@{
+    ViewBag.Title = "Comunidad";
+}
+
+<h2>Detalle de Comunidad</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.responsable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.responsable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.desc_contribucion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.desc_contribucion)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>*@
+
+        @*<dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "editar_Comunidad", new { id = Model.id_comunidad }) |
+    @Html.ActionLink("Regresar", "listar_Comunidad")
+</p>

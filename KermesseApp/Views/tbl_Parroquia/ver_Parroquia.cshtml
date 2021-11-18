@@ -1,0 +1,65 @@
+﻿@model KermesseApp.Models.tbl_parroquia
+
+@{
+    ViewBag.Title = "Parroquia";
+}
+
+<h2>Detalle de Parroquia</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.direccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.parroco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.parroco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.url_logo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.url_logo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sitio_web)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sitio_web)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "editar_Parroquia", new { id = Model.idparroquia }) |
+    @Html.ActionLink("Regresar", "listar_Parroquia")
+</p>

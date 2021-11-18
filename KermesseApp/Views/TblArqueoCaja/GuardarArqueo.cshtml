@@ -1,0 +1,265 @@
+﻿@model Tuple<KermesseApp.Models.tbl_arqueocaja, KermesseApp.Models.tbl_arqueocaja_det>
+
+@{
+    ViewBag.Title = "GuardarArqueo";
+}
+
+<h2>GuardarArqueo</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+
+    <div class="row">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.Item1.id_kermesse, "idkermesse", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("idkermesse", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.DropDownListFor(model => model.Item1.id_kermesse, ViewBag.id_kermesse as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Item1.id_kermesse, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.Item1.fecha_arqueo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Item1.fecha_arqueo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Item1.fecha_arqueo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.Item1.gran_total, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Item1.gran_total, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Item1.gran_total, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+    <h3>Detalle de Arqueo</h3>
+    <br>
+
+    <div class="row">
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Item2.id_moneda, "id_moneda", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("id_moneda", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.DropDownListFor(model => model.Item2.id_moneda, ViewBag.id_moneda as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Item2.id_moneda, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Item2.id_denominacion, "id_denominacion", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("id_denominacion", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.DropDownListFor(model => model.Item2.id_denominacion, ViewBag.id_denominacion as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Item2.id_denominacion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.Item2.cantidad, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Item2.cantidad, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Item2.cantidad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.Item2.subtotal, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Item2.subtotal, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Item2.subtotal, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group col-md-4">
+            <div class="col-md-offset-2 col-md-10">
+                <br>
+                <h5>       </h5>
+                <input onclick="agregarfila()" type="submit" value="Agregar" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+
+    <br><br>
+
+    <div class="table-responsive">
+
+        <table class="table table-bordered table-hover" name="tablaprueba" id="tablaprueba" width="50%" height="50%">
+
+            <thead>
+
+                <tr>
+                    <th>Moneda</th>
+                    <th>Denominacion</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                    <th>Acciones</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+                <tr></tr>
+            </tbody>
+
+            <thead>
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+            </thead>
+
+        </table>
+
+    </div>
+
+    <br>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="ArqueoCaja" type="submit" value="Guardar" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Regresar", "ListArqueo")
+</div>
+
+@section scripts{
+    <script>
+
+        function agregarfila() {
+
+            var mon = $('#cbmoneda option:selected').text();
+            var sim = $('#simbol').text();
+            var den = $('#denominacion option:selected').text();
+            var idden = $('#denominacion').val();
+            var cant = $('#cantidad').val();
+            var subtotal = $('#valor').val();
+
+            console.log(subtotal);
+
+            var m1 = document.getElementById("denominacion").value;
+            var m2 = document.getElementById("cantidad").value;
+            var sub = parseFloat(den) * parseFloat(m2);
+
+            document.getElementById("tablaprueba").insertRow(-1).innerHTML =
+                '<td>' + mon + '</td>' +
+                '<td>' + sim + '' + den + '</td>' +
+                '<td>' + cant + '</td>' +
+                '<td>' + sim + '' + sub + '</td>' +
+                '<td hidden>' + idden + '</td>' +
+                '<td hidden>' + sub + '</td>' +
+                '<td><button type="button" class="btn btn-sm btn-danger borrar"><i class="fas fa-trash-alt"></i></button></td>';
+
+            calcularTotal();
+        }
+
+        function eliminarfila() {
+            $(document).on('click', '.borrar', function (event) {
+                event.preventDefault();
+                $(this).closest('tr').remove();
+                calcularTotal();
+            });
+        }
+
+        function calcularTotal() {
+
+            var calcular = 0.00;
+
+            $.each($("#tablaprueba tbody tr"), function () {
+
+                if ($(this).find('td:eq(0)').html() === undefined) {
+                    console.log("Esta nulo")
+                } else {
+                    var subtotal = $(this).find('td:eq(5)').html()
+                    console.log(subtotal);
+                    calcular += parseFloat(subtotal);
+                }
+
+            });
+
+            $("#valor").val(calcular);
+        }
+
+        function ArqueoCaja(data) {
+            return $.ajax({
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                type: 'POST',
+                url: "/TblArqueoCaja/GuardarArqueo",
+                data: data,
+                success: function (result) {
+                    alert(result);
+                    location.reload();
+                },
+                error: function () {
+                    alert("Error!")
+                }
+            });
+
+            $("#ArqueoCaja").click(function (e) {
+                e.preventDefault();
+
+                var detailArr = [];
+                detailArr.length = 0;
+
+                $.each($("#tablapruea tbody tr"), function () {
+
+                    if ($(this).find('td:eq(0)').html() === undefined) {
+                        console.log("Este es nulo")
+                    } else {
+                        detailArr.push({
+                            id_moneda: $(this).find('td:eq(0)').html(),
+                            id_denominacion: $(this).find('td:eq(4)').html(),
+                            cantidad: $(this).find('td:eq(2)').html(),
+                            subtotal: $(this).find('td:eq(5)').html()
+                        });
+                    }
+                })
+
+                console.log(detailArr);
+
+                var data = JSON.stringify({
+                    kermesse: $("#kermesse").val(),
+                    fecha_arqueo: $("#fecha").val(),
+                    total: 4("#valor").val(),
+                    detalle: detailArr
+                });
+
+                console.log(data);
+
+                $.when(GuardarArqueo(data)).then(function (response) {
+                    console.log(response);
+                }).fail(function (err) {
+                    console.log(err);
+                })
+            });
+        
+    </script>
+}

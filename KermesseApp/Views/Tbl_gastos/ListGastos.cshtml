@@ -1,0 +1,126 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_gastos>
+
+@{
+    ViewBag.Title = "Gasto";
+}
+
+<h2>Lista de Gastos</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Gasto", "GuardarGastos")
+</p>
+
+@using (Html.BeginForm("FiltroGastos", "Tbl_gastos", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="form-group col-xs-4 col-md-4">
+
+            @Html.ActionLink("PDF", "ReporteG", new { tipo = "PDF" }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Word", "ReporteG", new { tipo = "Word" }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Excel", "ReporteG", new { tipo = "Excel" }, new { @class = "btn btn-success" })
+
+        </div>
+
+        <div class="form-group col-xs-8 col-md-8">
+            <div class="input-group busqueda">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-6", @placeholder = "Buscar" })
+                <button type="submit" class="btn btn-light col-md-2">Buscar</button>
+            </div>
+        </div>
+
+    </div>
+}
+<br />
+
+<table class="table table-bordered table-hover">
+    <tr class="table-primary">
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_kermesse.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_cat_gastos.nombre_cat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha_gasto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.concepto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.monto)
+        </th>
+        <th>
+            Acciones
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuario_creacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuario_modificacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuario_eliminacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha_creacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha_modificacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha_eliminacion)
+            </th>*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tbl_kermesse.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tbl_cat_gastos.nombre_cat)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha_gasto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.concepto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.monto)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.estado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.usuario_creacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.usuario_modificacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.usuario_eliminacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fecha_creacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fecha_modificacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fecha_eliminacion)
+                </td>*@
+            <td>
+                @Html.ActionLink("Editar", "EditGastos", new { id = item.id_gasto }, new { @class = "btn btn-outline-success btn-sm" }) |
+                @Html.ActionLink("Ver", "VerGastos", new { id = item.id_gasto }, new { @class = "btn btn-outline-info btn-sm" }) |
+                @Html.ActionLink("Eliminar", "DeleteGasto", new { id = item.id_gasto }, new { @class = "btn btn-outline-danger btn-sm" })
+            </td>
+        </tr>
+    }
+
+</table>

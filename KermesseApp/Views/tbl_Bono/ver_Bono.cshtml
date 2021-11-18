@@ -1,0 +1,42 @@
+﻿@model KermesseApp.Models.tbl_bonos
+
+@{
+    ViewBag.Title = "Bono";
+}
+
+<h2>Detalle de Bono</h2>
+
+<div>
+    <h4>tbl_bonos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.valor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.valor)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "editar_Bono", new { id = Model.id_bono }) |
+    @Html.ActionLink("Regresar", "listar_Bono")
+</p>

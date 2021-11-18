@@ -1,0 +1,113 @@
+﻿@model IEnumerable<KermesseApp.Models.vw_ingresocomunidad>
+
+@{
+    ViewBag.Title = "Ingreso Comunidad";
+}
+
+<h2>Lista de Ingreso Comunidad</h2>
+
+<p>
+    @Html.ActionLink("Nuevo ingreso comunidad", "guardar_IngresoComunidad")
+</p>
+
+@*Filtro de busqueda*@
+@using (Html.BeginForm("filtrar_IngresoComunidad", "tbl_IngresoComunidad", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="form-group col-xs-4 col-md-4">
+
+            @Html.ActionLink("PDF", "#", new { tipo = "PDF" }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Word", "#", new { tipo = "Word" }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Excel", "#", new { tipo = "Excel" }, new { @class = "btn btn-success" })
+
+        </div>
+
+        <div class="form-group col-xs-8 col-md-8">
+            <div class="input-group busqueda">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-6", @placeholder = "Buscar" })
+                <button type="submit" class="btn btn-light col-md-2">Buscar</button>
+            </div>
+        </div>
+
+    </div>
+}
+<br />
+
+<table class="table table-bordered table-hover">
+    <tr class="table-primary">
+        <th>
+            @Html.DisplayNameFor(model => model.kermesse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.comunidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.producto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cant_producto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.precio_producto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bonos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_bonos)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.denominacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.subtotal)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.kermesse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.comunidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.producto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cant_producto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.precio_producto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bonos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.total_bonos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.denominacion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.subtotal)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "editar_IngresoComunidad", new { id = item.id_ingresocom }, new { @class = "btn btn-outline-success btn-sm" }) |
+                @Html.ActionLink("Detalle", "ver_IngresoComunidad", new { id = item.id_ingresocom }, new { @class = "btn btn-outline-info btn-sm" }) |
+                @Html.ActionLink("Eliminar", "eliminar_IngresoComunidad", new { id = item.id_ingresocom }, new { @class = "btn btn-outline-danger btn-sm" })
+            </td>
+        </tr>
+    }
+
+</table>

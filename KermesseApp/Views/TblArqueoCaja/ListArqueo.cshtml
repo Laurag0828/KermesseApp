@@ -1,0 +1,112 @@
+﻿@model IEnumerable<KermesseApp.Models.Vw_Arqueo>
+
+@{
+    ViewBag.Title = "ListArqueo";
+}
+
+<h2>Lista de Gastos</h2>
+
+<p>
+    @Html.ActionLink("Nuevo ", "GuardarArqueo")
+</p>
+
+@using (Html.BeginForm("FiltroArqueo", "TblArqueoCaja", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="form-group col-xs-8 col-md-8">
+
+            @*<label for="cadena" class="form-label col-md-2">Busqueda: </label>*@
+
+            @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese los datos de busqueda" })
+
+            <span class="input-group">
+                <button type="submit" class="btn btn-block btn-success col-md-2">Buscar</button>
+            </span>
+
+        </div>
+
+        @*<div class="form-group col-xs-4 col-md-4">
+
+                @Html.ActionLink("PDF", "ReporteG", new { tipo = "PDF" }, new { @class = "btn btn-default" })
+                @Html.ActionLink("Word", "ReporteG", new { tipo = "Word" }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Excel", "ReporteG", new { tipo = "Excel" }, new { @class = "btn btn-success" })
+
+            </div>*@
+
+    </div>
+}
+
+<div class="row">
+
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha_arqueo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gran_total)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.subtotal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Expr1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.valor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.valor_letras)
+        </th>
+        <th>
+            Acciones
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fecha_arqueo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gran_total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.subtotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Expr1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.valor_letras)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "EditGastos", new { id = item.id_arqueocaja }, new { @class = "btn btn-xs btn-success" }) |
+                @Html.ActionLink("Ver", "VerGastos", new { id = item.id_arqueocaja }, new { @class = "btn btn-xs btn-primary" }) |
+                @Html.ActionLink("Eliminar", "DeleteGasto", new { id = item.id_arqueocaja }, new { @class = "btn btn-xs btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+

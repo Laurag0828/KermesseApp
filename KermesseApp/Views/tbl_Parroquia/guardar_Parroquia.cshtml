@@ -1,0 +1,77 @@
+﻿@model KermesseApp.Models.tbl_parroquia
+
+@{
+    ViewBag.Title = "Parroquia";
+}
+
+<div class="card border-secondary formulario">
+    @using (Html.BeginForm("guardar_Parroquia", "tbl_Parroquia", FormMethod.Post))
+    {
+        <div class="card-header">
+            <h2>Nueva Parroquia</h2>
+        </div>
+
+        <div class="card-body form-horizontal container-fluid">
+
+            <div class="form-group row">
+                @Html.LabelFor(x => x.nombre, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.ValidationMessageFor(x => x.nombre, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(x => x.nombre, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.direccion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.ValidationMessageFor(x => x.direccion, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(x => x.direccion, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.telefono, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.ValidationMessageFor(x => x.telefono, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(x => x.telefono, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.parroco, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.ValidationMessageFor(x => x.parroco, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(x => x.parroco, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.url_logo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.ValidationMessageFor(x => x.url_logo, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(x => x.url_logo, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.sitio_web, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.ValidationMessageFor(x => x.sitio_web, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(x => x.sitio_web, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group row justify-content-center">
+                <input type="submit" value="Guardar" class="btn btn-success col-md-2" />
+                <input type="reset" value="Cancelar" class="btn btn-danger col-md-2" />
+            </div>
+        </div>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Regresar", "listar_Parroquia")
+</div>
+

@@ -1,0 +1,41 @@
+﻿@model KermesseApp.Models.tbl_cat_gastos
+
+@{
+    ViewBag.Title = "Categoría de Gastos";
+}
+
+<h2>Visualizar Categoria de Gastos</h2>
+
+<div>
+    @*<h4>tbl_cat_gastos</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre_cat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nombre_cat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.desc_cat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.desc_cat)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Regresar", "ListaCatGastos")
+</p>
