@@ -1,30 +1,50 @@
 ﻿@model KermesseApp.Models.tbl_rol
 
 @{
-    ViewBag.Title = "guardarRol";
+    ViewBag.Title = "Rol";
 }
 
-<h2>Guardar Rol</h2>
-
-@using (Html.BeginForm("GuardarRol", "Tbl_rol", FormMethod.Post))
-{
-    <div class="container">
-        <div class="form-group">
-            <label> Descripcion del Rol</label>
-            @Html.ValidationMessageFor(x => x.rol_desc, "", new { @class = "text-danger" })
-            @Html.TextBoxFor(x => x.rol_desc, new { @class = "form-control" })
+<div class="card border-secondary formulario">
+    @using (Html.BeginForm("GuardarRol", "Tbl_rol", FormMethod.Post))
+    {
+        <div class="card-header">
+            <h2>Nuevo Rol</h2>
         </div>
-        @*<div class="form-group">
-            <label>Contraseña</label>
-            @Html.TextBoxFor(x => x.estado, new { @class = "form-control" })
-        </div>*@
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Guardar </button>
-            <button type="reset" class="btn btn-danger">Cancelar </button>
-        </div>
-    </div>
 
-}
+        <div class="card-body form-horizontal container-fluid">
+
+            <div class="form-group row">
+                <label class="col-md-2">Rol: </label>
+                <div class="col-md-10">
+                    @Html.ValidationMessageFor(x => x.rol, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(x => x.rol, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-2"> Descripción del Rol: </label>
+                <div class="col-md-10">
+                    @Html.ValidationMessageFor(x => x.rol_desc, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(x => x.rol_desc, new { @class = "form-control" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                <label>Contraseña</label>
+                @Html.TextBoxFor(x => x.estado, new { @class = "form-control" })
+            </div>*@
+
+            <br />
+
+            <div class="form-group row justify-content-center">
+                <input type="submit" value="Guardar" class="btn btn-success col-md-2" />
+                <input type="reset" value="Cancelar" class="btn btn-danger col-md-2" />
+            </div>
+        </div>
+
+    }
+</div>
+
 <div>
     @Html.ActionLink("Regresar", "ListRol")
 </div>

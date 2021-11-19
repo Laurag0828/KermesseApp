@@ -4,11 +4,15 @@
     ViewBag.Title = "Ingreso Comunidad";
 }
 
-<h2>Lista de Ingreso Comunidad</h2>
+<h2>Lista de Ingresos Comunidad</h2>
 
-<p>
-    @Html.ActionLink("Nuevo ingreso comunidad", "guardar_IngresoComunidad")
-</p>
+<div class="btn-nuevo">
+    <a href="@Url.Action("guardar_IngresoComunidad", "tbl_IngresoComunidad")">
+        <button type="button" class="btn btn-outline-primary btn-md">
+            <i class="fas fa-plus"></i> Nuevo Ingreso Comunidad
+        </button>
+    </a>
+</div>
 
 @*Filtro de busqueda*@
 @using (Html.BeginForm("filtrar_IngresoComunidad", "tbl_IngresoComunidad", FormMethod.Post))

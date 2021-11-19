@@ -15,7 +15,6 @@ namespace KermesseApp.Controllers
 
         private KERMESSEEntities db = new KERMESSEEntities();
 
-        // GET: Tbl_cat_gastos
         public ActionResult ListaCatGastos() //Vista de Cat Gastos
         {
             return View(db.tbl_cat_gastos.ToList());
@@ -36,12 +35,13 @@ namespace KermesseApp.Controllers
                 tcatg.nombre_cat = tcg.nombre_cat;
                 tcatg.desc_cat = tcg.desc_cat;
                 tcatg.estado = 1;
+
                 db.tbl_cat_gastos.Add(tcatg);
                 db.SaveChanges();
             }
-            ModelState.Clear();
 
-            return View("GuardarCatGast");
+            ModelState.Clear();
+            return RedirectToAction("ListaCatGastos");
         }
 
         public ActionResult DeleteCatGast(int id) //Metodo para eliminar

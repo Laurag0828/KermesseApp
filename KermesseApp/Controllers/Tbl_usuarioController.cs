@@ -45,7 +45,7 @@ namespace KermesseApp.Controllers
 
             }
             ModelState.Clear();
-            return View("VGuardarUsuario"); //RETORNA LA VISTA VACIA PARA GUARDAR UNA CATEGORIA
+            return RedirectToAction("ListUsuario");
 
         }
 
@@ -91,9 +91,9 @@ namespace KermesseApp.Controllers
                 {
                     db.Entry(tu).State = EntityState.Modified;
                     db.SaveChanges();
+                }
+                return RedirectToAction("ListUsuario");
             }
-            return RedirectToAction("ListUsuario");
-        }
             catch
             {
                 return View();

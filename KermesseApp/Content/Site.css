@@ -78,6 +78,10 @@ a, a:hover {
     object-fit: cover;
 }
 
+.btn-nuevo {
+    margin: 20px 0;
+}
+
 .busqueda {
     justify-content: end;
 }

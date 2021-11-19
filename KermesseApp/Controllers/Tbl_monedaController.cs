@@ -40,8 +40,7 @@ namespace KermesseApp.Controllers
                 db.SaveChanges();
             }
             ModelState.Clear();
-
-            return View("GuardarMon");
+            return RedirectToAction("tbl_Moneda");
         }
 
         public ActionResult DeleteMon(int id) //Metodo para eliminar

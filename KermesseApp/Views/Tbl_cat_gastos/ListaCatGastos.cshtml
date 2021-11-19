@@ -4,11 +4,15 @@
     ViewBag.Title = "Categoría de Gastos";
 }
 
-<h2>Lista de Categoria de Gastos</h2>
+<h2>Lista de Categorías de Gastos</h2>
 
-<p>
-    @Html.ActionLink("Nueva Categoria", "GuardarCatGast")
-</p>
+<div class="btn-nuevo">
+    <a href="@Url.Action("GuardarCatGast", "Tbl_cat_gastos")">
+        <button type="button" class="btn btn-outline-primary btn-md">
+            <i class="fas fa-plus"></i> Nueva Categoría de Gastos
+        </button>
+    </a>
+</div>
 
 @using (Html.BeginForm("FiltroCatGast", "Tbl_cat_gastos", FormMethod.Post))
 {
@@ -43,8 +47,8 @@
             @Html.DisplayNameFor(model => model.desc_cat)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>*@
+                @Html.DisplayNameFor(model => model.estado)
+            </th>*@
         <th>Acciones</th>
     </tr>
 

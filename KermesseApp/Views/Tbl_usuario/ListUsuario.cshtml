@@ -6,9 +6,13 @@
 
 <h1>Lista de Usuarios</h1>
 
-<p>
-    @Html.ActionLink("Nuevo Usuario", "VGuardarUsuario")
-</p>
+<div class="btn-nuevo">
+    <a href="@Url.Action("VGuardarUsuario", "Tbl_usuario")">
+        <button type="button" class="btn btn-outline-primary btn-md">
+            <i class="fas fa-plus"></i> Nuevo Usuario
+        </button>
+    </a>
+</div>
 
 @*MANDAMOS A LLAMAR LA LISTA FILTRADA*@
 @using (Html.BeginForm("FiltrarUsuario", "Tbl_usuario", FormMethod.Post))
@@ -41,8 +45,8 @@
             @Html.DisplayNameFor(model => model.usuario)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.pwd)
-        </th>*@
+                @Html.DisplayNameFor(model => model.pwd)
+            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.nombres)
         </th>
@@ -53,8 +57,8 @@
             @Html.DisplayNameFor(model => model.email)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>*@
+                @Html.DisplayNameFor(model => model.estado)
+            </th>*@
         <th></th>
     </tr>
 
@@ -83,7 +87,7 @@
             <td class="col-4">
                 @Html.ActionLink("Editar", "EditUsuario", new { id = item.id_usuario }, new { @Class = "btn btn-outline-success btn-sm" }) |
                 @Html.ActionLink("Ver", "VerUsuario", new { id = item.id_usuario }, new { @Class = "btn btn-outline-info btn-sm" })   |
-                @Html.ActionLink("Eliminar", "DeleteUsuario", new { id = item.id_usuario }, new { @class = "btn btn-outline-danger btn-smr" }) |
+                @Html.ActionLink("Eliminar", "DeleteUsuario", new { id = item.id_usuario }, new { @class = "btn btn-outline-danger btn-sm" }) 
                 @*<a href="@Url.Action("DeleteUsuario", new { id = item.id_usuario })" class=" btn btn-xs btn-danger">Eliminar </a>  |
                     <a href="@Url.Action("DeleteUsuario", new { id = item.id_usuario })"><i class=" glyphicon glyphicon-trash" title="Eliminar"></i> </a>  |*@
 

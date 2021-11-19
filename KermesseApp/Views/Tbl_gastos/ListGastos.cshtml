@@ -6,9 +6,13 @@
 
 <h2>Lista de Gastos</h2>
 
-<p>
-    @Html.ActionLink("Nuevo Gasto", "GuardarGastos")
-</p>
+<div class="btn-nuevo">
+    <a href="@Url.Action("GuardarGastos", "Tbl_gastos")">
+        <button type="button" class="btn btn-outline-primary btn-md">
+            <i class="fas fa-plus"></i> Nuevo Gasto
+        </button>
+    </a>
+</div>
 
 @using (Html.BeginForm("FiltroGastos", "Tbl_gastos", FormMethod.Post))
 {

@@ -6,9 +6,13 @@
 
 <h2>Lista de Parroquias</h2>
 
-<p>
-    @Html.ActionLink("Nueva parroquia", "guardar_Parroquia")
-</p>
+<div class="btn-nuevo">
+    <a href="@Url.Action("guardar_Parroquia", "tbl_Parroquia")">
+        <button type="button" class="btn btn-outline-primary btn-md">
+            <i class="fas fa-plus"></i> Nueva Parroquia
+        </button>
+    </a>
+</div>
 
 @*Filtro de busqueda*@
 @using (Html.BeginForm("filtrar_Parroquia", "tbl_Parroquia", FormMethod.Post))

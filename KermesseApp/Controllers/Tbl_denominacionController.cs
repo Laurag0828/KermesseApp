@@ -57,7 +57,7 @@ namespace KermesseApp.Controllers
 
             ViewBag.id_moneda = new SelectList(db.tbl_moneda, "id_moneda", "nombre");
 
-            return View("GuardarDen");
+            return RedirectToAction("ListDen");
         }
 
         public ActionResult DeleteDen(int id) //Metodo para eliminar

@@ -31,6 +31,7 @@ namespace KermesseApp.Controllers
             if (ModelState.IsValid)
             {
                 tbl_rol trol = new tbl_rol();
+                trol.rol = trl.rol;
                 trol.rol_desc = trl.rol_desc;
                 trol.estado = 1;
                 db.tbl_rol.Add(trol);
@@ -46,8 +47,6 @@ namespace KermesseApp.Controllers
             tbl_rol trol = new tbl_rol();
             trol = db.tbl_rol.Find(id);
             db.tbl_rol.Remove(trol);
-
-
 
             db.SaveChanges();
             var list = db.tbl_rol.ToList();
@@ -92,6 +91,7 @@ namespace KermesseApp.Controllers
                 }            
 
         }
+
         [HttpPost]
         public ActionResult FiltrarRol(String cadena)
         {
@@ -102,11 +102,12 @@ namespace KermesseApp.Controllers
             }
             else
             {
-                var listFiltrada = db.tbl_rol.Where(X => X.rol_desc.Contains(cadena));
+                var listFiltrada = db.tbl_rol.Where(X => X.rol.Contains(cadena) || X.rol_desc.Contains(cadena) );
                 return View("ListRol", listFiltrada);
             }
 
         }
+
         public ActionResult VerRptRol(String tipo)
         {
             LocalReport rpt = new LocalReport();

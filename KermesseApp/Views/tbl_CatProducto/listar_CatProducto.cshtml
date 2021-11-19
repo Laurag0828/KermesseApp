@@ -6,9 +6,13 @@
 
 <h2>Lista de Categoría de Productos</h2>
 
-<p>
-    @Html.ActionLink("Nueva categoría", "guardar_CatProducto")
-</p>
+<div class="btn-nuevo">
+    <a href="@Url.Action("guardar_CatProducto", "tbl_CatProducto")">
+        <button type="button" class="btn btn-outline-primary btn-md">
+            <i class="fas fa-plus"></i> Nueva Categoría de Producto
+        </button>
+    </a>
+</div>
 
 @*Filtro de busqueda*@
 @using (Html.BeginForm("filtrar_CatProducto", "tbl_CatProducto", FormMethod.Post))

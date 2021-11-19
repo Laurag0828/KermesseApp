@@ -6,9 +6,13 @@
 
 <h2>Lista de Comunidades</h2>
 
-<p>
-    @Html.ActionLink("Nueva comunidad", "guardar_Comunidad")
-</p>
+<div class="btn-nuevo">
+    <a href="@Url.Action("guardar_Comunidad", "tbl_Comunidad")">
+        <button type="button" class="btn btn-outline-primary btn-md">
+            <i class="fas fa-plus"></i> Nueva Comunidad
+        </button>
+    </a>
+</div>
 
 @*Filtro de busqueda*@
 @using (Html.BeginForm("filtrar_Comunidad", "tbl_Comunidad", FormMethod.Post))
