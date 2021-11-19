@@ -27,6 +27,7 @@ namespace KermesseApp.Models
         public string parroco { get; set; }
         public string url_logo { get; set; }
         public string sitio_web { get; set; }
+        public Nullable<int> estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_kermesse> tbl_kermesse { get; set; }

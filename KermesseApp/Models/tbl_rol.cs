@@ -25,7 +25,7 @@ namespace KermesseApp.Models
         public string rol { get; set; }
         public int estado { get; set; }
         public string rol_desc { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_rol_opcion> tbl_rol_opcion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

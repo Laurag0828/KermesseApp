@@ -15,7 +15,7 @@ namespace KermesseApp.Models
     public partial class vw_ingresocomunidad
     {
         public int id_ingresocom_det { get; set; }
-        public int total_bonos { get; set; }
+        public decimal total_bonos { get; set; }
         public Nullable<decimal> precio_producto { get; set; }
         public int cant_producto { get; set; }
         public int id_ingresocom { get; set; }

@@ -20,6 +20,7 @@ namespace KermesseApp.Models
         public string denominacion { get; set; }
         public int cantidad { get; set; }
         public decimal subtotal { get; set; }
+        public Nullable<int> estado { get; set; }
     
         public virtual tbl_bonos tbl_bonos { get; set; }
         public virtual tbl_ingreso_com tbl_ingreso_com { get; set; }

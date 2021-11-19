@@ -15,7 +15,7 @@ namespace KermesseApp.Controllers
         //Metodo para generar la lista de categoria de productos
         public ActionResult listar_CatProducto()
         {
-            return View(db.tbl_cat_producto.ToList());
+            return View(db.tbl_cat_producto.Where(model => model.estado != 3));
         }
 
         //Metodo para listar una categoria de producto especifica
@@ -91,18 +91,46 @@ namespace KermesseApp.Controllers
         {
             tbl_cat_producto tcp = new tbl_cat_producto();
 
+            var del = db.tbl_cat_producto.Where(x => x.id_cat_producto == id).First();
+
+            eliminar_Logico(del);
+
+            return RedirectToAction("listar_CatProducto");
+
+
             //Ambos metodos son para eliminar...
 
             //tcp = db.tbl_cat_producto.Find(id);
             //db.tbl_cat_producto.Remove(tcp);
 
-            var del = db.tbl_cat_producto.Where(x => x.id_cat_producto == id).First();
-            db.tbl_cat_producto.Remove(del);
 
-            db.SaveChanges();
+            //var del = db.tbl_cat_producto.Where(x => x.id_cat_producto == id).First();
+            //db.tbl_cat_producto.Remove(del);
 
-            var list = db.tbl_cat_producto.ToList();
-            return View("listar_CatProducto", list);
+            //db.SaveChanges();
+
+            //var list = db.tbl_cat_producto.ToList();
+            //return View("listar_CatProducto", list);
+        }
+
+        //Metodo para eliminar una parroquia de manera logica
+        public ActionResult eliminar_Logico(tbl_cat_producto tcp)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    tcp.estado = 3;
+                    db.Entry(tcp).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+                return RedirectToAction("listar_CatProducto");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         //Metodo para filtrar
@@ -111,12 +139,12 @@ namespace KermesseApp.Controllers
         {
             if (String.IsNullOrEmpty(Cadena))
             {
-                var list = db.tbl_cat_producto.ToList();
+                var list = db.tbl_cat_producto.Where(model => model.estado != 3);
                 return View("listar_CatProducto", list);
             }
             else
             {
-                var list_encontrada = db.tbl_cat_producto.Where(x => x.nombre.Contains(Cadena) || x.descripcion.Contains(Cadena));
+                var list_encontrada = db.tbl_cat_producto.Where(x => (x.nombre.Contains(Cadena) || x.descripcion.Contains(Cadena)) && x.estado != 3);
                 return View("listar_CatProducto", list_encontrada);
             }
         }

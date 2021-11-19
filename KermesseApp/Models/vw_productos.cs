@@ -21,5 +21,6 @@ namespace KermesseApp.Models
         public string comunidad { get; set; }
         public string catprod { get; set; }
         public int id_producto { get; set; }
+        public int estado { get; set; }
     }
 }

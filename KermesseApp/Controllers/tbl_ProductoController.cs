@@ -15,7 +15,7 @@ namespace KermesseApp.Controllers
         //Metodo para generar la lista de productos
         public ActionResult listar_Producto()
         {
-            return View(db.vw_productos.ToList());
+            return View(db.vw_productos.Where(model => model.estado != 3));
         }
 
         //Metodo para listar un producto especifico
@@ -101,22 +101,61 @@ namespace KermesseApp.Controllers
         }
 
         //Metodo para eliminar producto
+        //public ActionResult eliminar_Producto(int id)
+        //{
+        //    tbl_productos tp = new tbl_productos();
+
+        //    var del = db.tbl_productos.Where(x => x.id_producto == id).First();
+
+        //    eliminar_Logico(del);
+
+        //    return RedirectToAction("listar_Producto");
+
+        //    //Ambos metodos son para eliminar...
+
+        //    //tp = db.tbl_productos.Find(id);
+        //    //db.tbl_productos.Remove(tp);
+
+        //    //var del = db.tbl_productos.Where(x => x.id_producto == id).First();
+        //    //db.tbl_productos.Remove(del);
+
+        //    //db.SaveChanges();
+
+        //    //var list = db.tbl_productos.ToList();
+        //    //return View("listar_Producto", list);
+        //}
+
+        ////Metodo para eliminar un producto de manera logica
+        //public ActionResult eliminar_Logico(tbl_productos tp)
+        //{
+        //    try
+        //    {
+        //        if (ModelState.IsValid)
+        //        {
+        //            tp.estado = 3;
+        //            db.Entry(tp).State = EntityState.Modified;
+        //            db.SaveChanges();
+
+        //        }
+
+        //        return RedirectToAction("listar_Producto");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
+
         public ActionResult eliminar_Producto(int id)
         {
             tbl_productos tp = new tbl_productos();
-
-            //Ambos metodos son para eliminar...
-
-            //tp = db.tbl_productos.Find(id);
-            //db.tbl_productos.Remove(tp);
-
-            var del = db.tbl_productos.Where(x => x.id_producto == id).First();
-            db.tbl_productos.Remove(del);
-
+            tp = db.tbl_productos.Find(id);
+            tp.estado = 3;
+            db.Entry(tp).State = EntityState.Modified;
             db.SaveChanges();
-
             var list = db.tbl_productos.ToList();
-            return View("listar_Producto", list);
+
+            return RedirectToAction("listar_Producto");
         }
 
         //Metodo para filtrar
@@ -125,14 +164,14 @@ namespace KermesseApp.Controllers
         {
             if (String.IsNullOrEmpty(Cadena))
             {
-                var list = db.vw_productos.ToList();
+                var list = db.vw_productos.Where(model => model.estado != 3);
                 return View("listar_Producto", list);
             }
             else
             {
-                var list_encontrada = db.vw_productos.Where(x => x.nombre.Contains(Cadena) ||
+                var list_encontrada = db.vw_productos.Where(x => (x.nombre.Contains(Cadena) ||
                                        x.desc_presentacion.Contains(Cadena) || x.comunidad.Contains(Cadena) ||
-                                       x.catprod.Contains(Cadena));
+                                       x.catprod.Contains(Cadena)) && x.estado != 3);
 
                 return View("listar_Producto", list_encontrada);
             }

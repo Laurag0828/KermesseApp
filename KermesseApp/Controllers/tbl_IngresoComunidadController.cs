@@ -15,13 +15,66 @@ namespace KermesseApp.Controllers
         //Metodo para generar la lista de IngresoComunidad
         public ActionResult listar_IngresoComunidad()
         {
-            return View(db.vw_ingresocomunidad.Where(model => model.estado != 3));
+            return View(db.tbl_ingreso_com.Where(model => model.estado != 3));
+        }
+
+        public ActionResult actualizar_IngresoComunidad()
+        {
+            ViewBag.id_kermesse = new SelectList(db.tbl_kermesse, "id_kermesse", "nombre");
+            ViewBag.id_comunidad = new SelectList(db.tbl_comunidad, "id_comunidad", "nombre");
+            ViewBag.id_producto = new SelectList(db.tbl_productos, "id_producto", "nombre");
+
+            return View();
+        }
+
+        public ActionResult editar_IngresoComunidad(int id)
+        {
+
+            ViewBag.id_kermesse = new SelectList(db.tbl_kermesse.Where(model => model.estado != 3), "id_kermesse", "nombre");
+            ViewBag.id_comunidad = new SelectList(db.tbl_comunidad.Where(model => model.estado != 3), "id_comunidad", "nombre");
+            ViewBag.id_producto = new SelectList(db.tbl_productos.Where(model => model.estado != 3), "id_producto", "nombre");
+
+            tbl_ingreso_com tic = db.tbl_ingreso_com.Find(id);
+
+            if (tic == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(tic);
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult update_IngresoComunidad(tbl_ingreso_com tic, tbl_ingresocom_det ticd) //Actualizamos el campo estado
+        {
+
+            ViewBag.id_kermesse = new SelectList(db.tbl_kermesse.Where(model => model.estado != 3), "id_kermesse", "nombre");
+            ViewBag.comunidad = new SelectList(db.tbl_comunidad.Where(model => model.estado != 3), "id_comunidad", "nombre");
+            ViewBag.producto = new SelectList(db.tbl_productos.Where(model => model.estado != 3), "id_producto", "nombre");
+
+            var det = db.tbl_ingresocom_det.Where(Model => Model.id_ingresocom == tic.id_ingresocom);
+            tic.total_bonos = 0;
+
+            foreach (var item in det)
+            {
+                tic.total_bonos = (tic.total_bonos + item.subtotal);
+            }
+
+            tic.estado = 2;
+            db.Entry(tic).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("listar_IngresoComunidad");
+
         }
 
         //Metodo para listar IngresoComunidad especifico
         public ActionResult ver_IngresoComunidad(int id)
         {
-            var list = db.vw_ingresocomunidad.Where(x => x.id_ingresocom == id).First();
+            var list = db.tbl_ingreso_com.Where(x => x.id_ingresocom == id).First();
 
             return View(list);
         }
@@ -117,5 +170,92 @@ namespace KermesseApp.Controllers
 
             return RedirectToAction("listar_IngresoComunidad");
         }
+
+
+
+        // -- METODOS PARA EL DETALLE DE INGRESO COMUNIDAD
+
+
+        public ActionResult ver_IngresoComDet(int id)  //Metodo para visualizar
+        {
+
+            var det = db.vw_ingresocomunidad.Where(x => x.id_ingresocom == id);
+
+            return View(det);
+        }
+
+        public ActionResult actualizar_IngresoComDet()
+        {
+
+            ViewBag.id_bono = new SelectList(db.tbl_bonos, "id_bono", "nombre");
+            ViewBag.id_ingresocom = new SelectList(db.tbl_ingreso_com, "id_ingresocom", "id_ingresocom");
+
+            return View();
+        }
+
+        public ActionResult editar_IngresoComDet(int id)
+        {
+
+            ViewBag.id_bono = new SelectList(db.tbl_bonos.Where(model => model.estado != 3), "id_bono", "nombre");
+            ViewBag.id_ingresocom = new SelectList(db.tbl_ingreso_com.Where(model => model.estado != 3), "id_ingresocom", "id_ingresocom");
+
+            tbl_ingresocom_det ticd = db.tbl_ingresocom_det.Find(id);
+
+            if (ticd == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(ticd);
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult update_IngresoComDet(tbl_ingresocom_det ticd, tbl_bonos tb) //Actualizamos el campo estado
+        {
+
+            ViewBag.id_bono = new SelectList(db.tbl_bonos.Where(model => model.estado != 3), "id_bono", "nombre");
+            ViewBag.id_ingresocom = new SelectList(db.tbl_ingreso_com.Where(model => model.estado != 3), "id_ingresocom", "id_ingresocom");
+
+            var det = db.tbl_bonos.Where(Model => Model.id_bono == ticd.id_bono);
+            ticd.subtotal = 0;
+
+            foreach (var item in det)
+            {
+                ticd.subtotal = item.valor * ticd.cantidad;
+            }
+
+            ticd.estado = 2;
+            db.Entry(ticd).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return RedirectToAction("ver_IngresoComDet", new { id = ticd.id_ingresocom });
+
+        }
+
+        public ActionResult ver_Detalle(int id)  //Metodo para visualizar
+        {
+
+            var gast = db.tbl_ingresocom_det.Where(x => x.id_ingresocom_det == id).First();
+
+            return View(gast);
+        }
+
+        public ActionResult eliminar_Detalle(int id) //Metodo para eliminar
+        {
+
+            tbl_ingresocom_det ticd = new tbl_ingresocom_det();
+            ticd = db.tbl_ingresocom_det.Find(id);
+            db.tbl_ingresocom_det.Remove(ticd);
+            db.SaveChanges();
+
+            var list = db.tbl_ingresocom_det.ToList();
+
+            return RedirectToAction("ver_IngresoComDet", new { id = ticd.id_ingresocom, list });
+            //return RedirectToAction("VerArqueo", list);
+        }
+
     }
 }

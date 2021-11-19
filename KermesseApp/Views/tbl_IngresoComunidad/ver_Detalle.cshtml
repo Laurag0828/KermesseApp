@@ -1,0 +1,49 @@
+﻿@model KermesseApp.Models.tbl_ingresocom_det
+
+@{
+    ViewBag.Title = "ver_Detalle";
+}
+
+<h2>ver_Detalle</h2>
+
+<div>
+    <h4>tbl_ingresocom_det</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_bonos.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_bonos.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.denominacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.denominacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cantidad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.subtotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.subtotal)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Regresar", "ver_IngresoComDet", new { id = Model.id_ingresocom }) 
+</p>

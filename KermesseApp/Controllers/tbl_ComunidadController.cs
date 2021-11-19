@@ -15,7 +15,7 @@ namespace KermesseApp.Models
         //Metodo para generar la lista de comunidades
         public ActionResult listar_Comunidad()
         {
-            return View(db.tbl_comunidad.ToList());
+            return View(db.tbl_comunidad.Where(model => model.estado != 3));
         }
 
         //Metodo para listar una comunidad especifica
@@ -62,7 +62,7 @@ namespace KermesseApp.Models
 
             var add = db.tbl_comunidad.Where(x => x.id_comunidad == id).First();
 
-            return View(tc);
+            return View(db.tbl_comunidad.Where(model => model.estado != 3));
         }
 
         //Metodo para actualizar una comunidad (Proceso de guardado)
@@ -89,20 +89,48 @@ namespace KermesseApp.Models
         //Metodo para eliminar una comunidad
         public ActionResult eliminar_Comunidad(int id)
         {
-            tbl_comunidad tc = new tbl_comunidad();
+            tbl_comunidad tc = db.tbl_comunidad.Find(id);
+            var del = db.tbl_comunidad.Where(x => x.id_comunidad == id).First();
+
+            eliminar_Logico(del);
+
+            return RedirectToAction("listar_Comunidad");
+
 
             //Ambos son para eliminar...
 
             //tc = db.tbl_comunidad.Find(id);
             //db.tbl_comunidad.Remove(tc);
 
-            var del = db.tbl_comunidad.Where(x => x.id_comunidad == id).First();
-            db.tbl_comunidad.Remove(del);
 
-            db.SaveChanges();
+            //var del = db.tbl_comunidad.Where(x => x.id_comunidad == id).First();
+            //db.tbl_comunidad.Remove(del);
 
-            var list = db.tbl_comunidad.ToList();
-            return View("listar_Comunidad", list);
+            //db.SaveChanges();
+
+            //var list = db.tbl_comunidad.ToList();
+            //return View("listar_Comunidad", list);
+
+        }
+
+        //Metodo para eliminar una comunidad de manera logica
+        public ActionResult eliminar_Logico(tbl_comunidad tc)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    tc.estado = 3;
+                    db.Entry(tc).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+                return RedirectToAction("listar_Comunidad");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         //Metodo para filtrar 
@@ -111,13 +139,13 @@ namespace KermesseApp.Models
         {
             if (String.IsNullOrEmpty(Cadena))
             {
-                var list = db.tbl_comunidad.ToList();
+                var list = db.tbl_comunidad.Where(model => model.estado != 3);
                 return View("listar_Comunidad", list);
             }
             else
             {
-                var list_encontrada = db.tbl_comunidad.Where(x => x.nombre.Contains(Cadena) ||
-                                       x.responsable.Contains(Cadena) || x.desc_contribucion.Contains(Cadena));
+                var list_encontrada = db.tbl_comunidad.Where(x => (x.nombre.Contains(Cadena) ||
+                                       x.responsable.Contains(Cadena) || x.desc_contribucion.Contains(Cadena)) && x.estado != 3);
 
                 return View("listar_Comunidad", list_encontrada);
             }

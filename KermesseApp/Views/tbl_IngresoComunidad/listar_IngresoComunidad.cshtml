@@ -1,4 +1,4 @@
-﻿@model IEnumerable<KermesseApp.Models.vw_ingresocomunidad>
+﻿@model IEnumerable<KermesseApp.Models.tbl_ingreso_com>
 
 @{
     ViewBag.Title = "Ingreso Comunidad";
@@ -41,13 +41,13 @@
 <table class="table table-bordered table-hover">
     <tr class="table-primary">
         <th>
-            @Html.DisplayNameFor(model => model.kermesse)
+            @Html.DisplayNameFor(model => model.tbl_kermesse.nombre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.comunidad)
+            @Html.DisplayNameFor(model => model.tbl_comunidad.nombre)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.producto)
+            @Html.DisplayNameFor(model => model.tbl_productos.nombre)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.cant_producto)
@@ -56,19 +56,7 @@
             @Html.DisplayNameFor(model => model.precio_producto)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.bonos)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.total_bonos)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.denominacion)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cantidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.subtotal)
         </th>
         <th></th>
     </tr>
@@ -77,13 +65,13 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.kermesse)
+                @Html.DisplayFor(modelItem => item.tbl_kermesse.nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.comunidad)
+                @Html.DisplayFor(modelItem => item.tbl_comunidad.nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.producto)
+                @Html.DisplayFor(modelItem => item.tbl_productos.nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.cant_producto)
@@ -92,23 +80,11 @@
                 @Html.DisplayFor(modelItem => item.precio_producto)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.bonos)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.total_bonos)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.denominacion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cantidad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.subtotal)
-            </td>
-            <td>
                 @Html.ActionLink("Editar", "editar_IngresoComunidad", new { id = item.id_ingresocom }, new { @class = "btn btn-outline-success btn-sm" }) |
-                @Html.ActionLink("Detalle", "ver_IngresoComunidad", new { id = item.id_ingresocom }, new { @class = "btn btn-outline-info btn-sm" }) |
+                @Html.ActionLink("Detalle", "ver_IngresoComDet", new { id = item.id_ingresocom }, new { @class = "btn btn-outline-info btn-sm" }) |
                 @Html.ActionLink("Eliminar", "eliminar_IngresoComunidad", new { id = item.id_ingresocom }, new { @class = "btn btn-outline-danger btn-sm" })
             </td>
         </tr>

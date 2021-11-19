@@ -1,0 +1,54 @@
+﻿@model IEnumerable<KermesseApp.Models.vw_ingresocomunidad>
+
+@{
+    ViewBag.Title = "Ingreso Comunidad Detalle";
+}
+
+<h2>Ingreso Comunidad Detalle</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Detalle", "Create")
+</p>
+
+<div class="card border-secondary">
+    <div class="formulario card-body">
+        <table class="table table-bordered table-hover">
+
+            <tr class="table-primary">
+                <th>Bono</th>
+                <th>Denominación</th>
+                <th>Cantidad</th>
+                <th>SubTotal</th>
+                <th>Acciones</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        @Html.DisplayFor(model => item.bonos)
+                    </th>
+                    <th>
+                        @Html.DisplayFor(model => item.denominacion)
+                    </th>
+                    <th>
+                        @Html.DisplayFor(model => item.cantidad)
+                    </th>
+                    <th>
+                        @Html.DisplayFor(model => item.subtotal)
+                    </th>
+                    <td>
+                        @Html.ActionLink("Editar", "editar_IngresoComDet", new { id = item.id_ingresocom_det }, new { @class = "btn btn-outline-success btn-sm" }) |
+                        @Html.ActionLink("Detalle", "ver_Detalle", new { id = item.id_ingresocom_det }, new { @class = "btn btn-outline-info btn-sm" }) |
+                        @Html.ActionLink("Eliminar", "eliminar_Detalle", new { id = item.id_ingresocom_det }, new { @class = "btn btn-outline-danger btn-sm" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Regresar", "listar_IngresoComunidad")
+</p>

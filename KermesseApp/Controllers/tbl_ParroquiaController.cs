@@ -15,7 +15,7 @@ namespace KermesseApp.Controllers
         //Metodo para generar la lista de parroquias
         public ActionResult listar_Parroquia()
         {
-            return View(db.tbl_parroquia.ToList());
+            return View(db.tbl_parroquia.Where(model => model.estado != 3));
         }
 
         //Metodo para listar una parroquia especifica
@@ -46,6 +46,7 @@ namespace KermesseApp.Controllers
                 tParr.parroco = tp.parroco;
                 tParr.url_logo = tp.url_logo;
                 tParr.sitio_web = tp.sitio_web;
+                tParr.estado = 1;
 
                 db.tbl_parroquia.Add(tParr);
                 db.SaveChanges();
@@ -75,6 +76,7 @@ namespace KermesseApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    tp.estado = 2;
                     db.Entry(tp).State = EntityState.Modified;
                     db.SaveChanges();
                 }
@@ -92,18 +94,46 @@ namespace KermesseApp.Controllers
         {
             tbl_parroquia tp = new tbl_parroquia();
 
+            var del = db.tbl_parroquia.Where(x => x.idparroquia == id).First();
+
+            eliminar_Logico(del);
+
+            return RedirectToAction("listar_Parroquia");
+
+
             //Ambos metodos son para eliminar...
 
             //tp = db.tbl_parroquia.Find(id);
             //db.tbl_parroquia.Remove(tp);
 
-            var del = db.tbl_parroquia.Where(x => x.idparroquia == id).First();
-            db.tbl_parroquia.Remove(del);
 
-            db.SaveChanges();
+            //var del = db.tbl_parroquia.Where(x => x.idparroquia == id).First();
+            //db.tbl_parroquia.Remove(del);
 
-            var list = db.tbl_parroquia.ToList();
-            return View("listar_Parroquia", list);
+            //db.SaveChanges();
+
+            //var list = db.tbl_parroquia.ToList();
+            //return View("listar_Parroquia", list);
+        }
+
+        //Metodo para eliminar una parroquia de manera logica
+        public ActionResult eliminar_Logico(tbl_parroquia tp)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    tp.estado = 3;
+                    db.Entry(tp).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+                return RedirectToAction("listar_Parroquia");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         //Metodo para filtrar 
@@ -112,14 +142,14 @@ namespace KermesseApp.Controllers
         {
             if (String.IsNullOrEmpty(Cadena))
             {
-                var list = db.tbl_parroquia.ToList();
+                var list = db.tbl_parroquia.Where(model => model.estado != 3);
                 return View("listar_Parroquia", list);
             }
             else
             {
-                var list_encontrada = db.tbl_parroquia.Where(x => x.nombre.Contains(Cadena) ||
+                var list_encontrada = db.tbl_parroquia.Where(x => (x.nombre.Contains(Cadena) ||
                                        x.direccion.Contains(Cadena) || x.telefono.Contains(Cadena) ||
-                                       x.parroco.Contains(Cadena) || x.sitio_web.Contains(Cadena));
+                                       x.parroco.Contains(Cadena) || x.sitio_web.Contains(Cadena)) && x.estado != 3);
 
                 return View("listar_Parroquia", list_encontrada);
             }

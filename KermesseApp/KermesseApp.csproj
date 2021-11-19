@@ -483,6 +483,10 @@
     <Content Include="Views\Tbl_usuario\VerUsuario.cshtml" />
     <Content Include="Views\Tbl_usuario\VGuardarUsuario.cshtml" />
     <Content Include="Views\Tbl_usuario\View.cshtml" />
+    <Content Include="Views\tbl_IngresoComunidad\editar_IngresoComunidad.cshtml" />
+    <Content Include="Views\tbl_IngresoComunidad\ver_IngresoComDet.cshtml" />
+    <Content Include="Views\tbl_IngresoComunidad\editar_IngresoComDet.cshtml" />
+    <Content Include="Views\tbl_IngresoComunidad\ver_Detalle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
