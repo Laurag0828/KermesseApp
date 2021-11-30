@@ -1,42 +1,77 @@
-﻿@model KermesseApp.Models.tbl_rol_opciones
+﻿@using KermesseApp.Models;
 
 @{
-    ViewBag.Title = "VerRolOpciones";
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities db = new KERMESSEEntities();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<vw_rol_opciones> listopc = new List<vw_rol_opciones>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = db.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = db.vw_rol_opciones.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string[] separado = url.Split('/');
+    string opcionActual = separado[separado.Length - 1];
+
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+
+}
+@model KermesseApp.Models.tbl_rol_opciones
+
+@{
+    ViewBag.Title = "Details";
 }
 
-<h2>VerRolOpciones</h2>
+<h2>Detalle de Rol</h2>
 
 <div>
-    <h4>tbl_rol_opciones</h4>
+    <h4>tbl_rol_usuario</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.id_rol)
+            @Html.DisplayNameFor(model => model.tbl_rol.rol_desc)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.id_rol)
+            @Html.DisplayFor(model => model.tbl_rol.rol_desc)
         </dd>
+
         <dt>
-            @Html.DisplayNameFor(model => model.id_opcion)
+            @Html.DisplayNameFor(model => model.tbl_opciones.opcion)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.id_opcion)
+            @Html.DisplayFor(model => model.tbl_opciones.opcion)
         </dd>
-
-        @*<dt>
-            @Html.DisplayNameFor(model => model.estado)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.estado)
-        </dd>*@
 
     </dl>
 </div>
 <p>
-    @*@Html.ActionLink("Edit", "Edit", new { id = Model.id_rol }) |*@
-    @Html.ActionLink("Regresar", "ListRolOpciones")
+    @Html.ActionLink("Editar", "Edit", new { id = Model.id_rol_opcion }) |
+    @Html.ActionLink("Regresar", "Index")
 </p>
-

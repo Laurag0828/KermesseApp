@@ -1,0 +1,148 @@
+﻿@using KermesseApp.Models;
+
+@{
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities db = new KERMESSEEntities();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<vw_rol_opciones> listopc = new List<vw_rol_opciones>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = db.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = db.vw_rol_opciones.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string[] separado = url.Split('/');
+    string opcionActual = separado[separado.Length - 1];
+
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+
+}
+@model KermesseApp.Models.tbl_listaprecio
+
+@{
+    ViewBag.Title = "Nuevo detalle de Lista de Precio";
+}
+
+<h2>Guardar detalle de Lista Precio</h2>
+
+@using (Html.BeginForm("GuardarListaPrecioDet", "Tbl_listaprecio", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <h4>Ingrese los datos del nuevo detalle</h4>
+    <hr />
+
+    <div class="container">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id_listaprecio)
+        @{
+            int id = Model.id_listaprecio;
+        }
+
+        <div class="form-group">
+            <label> Nombre del producto:</label>
+            @Html.DropDownListFor(model => model.detalle.id_producto, ViewBag.id_producto as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-select", @id = "producto" })
+            @Html.ValidationMessageFor(model => model.detalle.id_producto, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <label> Precio de la venta:</label>
+            @Html.EditorFor(model => model.detalle.precio_venta, new { htmlAttributes = new { @class = "form-control", @id = "precioVenta" } })
+        </div>
+
+        <div class="container mt-3 col-xs-1" align="center">
+            <div class="form-group">
+                <input value="Agregar" class="btn btn-outline-success" type="button" onclick="AgregarDetalle(); return false;" />
+            </div>
+        </div>
+
+        <br />
+        <br />
+
+        <div class="row" id="divListaPrecio" style="display: none;">
+            <table id="tablaListaPrecio" class="table table-hover" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio Venta</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+        <div class="container mt-3 col-xs-1" align="center">
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-success" />
+                <a href="@Url.Action("ListListaPrecioDet", new {id})"><i class="btn btn-primary">Regresar</i></a>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    var num = 0;
+
+    function AgregarDetalle() {
+        let producto = document.getElementById("producto").value;
+        let productoNombre = $("#producto option:selected").text()
+        let precioVenta = document.getElementById("precioVenta").value;
+
+        //agregamos a la tabla
+        $("#divListaPrecio").show();
+        let tabla = document.getElementById("tablaListaPrecio");
+        let TR = document.createElement("tr");
+        let TDProducto = document.createElement("td");
+        let TDPrecioVenta = document.createElement("td");
+        TR.appendChild(TDProducto);
+        TR.appendChild(TDPrecioVenta);
+        TDProducto.innerHTML = productoNombre;
+        TDPrecioVenta.innerHTML = precioVenta;
+        tabla.appendChild(TR);
+
+        //agregamos hiddens
+        let divListaPrecio = document.getElementById("divListaPrecio");
+        let HiddenIndex = document.createElement("input");
+        let HiddenProducto = document.createElement("input");
+        let HiddenPrecioVenta = document.createElement("input");
+
+        HiddenIndex.name = "tbl_Listaprecio_Dets.Index";
+        HiddenIndex.value = num;
+        HiddenIndex.type = "hidden";
+        HiddenProducto.name = "tbl_Listaprecio_Dets[" + num + "].id_producto";
+        HiddenProducto.value = producto;
+        HiddenProducto.type = "hidden";
+        HiddenPrecioVenta.name = "tbl_Listaprecio_Dets[" + num + "].precio_venta";
+        HiddenPrecioVenta.value = precioVenta;
+        HiddenPrecioVenta.type = "hidden";
+
+        divListaPrecio.appendChild(HiddenIndex);
+        divListaPrecio.appendChild(HiddenProducto);
+        divListaPrecio.appendChild(HiddenPrecioVenta);
+
+        $("#producto").val("");
+        document.getElementById("precioVenta").value = "";
+        num++;
+    }
+</script>

@@ -1,79 +1,123 @@
-﻿@model IEnumerable<KermesseApp.Models.tbl_listaprecio>
+﻿@using KermesseApp.Models;
+
+@{
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities ke = new KERMESSEEntities();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<vw_rol_opciones> listopc = new List<vw_rol_opciones>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = ke.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = ke.vw_rol_opciones.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string[] separado = url.Split('/');
+    string opcionActual = separado[separado.Length - 1];
+
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+
+
+}
+
+@model IEnumerable<KermesseApp.Models.tbl_listaprecio>
+
 
 @{
     ViewBag.Title = "ListListaPrecio";
 }
 
-<h2> Listas de Precio</h2>
 
 <p>
-    @Html.ActionLink("Crear Lista Precio", "VGuardarListaPrecio")
+    @Html.ActionLink("Crear Lista Precio", "VGuardarListaPrecio", "", new { @class = "btn btn-primary" })
 </p>
 
 
-<h3>Buscar Lista Precio</h3>
-
-@using (Html.BeginForm("", "tbl_listaprecio", FormMethod.Post))
-{
-    <div class="row">
-        <div class="form-group col-xs-8 col-md-8">
-            @*<label for = "cadena" class= "form-label col-md-2">Busqueda:</label>*@
-            @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese aqui los datos de la busqueda" })
-            <span class="input-group">
-                <button type="submit" class="btn btn-block btn-success col-md-2">Buscar</button>
-            </span>
-        </div>
-
-        <div class="form-group col-xs-4 col-md-4">
-            @*Mandamos a llamar el reporte en los distintos formatos*@
-            @Html.ActionLink("PDF", "", new { tipo = "PDF" }, new { @class = "btn btn-default" })
-            @Html.ActionLink("Excel", "", new { tipo = "Excel" }, new { @class = "btn btn-success" })
-
-
-
-        </div>
-    </div>
-}
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.descripcion)
-        </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.estado)
-            </th>*@
-        @*<th>
-                @Html.DisplayNameFor(model => model.tbl_kermesse.nombre)
-            </th>*@
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
+<div class="card border-secondary formulario">
+    @using (Html.BeginForm("FiltrarListaPrecio", "Tbl_listaprecio", FormMethod.Post))
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.nombre)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.descripcion)
-    </td>
-    @*<td>
-            @Html.DisplayFor(modelItem => item.estado)
-        </td>*@
-    @*<td>
-            @Html.DisplayFor(modelItem => item.tbl_kermesse.nombre)
-        </td>*@
-    <td>
-        @Html.ActionLink("Editar", "", new { id = item.id_listaprecio }, new { @Class = "btn btn-xs btn-warning" }) |
-        @Html.ActionLink("Ver", "", new { id = item.id_listaprecio }, new { @Class = "btn btn-xs btn-default" })   |
-        @Html.ActionLink("Eliminar", "", new { id = item.id_listaprecio }, new { @class = "btn btn-xs btn-danger" }) |
+        <div class="card-header">
+            <h2>Nueva Lista Precio</h2>
+        </div>
+        <div class="card-body form-horizontal container-fluid justify-content-center">
+            <div class="row">
+                <div class="form-group col-xs-8 col-md-8">
+                    <span class="input-group">
+                        @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese aqui los datos de la busqueda" })
+                        <button type="submit" class="btn btn-success col-md-2">Buscar</button>
+                    </span>
+                </div>
+
+                <div class="form-group col-xs-4 col-md-4">
+                    @*Mandamos a llamar el reporte en los distintos formatos*@
+                    @Html.ActionLink("PDF", "VerRptListaPrecio", new { tipo = "PDF" }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Excel", "VerRptListaPrecio", new { tipo = "Excel" }, new { @class = "btn btn-success" })
+                </div>
+            </div>
 
 
-    </td>
-</tr>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.tbl_kermesse.nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.descripcion)
+                    </th>
+                    <th> Acciones </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tbl_kermesse.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.descripcion)
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Editar", "EditarListaPrecio", new { id = item.id_listaprecio }, new { @Class = "btn btn-outline-success btn-sm" }) |
+                            @Html.ActionLink("Ver", "ListListaPrecioDet", new { id = item.id_listaprecio }, new { @Class = "btn btn-outline-info btn-sm" })   |
+                            @Html.ActionLink("Eliminar", "EliminarListaPrecio", new { id = item.id_listaprecio }, new { @class = "btn btn-outline-danger btn-sm" }) |
+                        </td>
+                    </tr>
+                }
+
+
+
+            </table>
+        </div>
+
     }
-
-</table>
+</div>

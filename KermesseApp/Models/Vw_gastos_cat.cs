@@ -23,6 +23,6 @@ namespace KermesseApp.Models
         public int id_gasto { get; set; }
         public System.DateTime fecha_gasto { get; set; }
         public string concepto { get; set; }
-        public decimal monto { get; set; }
+        public double monto { get; set; }
     }
 }

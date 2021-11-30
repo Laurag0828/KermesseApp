@@ -14,10 +14,10 @@ namespace KermesseApp.Models
     
     public partial class tbl_tasacambio_det
     {
-        public int id_tasacambio_det { get; set; }
-        public int id_tasacambio { get; set; }
+        public int id_tasaCambio_det { get; set; }
+        public int id_tasaCambio { get; set; }
         public System.DateTime fecha { get; set; }
-        public decimal tipo_cambio { get; set; }
+        public decimal tipoCambio { get; set; }
         public int estado { get; set; }
     
         public virtual tbl_tasacambio tbl_tasacambio { get; set; }

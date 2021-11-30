@@ -24,18 +24,18 @@ namespace KermesseApp.Models
         }
     
         public int id_kermesse { get; set; }
-        public int id_parroquia { get; set; }
+        public int idparroquia { get; set; }
         public string nombre { get; set; }
         public System.DateTime fecha_inicio { get; set; }
         public System.DateTime fecha_fin { get; set; }
         public string desc_general { get; set; }
         public int estado { get; set; }
         public int usuario_creacion { get; set; }
-        public Nullable<int> usuario_modificacion { get; set; }
-        public Nullable<int> usuario_eliminacion { get; set; }
+        public int usuario_modificacion { get; set; }
+        public int usuario_eliminacion { get; set; }
         public System.DateTime fecha_creacion { get; set; }
-        public Nullable<System.DateTime> fecha_modificacion { get; set; }
-        public Nullable<System.DateTime> fecha_eliminacion { get; set; }
+        public System.DateTime fecha_modificacion { get; set; }
+        public System.DateTime fecha_eliminacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_arqueocaja> tbl_arqueocaja { get; set; }

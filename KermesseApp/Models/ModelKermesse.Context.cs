@@ -44,18 +44,22 @@ namespace KermesseApp.Models
         public virtual DbSet<tbl_parroquia> tbl_parroquia { get; set; }
         public virtual DbSet<tbl_productos> tbl_productos { get; set; }
         public virtual DbSet<tbl_rol> tbl_rol { get; set; }
-        public virtual DbSet<tbl_rol_opcion> tbl_rol_opcion { get; set; }
+        public virtual DbSet<tbl_rol_opciones> tbl_rol_opciones { get; set; }
         public virtual DbSet<tbl_rol_usuario> tbl_rol_usuario { get; set; }
         public virtual DbSet<tbl_tasacambio> tbl_tasacambio { get; set; }
         public virtual DbSet<tbl_tasacambio_det> tbl_tasacambio_det { get; set; }
         public virtual DbSet<tbl_usuario> tbl_usuario { get; set; }
         public virtual DbSet<view_moneda> view_moneda { get; set; }
         public virtual DbSet<Vw_Arqueo> Vw_Arqueo { get; set; }
-        public virtual DbSet<Vw_Arqueo1> Vw_Arqueo1 { get; set; }
         public virtual DbSet<Vw_Den> Vw_Den { get; set; }
         public virtual DbSet<Vw_gastos_cat> Vw_gastos_cat { get; set; }
-        public virtual DbSet<vw_ingresocomunidad> vw_ingresocomunidad { get; set; }
+        public virtual DbSet<vw_listaprecio> vw_listaprecio { get; set; }
         public virtual DbSet<Vw_Moneda> Vw_Moneda { get; set; }
+        public virtual DbSet<vw_opciones> vw_opciones { get; set; }
         public virtual DbSet<vw_productos> vw_productos { get; set; }
+        public virtual DbSet<vw_rol> vw_rol { get; set; }
+        public virtual DbSet<vw_rol_opciones> vw_rol_opciones { get; set; }
+        public virtual DbSet<vw_rol_usuario> vw_rol_usuario { get; set; }
+        public virtual DbSet<vw_ingresocomunidad> vw_ingresocomunidad { get; set; }
     }
 }

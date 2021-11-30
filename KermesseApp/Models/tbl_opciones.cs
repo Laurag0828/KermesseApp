@@ -17,7 +17,7 @@ namespace KermesseApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbl_opciones()
         {
-            this.tbl_rol_opcion = new HashSet<tbl_rol_opcion>();
+            this.tbl_rol_opciones = new HashSet<tbl_rol_opciones>();
         }
     
         public int id_opciones { get; set; }
@@ -25,6 +25,6 @@ namespace KermesseApp.Models
         public int estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_rol_opcion> tbl_rol_opcion { get; set; }
+        public virtual ICollection<tbl_rol_opciones> tbl_rol_opciones { get; set; }
     }
 }

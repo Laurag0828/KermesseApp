@@ -1,50 +1,73 @@
-﻿@model KermesseApp.Models.tbl_rol
+﻿@using KermesseApp.Models;
 
 @{
-    ViewBag.Title = "Rol";
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities db = new KERMESSEEntities();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<vw_rol_opciones> listopc = new List<vw_rol_opciones>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = db.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = db.vw_rol_opciones.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string[] separado = url.Split('/');
+    string opcionActual = separado[separado.Length - 1];
+
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+
+}
+@model KermesseApp.Models.tbl_rol
+
+@{
+    ViewBag.Title = "guardarRol";
 }
 
-<div class="card border-secondary formulario">
-    @using (Html.BeginForm("GuardarRol", "Tbl_rol", FormMethod.Post))
-    {
-        <div class="card-header">
-            <h2>Nuevo Rol</h2>
+<h2>Guardar Rol</h2>
+
+@using (Html.BeginForm("GuardarRol", "Tbl_rol", FormMethod.Post))
+{
+    <div class="container">
+        <div class="form-group">
+            <label> Descripcion del Rol</label>
+            @Html.ValidationMessageFor(x => x.rol_desc, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(x => x.rol_desc, new { @class = "form-control" })
         </div>
-
-        <div class="card-body form-horizontal container-fluid">
-
-            <div class="form-group row">
-                <label class="col-md-2">Rol: </label>
-                <div class="col-md-10">
-                    @Html.ValidationMessageFor(x => x.rol, "", new { @class = "text-danger" })
-                    @Html.TextBoxFor(x => x.rol, new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-md-2"> Descripción del Rol: </label>
-                <div class="col-md-10">
-                    @Html.ValidationMessageFor(x => x.rol_desc, "", new { @class = "text-danger" })
-                    @Html.TextBoxFor(x => x.rol_desc, new { @class = "form-control" })
-                </div>
-            </div>
-
-            @*<div class="form-group">
+        @*<div class="form-group">
                 <label>Contraseña</label>
                 @Html.TextBoxFor(x => x.estado, new { @class = "form-control" })
             </div>*@
-
-            <br />
-
-            <div class="form-group row justify-content-center">
-                <input type="submit" value="Guardar" class="btn btn-success col-md-2" />
-                <input type="reset" value="Cancelar" class="btn btn-danger col-md-2" />
-            </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Guardar </button>
+            <button type="reset" class="btn btn-danger">Cancelar </button>
         </div>
+    </div>
 
-    }
-</div>
-
+}
 <div>
     @Html.ActionLink("Regresar", "ListRol")
 </div>

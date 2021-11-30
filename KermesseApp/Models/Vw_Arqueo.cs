@@ -21,7 +21,7 @@ namespace KermesseApp.Models
         public System.DateTime fecha_arqueo { get; set; }
         public int id_moneda { get; set; }
         public string moneda { get; set; }
-        public int id_denominacion { get; set; }
+        public int id_Denominacion { get; set; }
         public decimal valor { get; set; }
         public int id_arqueocaja_det { get; set; }
         public decimal cantidad { get; set; }

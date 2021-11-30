@@ -1,0 +1,25 @@
+﻿@model KermesseApp.Models.tbl_listaprecio_det
+@{
+    ViewBag.Title = "VerRptListaPrecio";
+}
+
+<h2>Reporte de Productos</h2>
+@using (Html.BeginForm("VerRptListaPrecio", "Tbl_listaprecio", FormMethod.Post))
+{
+    <div class="container">
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_listaprecio, "id_listaprecio", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DropDownListFor(model => model.id_listaprecio, ViewBag.id_listaprecio as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_producto, "id_producto", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DropDownListFor(model => model.id_producto, ViewBag.id_producto as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Generar Reporte </button>
+            <button type="reset" class="btn btn-danger"> Cancelar </button>
+        </div>
+
+    </div>
+}
+

@@ -12,7 +12,7 @@ namespace KermesseApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_rol_opcion
+    public partial class tbl_rol_opciones
     {
         public int id_rol_opcion { get; set; }
         public int id_rol { get; set; }

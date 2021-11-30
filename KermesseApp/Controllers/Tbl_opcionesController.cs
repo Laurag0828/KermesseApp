@@ -123,7 +123,7 @@ namespace KermesseApp.Controllers
             List<tbl_opciones> listaOpciones = new List<tbl_opciones>();
             listaOpciones = db.tbl_opciones.ToList();
 
-            ReportDataSource rds = new ReportDataSource("dsRptOpciones", listaOpciones);
+            ReportDataSource rds = new ReportDataSource("dsRptOpcion", listaOpciones);
             rpt.DataSources.Add(rds);
 
             var b = rpt.Render(tipo, null, out mt, out enc, out f, out s, out w);
@@ -131,6 +131,34 @@ namespace KermesseApp.Controllers
             return new FileContentResult(b, mt);
         }
 
+        public ActionResult VerRptOpciones(string tipo, string cadena)
+        {
+            LocalReport rpt = new LocalReport();
+            String mt, enc, f;
+            String[] s;
+            Warning[] w;
+
+            string ruta = Path.Combine(Server.MapPath("~/Reportes"), "rptOpciones.rdlc");
+            rpt.ReportPath = ruta;
+
+            ReportDataSource rd = null;
+            if (string.IsNullOrEmpty(cadena))
+            {
+                var lista = db.tbl_usuario.ToList();
+                rd = new ReportDataSource("dsRptOpciones", lista);
+
+            }
+            else
+            {
+                var lista = db.tbl_usuario.Where(x => x.usuario.Contains(cadena) || x.nombres.Contains(cadena) || x.email.Contains(cadena));
+                rd = new ReportDataSource("dsRptOpciones", lista);
+            }
+
+            rpt.DataSources.Add(rd);
+            var b = rpt.Render(tipo, null, out mt, out enc, out f, out s, out w);
+
+            return new FileContentResult(b, mt);
+        }
 
     }
 }

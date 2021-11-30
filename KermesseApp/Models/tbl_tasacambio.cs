@@ -20,11 +20,11 @@ namespace KermesseApp.Models
             this.tbl_tasacambio_det = new HashSet<tbl_tasacambio_det>();
         }
     
-        public int id_tasacambio { get; set; }
+        public int id_tasaCambio { get; set; }
         public int id_monedaO { get; set; }
-        public int id_monedaC { get; set; }
-        public int mes { get; set; }
-        public int anio { get; set; }
+        public int ind_monedaC { get; set; }
+        public string mes { get; set; }
+        public int año { get; set; }
         public int estado { get; set; }
     
         public virtual tbl_moneda tbl_moneda { get; set; }

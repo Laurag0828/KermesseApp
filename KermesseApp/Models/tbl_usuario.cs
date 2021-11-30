@@ -11,7 +11,9 @@ namespace KermesseApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.Text.RegularExpressions;
+
     public partial class tbl_usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,16 +24,35 @@ namespace KermesseApp.Models
             this.tbl_kermesse2 = new HashSet<tbl_kermesse>();
             this.tbl_rol_usuario = new HashSet<tbl_rol_usuario>();
         }
-    
+
         public int id_usuario { get; set; }
+        [Display(Name = "Nombre del Usuario")]
+        [Required(ErrorMessage = "Escriba el nombre del Usuario")]
+        [StringLength(50, ErrorMessage = "La cantidad de caracteres permitida es de 50")]
         public string usuario { get; set; }
+        [Display(Name = "Nombre de Contraseña")]
+        [Required(ErrorMessage = "Provea una contraseña")]
+        [StringLength(50, ErrorMessage = "La cantidad de caracteres permitida es de 50")]
         public string pwd { get; set; }
+        [Display(Name = "Confirmación de contraseña")]
+        [Required(ErrorMessage = "Se requiere que la contraseña sea confirmada.")]
+        [Compare("pwd", ErrorMessage = "Las contraseñas deben coincidir")]
+        public string confirmarpwd { get; set; }
+        [Display(Name = "Nombre del Usuario")]
+        [Required(ErrorMessage = "Escriba el nombre del Usuario")]
+        [StringLength(50, ErrorMessage = "La cantidad de caracteres permitida es de 50")]
+
         public string nombres { get; set; }
+        [Display(Name = "Apellido de la persona")]
+        [Required(ErrorMessage = "Escriba el apellido de la persona")]
+        [StringLength(50, ErrorMessage = "La cantidad de caracteres permitida es de 50")]
         public string apellidos { get; set; }
+        [Display(Name = "Correo de la persona")]
+        [Required(ErrorMessage = "Escriba el correo de la persona")]
+        [StringLength(50, ErrorMessage = "La cantidad de caracteres permitida es de 50")]
         public string email { get; set; }
         public int estado { get; set; }
-        public string confirmarpwd { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_kermesse> tbl_kermesse { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

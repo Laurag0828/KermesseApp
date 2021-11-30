@@ -246,7 +246,7 @@
     <Compile Include="Models\tbl_rol.cs">
       <DependentUpon>ModelKermesse.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbl_rol_opcion.cs">
+    <Compile Include="Models\tbl_rol_opciones.cs">
       <DependentUpon>ModelKermesse.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_rol_usuario.cs">
@@ -267,9 +267,6 @@
     <Compile Include="Models\Vw_Arqueo.cs">
       <DependentUpon>ModelKermesse.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Vw_Arqueo1.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Vw_Den.cs">
       <DependentUpon>ModelKermesse.tt</DependentUpon>
     </Compile>
@@ -279,10 +276,25 @@
     <Compile Include="Models\vw_ingresocomunidad.cs">
       <DependentUpon>ModelKermesse.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\vw_listaprecio.cs">
+      <DependentUpon>ModelKermesse.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Vw_Moneda.cs">
       <DependentUpon>ModelKermesse.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\vw_opciones.cs">
+      <DependentUpon>ModelKermesse.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\vw_productos.cs">
+      <DependentUpon>ModelKermesse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_rol.cs">
+      <DependentUpon>ModelKermesse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_rol_opciones.cs">
+      <DependentUpon>ModelKermesse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_rol_usuario.cs">
       <DependentUpon>ModelKermesse.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -519,6 +531,19 @@
     <Content Include="Views\Tbl_usuario\View.cshtml" />
     <Content Include="Views\TblArqueoCaja\VistaRptArqueo.cshtml" />
     <Content Include="Views\tbl_IngresoComunidad\VistaRptIngresoCom.cshtml" />
+    <Content Include="Views\tbl_listaprecio\EditarListaPrecio.cshtml" />
+    <Content Include="Views\tbl_listaprecio\EditarListaPrecioDet.cshtml" />
+    <Content Include="Views\tbl_listaprecio\ListListaPrecioDet.cshtml" />
+    <Content Include="Views\tbl_listaprecio\VGuardarListaPrecioDet.cshtml" />
+    <Content Include="Views\tbl_listaprecio\VistaRptListaPrecio.cshtml" />
+    <Content Include="Views\Tbl_rolopciones\CreateRolOpciones.cshtml" />
+    <Content Include="Views\Tbl_rolopciones\DeleteRolOpciones.cshtml" />
+    <Content Include="Views\Tbl_rolusuario\CreateRolUs.cshtml" />
+    <Content Include="Views\Tbl_rolusuario\DeleteRolUs.cshtml" />
+    <Content Include="Views\Tbl_rolusuario\EditRolUs.cshtml" />
+    <Content Include="Views\Tbl_rolusuario\ListarRolUsuario.cshtml" />
+    <Content Include="Views\Tbl_rolusuario\VerRolus.cshtml" />
+    <Content Include="Views\Tbl_usuario\ViewLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -539,10 +564,16 @@
     <EmbeddedResource Include="Reportes\rptComunidad.rdlc" />
     <EmbeddedResource Include="Reportes\rptden.rdlc" />
     <EmbeddedResource Include="Reportes\rptfiltraGastos.rdlc" />
+    <EmbeddedResource Include="Reportes\rptFiltraListaPrecio.rdlc" />
     <EmbeddedResource Include="Reportes\rptIngCom.rdlc" />
     <EmbeddedResource Include="Reportes\rptMon.rdlc" />
+    <EmbeddedResource Include="Reportes\rptOpciones.rdlc" />
     <EmbeddedResource Include="Reportes\rptParroquia.rdlc" />
     <EmbeddedResource Include="Reportes\rptProd.rdlc" />
+    <EmbeddedResource Include="Reportes\rptRol.rdlc" />
+    <EmbeddedResource Include="Reportes\rptRolOpc.rdlc" />
+    <EmbeddedResource Include="Reportes\rptRolUs.rdlc" />
+    <EmbeddedResource Include="Reportes\rptUsuario.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

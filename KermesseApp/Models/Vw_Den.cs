@@ -14,7 +14,7 @@ namespace KermesseApp.Models
     
     public partial class Vw_Den
     {
-        public int id_denominacion { get; set; }
+        public int id_Denominacion { get; set; }
         public decimal valor { get; set; }
         public string valor_letras { get; set; }
         public int id_moneda { get; set; }

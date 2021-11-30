@@ -49,7 +49,7 @@
           </Key>
           <Property Name="id_bono" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="valor" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_cat_gastos">
@@ -57,8 +57,8 @@
             <PropertyRef Name="id_cat_gasto" />
           </Key>
           <Property Name="id_cat_gasto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre_cat" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="desc_cat" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="nombre_cat" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="desc_cat" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_cat_producto">
@@ -76,8 +76,8 @@
           </Key>
           <Property Name="id_comunidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="responsable" Type="nvarchar" MaxLength="80" Nullable="false" />
-          <Property Name="desc_contribucion" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="responsable" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="desc_contribucion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_denominacion">
@@ -86,8 +86,8 @@
           </Key>
           <Property Name="id_denominacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_moneda" Type="int" Nullable="false" />
-          <Property Name="valor" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="valor_letras" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="valor_letras" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_gastos">
@@ -99,14 +99,13 @@
           <Property Name="id_cat_gasto" Type="int" Nullable="false" />
           <Property Name="fecha_gasto" Type="date" Nullable="false" />
           <Property Name="concepto" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="monto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="monto" Type="float" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
           <Property Name="usuario_creacion" Type="int" Nullable="false" />
           <Property Name="usuario_modificacion" Type="int" />
           <Property Name="usuario_eliminacion" Type="int" />
           <Property Name="fecha_creacion" Type="datetime" />
           <Property Name="fecha_modificacion" Type="datetime" />
-          <Property Name="fecha_eliminacion" Type="datetime" />
         </EntityType>
         <EntityType Name="tbl_ingreso_com">
           <Key>
@@ -116,15 +115,15 @@
           <Property Name="id_kermesse" Type="int" Nullable="false" />
           <Property Name="id_comunidad" Type="int" Nullable="false" />
           <Property Name="id_producto" Type="int" Nullable="false" />
-          <Property Name="cant_producto" Type="int" Nullable="false" />
           <Property Name="precio_producto" Type="decimal" Precision="18" Scale="2" />
-          <Property Name="total_bonos" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="cant_producto" Type="int" Nullable="false" />
+          <Property Name="total_bonos" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="usuario_creacion" Type="int" Nullable="false" />
           <Property Name="usuario_modificacion" Type="int" />
           <Property Name="usuario_eliminacion" Type="int" />
           <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
-          <Property Name="fecha_modificacion" Type="datetime" />
-          <Property Name="fecha_eliminacion" Type="datetime" />
+          <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+          <Property Name="fecha_eliminacion" Type="datetime" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_ingresocom_det">
@@ -144,18 +143,18 @@
             <PropertyRef Name="id_kermesse" />
           </Key>
           <Property Name="id_kermesse" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_parroquia" Type="int" Nullable="false" />
+          <Property Name="idparroquia" Type="int" Nullable="false" />
           <Property Name="nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="fecha_inicio" Type="date" Nullable="false" />
           <Property Name="fecha_fin" Type="date" Nullable="false" />
-          <Property Name="desc_general" Type="nvarchar" MaxLength="400" />
+          <Property Name="desc_general" Type="nvarchar" MaxLength="400" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
           <Property Name="usuario_creacion" Type="int" Nullable="false" />
-          <Property Name="usuario_modificacion" Type="int" />
-          <Property Name="usuario_eliminacion" Type="int" />
+          <Property Name="usuario_modificacion" Type="int" Nullable="false" />
+          <Property Name="usuario_eliminacion" Type="int" Nullable="false" />
           <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
-          <Property Name="fecha_modificacion" Type="datetime" />
-          <Property Name="fecha_eliminacion" Type="datetime" />
+          <Property Name="fecha_modificacion" Type="datetime" Nullable="false" />
+          <Property Name="fecha_eliminacion" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_listaprecio">
           <Key>
@@ -174,15 +173,15 @@
           <Property Name="id_listaprecio_det" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_listaprecio" Type="int" Nullable="false" />
           <Property Name="id_producto" Type="int" Nullable="false" />
-          <Property Name="precio_venta" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="precio_venta" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_moneda">
           <Key>
             <PropertyRef Name="id_moneda" />
           </Key>
           <Property Name="id_moneda" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="signo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="signo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_opciones">
@@ -190,7 +189,7 @@
             <PropertyRef Name="id_opciones" />
           </Key>
           <Property Name="id_opciones" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="opcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="opcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_parroquia">
@@ -201,7 +200,7 @@
           <Property Name="nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="direccion" Type="nvarchar" MaxLength="400" Nullable="false" />
           <Property Name="telefono" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="parroco" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="parroco" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="url_logo" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="sitio_web" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="estado" Type="int" />
@@ -213,10 +212,10 @@
           <Property Name="id_producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_comunidad" Type="int" Nullable="false" />
           <Property Name="id_cat_producto" Type="int" Nullable="false" />
-          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="desc_presentacion" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="desc_presentacion" Type="varchar" MaxLength="100" />
           <Property Name="cantidad" Type="int" Nullable="false" />
-          <Property Name="precio_venta" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="precio_venta" Type="float" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_rol">
@@ -224,11 +223,10 @@
             <PropertyRef Name="id_rol" />
           </Key>
           <Property Name="id_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="rol" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="rol_desc" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
-          <Property Name="rol_desc" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="tbl_rol_opcion">
+        <EntityType Name="tbl_rol_opciones">
           <Key>
             <PropertyRef Name="id_rol_opcion" />
           </Key>
@@ -246,49 +244,48 @@
         </EntityType>
         <EntityType Name="tbl_tasacambio">
           <Key>
-            <PropertyRef Name="id_tasacambio" />
+            <PropertyRef Name="id_tasaCambio" />
           </Key>
-          <Property Name="id_tasacambio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_tasaCambio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_monedaO" Type="int" Nullable="false" />
-          <Property Name="id_monedaC" Type="int" Nullable="false" />
-          <Property Name="mes" Type="int" Nullable="false" />
-          <Property Name="anio" Type="int" Nullable="false" />
+          <Property Name="ind_monedaC" Type="int" Nullable="false" />
+          <Property Name="mes" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="año" Type="int" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_tasacambio_det">
           <Key>
-            <PropertyRef Name="id_tasacambio_det" />
+            <PropertyRef Name="id_tasaCambio_det" />
           </Key>
-          <Property Name="id_tasacambio_det" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_tasacambio" Type="int" Nullable="false" />
+          <Property Name="id_tasaCambio_det" Type="int" Nullable="false" />
+          <Property Name="id_tasaCambio" Type="int" Nullable="false" />
           <Property Name="fecha" Type="date" Nullable="false" />
-          <Property Name="tipo_cambio" Type="decimal" Precision="18" Scale="4" Nullable="false" />
-          <Property Name="estado" Type="int" Nullable="false" />
+          <Property Name="tipoCambio" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="estado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="tbl_usuario">
           <Key>
             <PropertyRef Name="id_usuario" />
           </Key>
           <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="pwd" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="usuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pwd" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombres" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidos" Type="nchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
-          <Property Name="confirmarpwd" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'KERMESSE.dbo.view_moneda' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="view_moneda">
           <Key>
-            <PropertyRef Name="id_denominacion" />
+            <PropertyRef Name="id_Denominacion" />
             <PropertyRef Name="nombre" />
             <PropertyRef Name="signo" />
           </Key>
-          <Property Name="id_denominacion" Type="int" Nullable="false" />
-          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="signo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="id_Denominacion" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="signo" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'KERMESSE.dbo.Vw_Arqueo' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -301,7 +298,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.Vw_Arqueo' no tiene definida ni
             <PropertyRef Name="fecha_arqueo" />
             <PropertyRef Name="id_moneda" />
             <PropertyRef Name="moneda" />
-            <PropertyRef Name="id_denominacion" />
+            <PropertyRef Name="id_Denominacion" />
             <PropertyRef Name="valor" />
             <PropertyRef Name="id_arqueocaja_det" />
             <PropertyRef Name="cantidad" />
@@ -314,63 +311,31 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.Vw_Arqueo' no tiene definida ni
           <Property Name="gran_total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="fecha_arqueo" Type="date" Nullable="false" />
           <Property Name="id_moneda" Type="int" Nullable="false" />
-          <Property Name="moneda" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="id_denominacion" Type="int" Nullable="false" />
-          <Property Name="valor" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="moneda" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_Denominacion" Type="int" Nullable="false" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="id_arqueocaja_det" Type="int" Nullable="false" />
           <Property Name="cantidad" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="subtotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'KERMESSE.dbo.Vw_Arqueo1' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
-        <EntityType Name="Vw_Arqueo1">
-          <Key>
-            <PropertyRef Name="id_arqueocaja" />
-            <PropertyRef Name="fecha_arqueo" />
-            <PropertyRef Name="gran_total" />
-            <PropertyRef Name="id_arqueocaja_det" />
-            <PropertyRef Name="cantidad" />
-            <PropertyRef Name="subtotal" />
-            <PropertyRef Name="id_kermesse" />
-            <PropertyRef Name="nombre" />
-            <PropertyRef Name="id_moneda" />
-            <PropertyRef Name="Expr1" />
-            <PropertyRef Name="id_denominacion" />
-            <PropertyRef Name="valor" />
-            <PropertyRef Name="valor_letras" />
-          </Key>
-          <Property Name="id_arqueocaja" Type="int" Nullable="false" />
-          <Property Name="fecha_arqueo" Type="date" Nullable="false" />
-          <Property Name="gran_total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="id_arqueocaja_det" Type="int" Nullable="false" />
-          <Property Name="cantidad" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="subtotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="id_kermesse" Type="int" Nullable="false" />
-          <Property Name="nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="id_moneda" Type="int" Nullable="false" />
-          <Property Name="Expr1" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="id_denominacion" Type="int" Nullable="false" />
-          <Property Name="valor" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="valor_letras" Type="nvarchar" MaxLength="250" Nullable="false" />
-        </EntityType>
-        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'KERMESSE.dbo.Vw_Den' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Vw_Den">
           <Key>
-            <PropertyRef Name="id_denominacion" />
+            <PropertyRef Name="id_Denominacion" />
             <PropertyRef Name="valor" />
             <PropertyRef Name="valor_letras" />
             <PropertyRef Name="id_moneda" />
             <PropertyRef Name="nombre" />
             <PropertyRef Name="signo" />
           </Key>
-          <Property Name="id_denominacion" Type="int" Nullable="false" />
-          <Property Name="valor" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="valor_letras" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="id_Denominacion" Type="int" Nullable="false" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="valor_letras" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="id_moneda" Type="int" Nullable="false" />
-          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="signo" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="signo" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'KERMESSE.dbo.Vw_gastos_cat' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -392,11 +357,11 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.Vw_gastos_cat' no tiene definid
           <Property Name="fecha_inicio" Type="date" Nullable="false" />
           <Property Name="fecha_fin" Type="date" Nullable="false" />
           <Property Name="id_cat_gasto" Type="int" Nullable="false" />
-          <Property Name="nombre_cat" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombre_cat" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="id_gasto" Type="int" Nullable="false" />
           <Property Name="fecha_gasto" Type="date" Nullable="false" />
           <Property Name="concepto" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="monto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="monto" Type="float" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_ingresocomunidad' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
@@ -420,13 +385,13 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_ingresocomunidad' no tiene d
             <PropertyRef Name="id_bono" />
           </Key>
           <Property Name="id_ingresocom_det" Type="int" Nullable="false" />
-          <Property Name="total_bonos" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="total_bonos" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="precio_producto" Type="decimal" Precision="18" Scale="2" />
           <Property Name="cant_producto" Type="int" Nullable="false" />
           <Property Name="id_ingresocom" Type="int" Nullable="false" />
           <Property Name="kermesse" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="comunidad" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="producto" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="producto" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="bonos" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="denominacion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="cantidad" Type="int" Nullable="false" />
@@ -438,27 +403,54 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_ingresocomunidad' no tiene d
           <Property Name="id_bono" Type="int" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_listaprecio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_listaprecio">
+          <Key>
+            <PropertyRef Name="id_listaprecio_det" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="producto" />
+            <PropertyRef Name="precio_venta" />
+            <PropertyRef Name="id_listaprecio" />
+            <PropertyRef Name="id_producto" />
+          </Key>
+          <Property Name="id_listaprecio_det" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="producto" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="precio_venta" Type="float" Nullable="false" />
+          <Property Name="id_listaprecio" Type="int" Nullable="false" />
+          <Property Name="id_producto" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'KERMESSE.dbo.Vw_Moneda' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="Vw_Moneda">
           <Key>
-            <PropertyRef Name="id_denominacion" />
+            <PropertyRef Name="id_Denominacion" />
             <PropertyRef Name="valor" />
             <PropertyRef Name="valor_letras" />
             <PropertyRef Name="nombre" />
             <PropertyRef Name="Expr1" />
           </Key>
-          <Property Name="id_denominacion" Type="int" Nullable="false" />
-          <Property Name="valor" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="valor_letras" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_Denominacion" Type="int" Nullable="false" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="valor_letras" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Expr1" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_opciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_opciones">
+          <Key>
+            <PropertyRef Name="id_opciones" />
+            <PropertyRef Name="opcion" />
+          </Key>
+          <Property Name="id_opciones" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="opcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
         <EntityType Name="vw_productos">
           <Key>
             <PropertyRef Name="nombre" />
-            <PropertyRef Name="desc_presentacion" />
             <PropertyRef Name="cantidad" />
             <PropertyRef Name="precio_venta" />
             <PropertyRef Name="comunidad" />
@@ -466,14 +458,56 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             <PropertyRef Name="id_producto" />
             <PropertyRef Name="estado" />
           </Key>
-          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="desc_presentacion" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="desc_presentacion" Type="varchar" MaxLength="100" />
           <Property Name="cantidad" Type="int" Nullable="false" />
-          <Property Name="precio_venta" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="precio_venta" Type="float" Nullable="false" />
           <Property Name="comunidad" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="catprod" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="id_producto" Type="int" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_rol' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_rol">
+          <Key>
+            <PropertyRef Name="id_rol" />
+            <PropertyRef Name="rol_desc" />
+          </Key>
+          <Property Name="id_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rol_desc" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_rol_opciones' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_rol_opciones">
+          <Key>
+            <PropertyRef Name="id_rol_opcion" />
+            <PropertyRef Name="opcion" />
+            <PropertyRef Name="id_rol" />
+            <PropertyRef Name="rol_desc" />
+            <PropertyRef Name="id_opcion" />
+          </Key>
+          <Property Name="id_rol_opcion" Type="int" Nullable="false" />
+          <Property Name="opcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_rol" Type="int" Nullable="false" />
+          <Property Name="rol_desc" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="id_opcion" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_rol_usuario' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="vw_rol_usuario">
+          <Key>
+            <PropertyRef Name="id_rol_usuario" />
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="usuario" />
+            <PropertyRef Name="rol_desc" />
+            <PropertyRef Name="id_rol" />
+          </Key>
+          <Property Name="id_rol_usuario" Type="int" Nullable="false" />
+          <Property Name="id_usuario" Type="int" Nullable="false" />
+          <Property Name="usuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="rol_desc" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="id_rol" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_tbl_arqueocaja_det_tbl_arqueocaja">
           <End Role="tbl_arqueocaja" Type="Self.tbl_arqueocaja" Multiplicity="1" />
@@ -511,7 +545,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tbl_arqueocaja_tbl_kermesse1">
+        <Association Name="FK_tbl_arqueocaja_tbl_kermesse">
           <End Role="tbl_kermesse" Type="Self.tbl_kermesse" Multiplicity="1" />
           <End Role="tbl_arqueocaja" Type="Self.tbl_arqueocaja" Multiplicity="*" />
           <ReferentialConstraint>
@@ -535,7 +569,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tbl_gastos_tbl_cat_gastos">
+        <Association Name="FK_tbl_gastos_tbl_control_gastos">
           <End Role="tbl_cat_gastos" Type="Self.tbl_cat_gastos" Multiplicity="1" />
           <End Role="tbl_gastos" Type="Self.tbl_gastos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -627,7 +661,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
               <PropertyRef Name="idparroquia" />
             </Principal>
             <Dependent Role="tbl_kermesse">
-              <PropertyRef Name="id_parroquia" />
+              <PropertyRef Name="idparroquia" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -644,7 +678,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tbl_kermesse_tbl_usuario1">
-          <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="0..1" />
+          <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="1" />
           <End Role="tbl_kermesse" Type="Self.tbl_kermesse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_usuario">
@@ -656,7 +690,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tbl_kermesse_tbl_usuario2">
-          <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="0..1" />
+          <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="1" />
           <End Role="tbl_kermesse" Type="Self.tbl_kermesse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_usuario">
@@ -727,26 +761,26 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tbl_rol_opcion_tbl_opciones">
+        <Association Name="FK_tbl_rol_opciones_tbl_opciones">
           <End Role="tbl_opciones" Type="Self.tbl_opciones" Multiplicity="1" />
-          <End Role="tbl_rol_opcion" Type="Self.tbl_rol_opcion" Multiplicity="*" />
+          <End Role="tbl_rol_opciones" Type="Self.tbl_rol_opciones" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_opciones">
               <PropertyRef Name="id_opciones" />
             </Principal>
-            <Dependent Role="tbl_rol_opcion">
+            <Dependent Role="tbl_rol_opciones">
               <PropertyRef Name="id_opcion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tbl_rol_opcion_tbl_rol">
+        <Association Name="FK_tbl_rol_opciones_tbl_rol">
           <End Role="tbl_rol" Type="Self.tbl_rol" Multiplicity="1" />
-          <End Role="tbl_rol_opcion" Type="Self.tbl_rol_opcion" Multiplicity="*" />
+          <End Role="tbl_rol_opciones" Type="Self.tbl_rol_opciones" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_rol">
               <PropertyRef Name="id_rol" />
             </Principal>
-            <Dependent Role="tbl_rol_opcion">
+            <Dependent Role="tbl_rol_opciones">
               <PropertyRef Name="id_rol" />
             </Dependent>
           </ReferentialConstraint>
@@ -780,10 +814,10 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           <End Role="tbl_tasacambio_det" Type="Self.tbl_tasacambio_det" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_tasacambio">
-              <PropertyRef Name="id_tasacambio" />
+              <PropertyRef Name="id_tasaCambio" />
             </Principal>
             <Dependent Role="tbl_tasacambio_det">
-              <PropertyRef Name="id_tasacambio" />
+              <PropertyRef Name="id_tasaCambio" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -807,7 +841,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
               <PropertyRef Name="id_moneda" />
             </Principal>
             <Dependent Role="tbl_tasacambio">
-              <PropertyRef Name="id_monedaC" />
+              <PropertyRef Name="ind_monedaC" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -831,14 +865,14 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           <EntitySet Name="tbl_parroquia" EntityType="Self.tbl_parroquia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_productos" EntityType="Self.tbl_productos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_rol" EntityType="Self.tbl_rol" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tbl_rol_opcion" EntityType="Self.tbl_rol_opcion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_rol_opciones" EntityType="Self.tbl_rol_opciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_rol_usuario" EntityType="Self.tbl_rol_usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_tasacambio" EntityType="Self.tbl_tasacambio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_tasacambio_det" EntityType="Self.tbl_tasacambio_det" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_usuario" EntityType="Self.tbl_usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="view_moneda" EntityType="Self.view_moneda" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [view_moneda].[id_denominacion] AS [id_denominacion], 
+    [view_moneda].[id_Denominacion] AS [id_Denominacion], 
     [view_moneda].[nombre] AS [nombre], 
     [view_moneda].[signo] AS [signo]
     FROM [dbo].[view_moneda] AS [view_moneda]</DefiningQuery>
@@ -852,7 +886,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
     [Vw_Arqueo].[fecha_arqueo] AS [fecha_arqueo], 
     [Vw_Arqueo].[id_moneda] AS [id_moneda], 
     [Vw_Arqueo].[moneda] AS [moneda], 
-    [Vw_Arqueo].[id_denominacion] AS [id_denominacion], 
+    [Vw_Arqueo].[id_Denominacion] AS [id_Denominacion], 
     [Vw_Arqueo].[valor] AS [valor], 
     [Vw_Arqueo].[id_arqueocaja_det] AS [id_arqueocaja_det], 
     [Vw_Arqueo].[cantidad] AS [cantidad], 
@@ -860,26 +894,9 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
     [Vw_Arqueo].[estado] AS [estado]
     FROM [dbo].[Vw_Arqueo] AS [Vw_Arqueo]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Vw_Arqueo1" EntityType="Self.Vw_Arqueo1" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Vw_Arqueo1].[id_arqueocaja] AS [id_arqueocaja], 
-    [Vw_Arqueo1].[fecha_arqueo] AS [fecha_arqueo], 
-    [Vw_Arqueo1].[gran_total] AS [gran_total], 
-    [Vw_Arqueo1].[id_arqueocaja_det] AS [id_arqueocaja_det], 
-    [Vw_Arqueo1].[cantidad] AS [cantidad], 
-    [Vw_Arqueo1].[subtotal] AS [subtotal], 
-    [Vw_Arqueo1].[id_kermesse] AS [id_kermesse], 
-    [Vw_Arqueo1].[nombre] AS [nombre], 
-    [Vw_Arqueo1].[id_moneda] AS [id_moneda], 
-    [Vw_Arqueo1].[Expr1] AS [Expr1], 
-    [Vw_Arqueo1].[id_denominacion] AS [id_denominacion], 
-    [Vw_Arqueo1].[valor] AS [valor], 
-    [Vw_Arqueo1].[valor_letras] AS [valor_letras]
-    FROM [dbo].[Vw_Arqueo1] AS [Vw_Arqueo1]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="Vw_Den" EntityType="Self.Vw_Den" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [Vw_Den].[id_denominacion] AS [id_denominacion], 
+    [Vw_Den].[id_Denominacion] AS [id_Denominacion], 
     [Vw_Den].[valor] AS [valor], 
     [Vw_Den].[valor_letras] AS [valor_letras], 
     [Vw_Den].[id_moneda] AS [id_moneda], 
@@ -922,14 +939,30 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
     [vw_ingresocomunidad].[id_bono] AS [id_bono]
     FROM [dbo].[vw_ingresocomunidad] AS [vw_ingresocomunidad]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vw_listaprecio" EntityType="Self.vw_listaprecio" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_listaprecio].[id_listaprecio_det] AS [id_listaprecio_det], 
+    [vw_listaprecio].[nombre] AS [nombre], 
+    [vw_listaprecio].[producto] AS [producto], 
+    [vw_listaprecio].[precio_venta] AS [precio_venta], 
+    [vw_listaprecio].[id_listaprecio] AS [id_listaprecio], 
+    [vw_listaprecio].[id_producto] AS [id_producto]
+    FROM [dbo].[vw_listaprecio] AS [vw_listaprecio]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="Vw_Moneda" EntityType="Self.Vw_Moneda" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [Vw_Moneda].[id_denominacion] AS [id_denominacion], 
+    [Vw_Moneda].[id_Denominacion] AS [id_Denominacion], 
     [Vw_Moneda].[valor] AS [valor], 
     [Vw_Moneda].[valor_letras] AS [valor_letras], 
     [Vw_Moneda].[nombre] AS [nombre], 
     [Vw_Moneda].[Expr1] AS [Expr1]
     FROM [dbo].[Vw_Moneda] AS [Vw_Moneda]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_opciones" EntityType="Self.vw_opciones" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_opciones].[id_opciones] AS [id_opciones], 
+    [vw_opciones].[opcion] AS [opcion]
+    FROM [dbo].[vw_opciones] AS [vw_opciones]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="vw_productos" EntityType="Self.vw_productos" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -943,6 +976,30 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
     [vw_productos].[estado] AS [estado]
     FROM [dbo].[vw_productos] AS [vw_productos]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vw_rol" EntityType="Self.vw_rol" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_rol].[id_rol] AS [id_rol], 
+    [vw_rol].[rol_desc] AS [rol_desc]
+    FROM [dbo].[vw_rol] AS [vw_rol]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_rol_opciones" EntityType="Self.vw_rol_opciones" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_rol_opciones].[id_rol_opcion] AS [id_rol_opcion], 
+    [vw_rol_opciones].[opcion] AS [opcion], 
+    [vw_rol_opciones].[id_rol] AS [id_rol], 
+    [vw_rol_opciones].[rol_desc] AS [rol_desc], 
+    [vw_rol_opciones].[id_opcion] AS [id_opcion]
+    FROM [dbo].[vw_rol_opciones] AS [vw_rol_opciones]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_rol_usuario" EntityType="Self.vw_rol_usuario" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_rol_usuario].[id_rol_usuario] AS [id_rol_usuario], 
+    [vw_rol_usuario].[id_usuario] AS [id_usuario], 
+    [vw_rol_usuario].[usuario] AS [usuario], 
+    [vw_rol_usuario].[rol_desc] AS [rol_desc], 
+    [vw_rol_usuario].[id_rol] AS [id_rol]
+    FROM [dbo].[vw_rol_usuario] AS [vw_rol_usuario]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_tbl_arqueocaja_det_tbl_arqueocaja" Association="Self.FK_tbl_arqueocaja_det_tbl_arqueocaja">
             <End Role="tbl_arqueocaja" EntitySet="tbl_arqueocaja" />
             <End Role="tbl_arqueocaja_det" EntitySet="tbl_arqueocaja_det" />
@@ -955,7 +1012,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             <End Role="tbl_moneda" EntitySet="tbl_moneda" />
             <End Role="tbl_arqueocaja_det" EntitySet="tbl_arqueocaja_det" />
           </AssociationSet>
-          <AssociationSet Name="FK_tbl_arqueocaja_tbl_kermesse1" Association="Self.FK_tbl_arqueocaja_tbl_kermesse1">
+          <AssociationSet Name="FK_tbl_arqueocaja_tbl_kermesse" Association="Self.FK_tbl_arqueocaja_tbl_kermesse">
             <End Role="tbl_kermesse" EntitySet="tbl_kermesse" />
             <End Role="tbl_arqueocaja" EntitySet="tbl_arqueocaja" />
           </AssociationSet>
@@ -963,7 +1020,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             <End Role="tbl_moneda" EntitySet="tbl_moneda" />
             <End Role="tbl_denominacion" EntitySet="tbl_denominacion" />
           </AssociationSet>
-          <AssociationSet Name="FK_tbl_gastos_tbl_cat_gastos" Association="Self.FK_tbl_gastos_tbl_cat_gastos">
+          <AssociationSet Name="FK_tbl_gastos_tbl_control_gastos" Association="Self.FK_tbl_gastos_tbl_control_gastos">
             <End Role="tbl_cat_gastos" EntitySet="tbl_cat_gastos" />
             <End Role="tbl_gastos" EntitySet="tbl_gastos" />
           </AssociationSet>
@@ -1027,13 +1084,13 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             <End Role="tbl_comunidad" EntitySet="tbl_comunidad" />
             <End Role="tbl_productos" EntitySet="tbl_productos" />
           </AssociationSet>
-          <AssociationSet Name="FK_tbl_rol_opcion_tbl_opciones" Association="Self.FK_tbl_rol_opcion_tbl_opciones">
+          <AssociationSet Name="FK_tbl_rol_opciones_tbl_opciones" Association="Self.FK_tbl_rol_opciones_tbl_opciones">
             <End Role="tbl_opciones" EntitySet="tbl_opciones" />
-            <End Role="tbl_rol_opcion" EntitySet="tbl_rol_opcion" />
+            <End Role="tbl_rol_opciones" EntitySet="tbl_rol_opciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_tbl_rol_opcion_tbl_rol" Association="Self.FK_tbl_rol_opcion_tbl_rol">
+          <AssociationSet Name="FK_tbl_rol_opciones_tbl_rol" Association="Self.FK_tbl_rol_opciones_tbl_rol">
             <End Role="tbl_rol" EntitySet="tbl_rol" />
-            <End Role="tbl_rol_opcion" EntitySet="tbl_rol_opcion" />
+            <End Role="tbl_rol_opciones" EntitySet="tbl_rol_opciones" />
           </AssociationSet>
           <AssociationSet Name="FK_tbl_rol_usuario_tbl_rol" Association="Self.FK_tbl_rol_usuario_tbl_rol">
             <End Role="tbl_rol" EntitySet="tbl_rol" />
@@ -1080,24 +1137,27 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           <EntitySet Name="tbl_parroquia" EntityType="KERMESSEModel.tbl_parroquia" />
           <EntitySet Name="tbl_productos" EntityType="KERMESSEModel.tbl_productos" />
           <EntitySet Name="tbl_rol" EntityType="KERMESSEModel.tbl_rol" />
-          <EntitySet Name="tbl_rol_opcion" EntityType="KERMESSEModel.tbl_rol_opcion" />
+          <EntitySet Name="tbl_rol_opciones" EntityType="KERMESSEModel.tbl_rol_opciones" />
           <EntitySet Name="tbl_rol_usuario" EntityType="KERMESSEModel.tbl_rol_usuario" />
           <EntitySet Name="tbl_tasacambio" EntityType="KERMESSEModel.tbl_tasacambio" />
           <EntitySet Name="tbl_tasacambio_det" EntityType="KERMESSEModel.tbl_tasacambio_det" />
           <EntitySet Name="tbl_usuario" EntityType="KERMESSEModel.tbl_usuario" />
           <EntitySet Name="view_moneda" EntityType="KERMESSEModel.view_moneda" />
           <EntitySet Name="Vw_Arqueo" EntityType="KERMESSEModel.Vw_Arqueo" />
-          <EntitySet Name="Vw_Arqueo1" EntityType="KERMESSEModel.Vw_Arqueo1" />
           <EntitySet Name="Vw_Den" EntityType="KERMESSEModel.Vw_Den" />
           <EntitySet Name="Vw_gastos_cat" EntityType="KERMESSEModel.Vw_gastos_cat" />
-          <EntitySet Name="vw_ingresocomunidad" EntityType="KERMESSEModel.vw_ingresocomunidad" />
+          <EntitySet Name="vw_listaprecio" EntityType="KERMESSEModel.vw_listaprecio" />
           <EntitySet Name="Vw_Moneda" EntityType="KERMESSEModel.Vw_Moneda" />
+          <EntitySet Name="vw_opciones" EntityType="KERMESSEModel.vw_opciones" />
           <EntitySet Name="vw_productos" EntityType="KERMESSEModel.vw_productos" />
+          <EntitySet Name="vw_rol" EntityType="KERMESSEModel.vw_rol" />
+          <EntitySet Name="vw_rol_opciones" EntityType="KERMESSEModel.vw_rol_opciones" />
+          <EntitySet Name="vw_rol_usuario" EntityType="KERMESSEModel.vw_rol_usuario" />
           <AssociationSet Name="FK_tbl_arqueocaja_det_tbl_arqueocaja" Association="KERMESSEModel.FK_tbl_arqueocaja_det_tbl_arqueocaja">
             <End Role="tbl_arqueocaja" EntitySet="tbl_arqueocaja" />
             <End Role="tbl_arqueocaja_det" EntitySet="tbl_arqueocaja_det" />
           </AssociationSet>
-          <AssociationSet Name="FK_tbl_arqueocaja_tbl_kermesse1" Association="KERMESSEModel.FK_tbl_arqueocaja_tbl_kermesse1">
+          <AssociationSet Name="FK_tbl_arqueocaja_tbl_kermesse" Association="KERMESSEModel.FK_tbl_arqueocaja_tbl_kermesse">
             <End Role="tbl_kermesse" EntitySet="tbl_kermesse" />
             <End Role="tbl_arqueocaja" EntitySet="tbl_arqueocaja" />
           </AssociationSet>
@@ -1113,7 +1173,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             <End Role="tbl_bonos" EntitySet="tbl_bonos" />
             <End Role="tbl_ingresocom_det" EntitySet="tbl_ingresocom_det" />
           </AssociationSet>
-          <AssociationSet Name="FK_tbl_gastos_tbl_cat_gastos" Association="KERMESSEModel.FK_tbl_gastos_tbl_cat_gastos">
+          <AssociationSet Name="FK_tbl_gastos_tbl_control_gastos" Association="KERMESSEModel.FK_tbl_gastos_tbl_control_gastos">
             <End Role="tbl_cat_gastos" EntitySet="tbl_cat_gastos" />
             <End Role="tbl_gastos" EntitySet="tbl_gastos" />
           </AssociationSet>
@@ -1185,13 +1245,13 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             <End Role="tbl_moneda" EntitySet="tbl_moneda" />
             <End Role="tbl_tasacambio" EntitySet="tbl_tasacambio" />
           </AssociationSet>
-          <AssociationSet Name="FK_tbl_rol_opcion_tbl_opciones" Association="KERMESSEModel.FK_tbl_rol_opcion_tbl_opciones">
+          <AssociationSet Name="FK_tbl_rol_opciones_tbl_opciones" Association="KERMESSEModel.FK_tbl_rol_opciones_tbl_opciones">
             <End Role="tbl_opciones" EntitySet="tbl_opciones" />
-            <End Role="tbl_rol_opcion" EntitySet="tbl_rol_opcion" />
+            <End Role="tbl_rol_opciones" EntitySet="tbl_rol_opciones" />
           </AssociationSet>
-          <AssociationSet Name="FK_tbl_rol_opcion_tbl_rol" Association="KERMESSEModel.FK_tbl_rol_opcion_tbl_rol">
+          <AssociationSet Name="FK_tbl_rol_opciones_tbl_rol" Association="KERMESSEModel.FK_tbl_rol_opciones_tbl_rol">
             <End Role="tbl_rol" EntitySet="tbl_rol" />
-            <End Role="tbl_rol_opcion" EntitySet="tbl_rol_opcion" />
+            <End Role="tbl_rol_opciones" EntitySet="tbl_rol_opciones" />
           </AssociationSet>
           <AssociationSet Name="FK_tbl_rol_usuario_tbl_rol" Association="KERMESSEModel.FK_tbl_rol_usuario_tbl_rol">
             <End Role="tbl_rol" EntitySet="tbl_rol" />
@@ -1205,6 +1265,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             <End Role="tbl_tasacambio" EntitySet="tbl_tasacambio" />
             <End Role="tbl_tasacambio_det" EntitySet="tbl_tasacambio_det" />
           </AssociationSet>
+          <EntitySet Name="vw_ingresocomunidad" EntityType="KERMESSEModel.vw_ingresocomunidad" />
         </EntityContainer>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1232,7 +1293,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           <Property Name="fecha_eliminacion" Type="DateTime" Precision="3" />
           <Property Name="estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_arqueocaja_det" Relationship="KERMESSEModel.FK_tbl_arqueocaja_det_tbl_arqueocaja" FromRole="tbl_arqueocaja" ToRole="tbl_arqueocaja_det" />
-          <NavigationProperty Name="tbl_kermesse" Relationship="KERMESSEModel.FK_tbl_arqueocaja_tbl_kermesse1" FromRole="tbl_arqueocaja" ToRole="tbl_kermesse" />
+          <NavigationProperty Name="tbl_kermesse" Relationship="KERMESSEModel.FK_tbl_arqueocaja_tbl_kermesse" FromRole="tbl_arqueocaja" ToRole="tbl_kermesse" />
         </EntityType>
         <EntityType Name="tbl_arqueocaja_det">
           <Key>
@@ -1255,7 +1316,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           </Key>
           <Property Name="id_bono" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_ingresocom_det" Relationship="KERMESSEModel.FK_tbl_ingresocom_det_tbl_bonos" FromRole="tbl_bonos" ToRole="tbl_ingresocom_det" />
         </EntityType>
@@ -1264,10 +1325,10 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             <PropertyRef Name="id_cat_gasto" />
           </Key>
           <Property Name="id_cat_gasto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre_cat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="desc_cat" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="nombre_cat" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="desc_cat" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tbl_gastos" Relationship="KERMESSEModel.FK_tbl_gastos_tbl_cat_gastos" FromRole="tbl_cat_gastos" ToRole="tbl_gastos" />
+          <NavigationProperty Name="tbl_gastos" Relationship="KERMESSEModel.FK_tbl_gastos_tbl_control_gastos" FromRole="tbl_cat_gastos" ToRole="tbl_gastos" />
         </EntityType>
         <EntityType Name="tbl_cat_producto">
           <Key>
@@ -1285,8 +1346,8 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           </Key>
           <Property Name="id_comunidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="responsable" Type="String" Nullable="false" MaxLength="80" FixedLength="false" Unicode="true" />
-          <Property Name="desc_contribucion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="responsable" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="desc_contribucion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_ingreso_com" Relationship="KERMESSEModel.FK_tbl_ingreso_com_tbl_comunidad" FromRole="tbl_comunidad" ToRole="tbl_ingreso_com" />
           <NavigationProperty Name="tbl_productos" Relationship="KERMESSEModel.FK_tbl_productos_tbl_comunidad" FromRole="tbl_comunidad" ToRole="tbl_productos" />
@@ -1297,8 +1358,8 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           </Key>
           <Property Name="id_denominacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_moneda" Type="Int32" Nullable="false" />
-          <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="valor_letras" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="valor_letras" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_arqueocaja_det" Relationship="KERMESSEModel.FK_tbl_arqueocaja_det_tbl_denominacion" FromRole="tbl_denominacion" ToRole="tbl_arqueocaja_det" />
           <NavigationProperty Name="tbl_moneda" Relationship="KERMESSEModel.FK_tbl_denominacion_tbl_moneda" FromRole="tbl_denominacion" ToRole="tbl_moneda" />
@@ -1312,15 +1373,14 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           <Property Name="id_cat_gasto" Type="Int32" Nullable="false" />
           <Property Name="fecha_gasto" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="concepto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="monto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="monto" Type="Double" Nullable="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
           <Property Name="usuario_creacion" Type="Int32" Nullable="false" />
           <Property Name="usuario_modificacion" Type="Int32" />
           <Property Name="usuario_eliminacion" Type="Int32" />
           <Property Name="fecha_creacion" Type="DateTime" Precision="3" />
           <Property Name="fecha_modificacion" Type="DateTime" Precision="3" />
-          <Property Name="fecha_eliminacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbl_cat_gastos" Relationship="KERMESSEModel.FK_tbl_gastos_tbl_cat_gastos" FromRole="tbl_gastos" ToRole="tbl_cat_gastos" />
+          <NavigationProperty Name="tbl_cat_gastos" Relationship="KERMESSEModel.FK_tbl_gastos_tbl_control_gastos" FromRole="tbl_gastos" ToRole="tbl_cat_gastos" />
           <NavigationProperty Name="tbl_kermesse" Relationship="KERMESSEModel.FK_tbl_gastos_tbl_kermesse" FromRole="tbl_gastos" ToRole="tbl_kermesse" />
         </EntityType>
         <EntityType Name="tbl_ingreso_com">
@@ -1331,15 +1391,15 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           <Property Name="id_kermesse" Type="Int32" Nullable="false" />
           <Property Name="id_comunidad" Type="Int32" Nullable="false" />
           <Property Name="id_producto" Type="Int32" Nullable="false" />
-          <Property Name="cant_producto" Type="Int32" Nullable="false" />
           <Property Name="precio_producto" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="total_bonos" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="cant_producto" Type="Int32" Nullable="false" />
+          <Property Name="total_bonos" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="usuario_creacion" Type="Int32" Nullable="false" />
           <Property Name="usuario_modificacion" Type="Int32" />
           <Property Name="usuario_eliminacion" Type="Int32" />
           <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="fecha_modificacion" Type="DateTime" Precision="3" />
-          <Property Name="fecha_eliminacion" Type="DateTime" Precision="3" />
+          <Property Name="fecha_modificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fecha_eliminacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_comunidad" Relationship="KERMESSEModel.FK_tbl_ingreso_com_tbl_comunidad" FromRole="tbl_ingreso_com" ToRole="tbl_comunidad" />
           <NavigationProperty Name="tbl_kermesse" Relationship="KERMESSEModel.FK_tbl_ingreso_com_tbl_kermesse" FromRole="tbl_ingreso_com" ToRole="tbl_kermesse" />
@@ -1365,19 +1425,19 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             <PropertyRef Name="id_kermesse" />
           </Key>
           <Property Name="id_kermesse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_parroquia" Type="Int32" Nullable="false" />
+          <Property Name="idparroquia" Type="Int32" Nullable="false" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="fecha_fin" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="desc_general" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="desc_general" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
           <Property Name="estado" Type="Int32" Nullable="false" />
           <Property Name="usuario_creacion" Type="Int32" Nullable="false" />
-          <Property Name="usuario_modificacion" Type="Int32" />
-          <Property Name="usuario_eliminacion" Type="Int32" />
+          <Property Name="usuario_modificacion" Type="Int32" Nullable="false" />
+          <Property Name="usuario_eliminacion" Type="Int32" Nullable="false" />
           <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="fecha_modificacion" Type="DateTime" Precision="3" />
-          <Property Name="fecha_eliminacion" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="tbl_arqueocaja" Relationship="KERMESSEModel.FK_tbl_arqueocaja_tbl_kermesse1" FromRole="tbl_kermesse" ToRole="tbl_arqueocaja" />
+          <Property Name="fecha_modificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fecha_eliminacion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tbl_arqueocaja" Relationship="KERMESSEModel.FK_tbl_arqueocaja_tbl_kermesse" FromRole="tbl_kermesse" ToRole="tbl_arqueocaja" />
           <NavigationProperty Name="tbl_gastos" Relationship="KERMESSEModel.FK_tbl_gastos_tbl_kermesse" FromRole="tbl_kermesse" ToRole="tbl_gastos" />
           <NavigationProperty Name="tbl_ingreso_com" Relationship="KERMESSEModel.FK_tbl_ingreso_com_tbl_kermesse" FromRole="tbl_kermesse" ToRole="tbl_ingreso_com" />
           <NavigationProperty Name="tbl_parroquia" Relationship="KERMESSEModel.FK_tbl_kermesse_tbl_parroquia" FromRole="tbl_kermesse" ToRole="tbl_parroquia" />
@@ -1405,7 +1465,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           <Property Name="id_listaprecio_det" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_listaprecio" Type="Int32" Nullable="false" />
           <Property Name="id_producto" Type="Int32" Nullable="false" />
-          <Property Name="precio_venta" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="precio_venta" Type="Double" Nullable="false" />
           <NavigationProperty Name="tbl_listaprecio" Relationship="KERMESSEModel.FK_tbl_listaprecio_det_tbl_listaprecio" FromRole="tbl_listaprecio_det" ToRole="tbl_listaprecio" />
           <NavigationProperty Name="tbl_productos" Relationship="KERMESSEModel.FK_tbl_listaprecio_det_tbl_productos" FromRole="tbl_listaprecio_det" ToRole="tbl_productos" />
         </EntityType>
@@ -1414,8 +1474,8 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             <PropertyRef Name="id_moneda" />
           </Key>
           <Property Name="id_moneda" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="signo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="signo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_arqueocaja_det" Relationship="KERMESSEModel.FK_tbl_arqueocaja_det_tbl_moneda" FromRole="tbl_moneda" ToRole="tbl_arqueocaja_det" />
           <NavigationProperty Name="tbl_denominacion" Relationship="KERMESSEModel.FK_tbl_denominacion_tbl_moneda" FromRole="tbl_moneda" ToRole="tbl_denominacion" />
@@ -1427,9 +1487,9 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             <PropertyRef Name="id_opciones" />
           </Key>
           <Property Name="id_opciones" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="opcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="opcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tbl_rol_opcion" Relationship="KERMESSEModel.FK_tbl_rol_opcion_tbl_opciones" FromRole="tbl_opciones" ToRole="tbl_rol_opcion" />
+          <NavigationProperty Name="tbl_rol_opciones" Relationship="KERMESSEModel.FK_tbl_rol_opciones_tbl_opciones" FromRole="tbl_opciones" ToRole="tbl_rol_opciones" />
         </EntityType>
         <EntityType Name="tbl_parroquia">
           <Key>
@@ -1439,7 +1499,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="direccion" Type="String" Nullable="false" MaxLength="400" FixedLength="false" Unicode="true" />
           <Property Name="telefono" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="parroco" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="parroco" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="url_logo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="sitio_web" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="estado" Type="Int32" />
@@ -1452,10 +1512,10 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           <Property Name="id_producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_comunidad" Type="Int32" Nullable="false" />
           <Property Name="id_cat_producto" Type="Int32" Nullable="false" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="desc_presentacion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="desc_presentacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="cantidad" Type="Int32" Nullable="false" />
-          <Property Name="precio_venta" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="precio_venta" Type="Double" Nullable="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_cat_producto" Relationship="KERMESSEModel.FK_tbl_productos_tbl_cat_producto" FromRole="tbl_productos" ToRole="tbl_cat_producto" />
           <NavigationProperty Name="tbl_comunidad" Relationship="KERMESSEModel.FK_tbl_productos_tbl_comunidad" FromRole="tbl_productos" ToRole="tbl_comunidad" />
@@ -1467,21 +1527,20 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             <PropertyRef Name="id_rol" />
           </Key>
           <Property Name="id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="rol" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="rol_desc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
-          <Property Name="rol_desc" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tbl_rol_opcion" Relationship="KERMESSEModel.FK_tbl_rol_opcion_tbl_rol" FromRole="tbl_rol" ToRole="tbl_rol_opcion" />
+          <NavigationProperty Name="tbl_rol_opciones" Relationship="KERMESSEModel.FK_tbl_rol_opciones_tbl_rol" FromRole="tbl_rol" ToRole="tbl_rol_opciones" />
           <NavigationProperty Name="tbl_rol_usuario" Relationship="KERMESSEModel.FK_tbl_rol_usuario_tbl_rol" FromRole="tbl_rol" ToRole="tbl_rol_usuario" />
         </EntityType>
-        <EntityType Name="tbl_rol_opcion">
+        <EntityType Name="tbl_rol_opciones">
           <Key>
             <PropertyRef Name="id_rol_opcion" />
           </Key>
           <Property Name="id_rol_opcion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_rol" Type="Int32" Nullable="false" />
           <Property Name="id_opcion" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="tbl_opciones" Relationship="KERMESSEModel.FK_tbl_rol_opcion_tbl_opciones" FromRole="tbl_rol_opcion" ToRole="tbl_opciones" />
-          <NavigationProperty Name="tbl_rol" Relationship="KERMESSEModel.FK_tbl_rol_opcion_tbl_rol" FromRole="tbl_rol_opcion" ToRole="tbl_rol" />
+          <NavigationProperty Name="tbl_opciones" Relationship="KERMESSEModel.FK_tbl_rol_opciones_tbl_opciones" FromRole="tbl_rol_opciones" ToRole="tbl_opciones" />
+          <NavigationProperty Name="tbl_rol" Relationship="KERMESSEModel.FK_tbl_rol_opciones_tbl_rol" FromRole="tbl_rol_opciones" ToRole="tbl_rol" />
         </EntityType>
         <EntityType Name="tbl_rol_usuario">
           <Key>
@@ -1495,13 +1554,13 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
         </EntityType>
         <EntityType Name="tbl_tasacambio">
           <Key>
-            <PropertyRef Name="id_tasacambio" />
+            <PropertyRef Name="id_tasaCambio" />
           </Key>
-          <Property Name="id_tasacambio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_tasaCambio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_monedaO" Type="Int32" Nullable="false" />
-          <Property Name="id_monedaC" Type="Int32" Nullable="false" />
-          <Property Name="mes" Type="Int32" Nullable="false" />
-          <Property Name="anio" Type="Int32" Nullable="false" />
+          <Property Name="ind_monedaC" Type="Int32" Nullable="false" />
+          <Property Name="mes" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="año" Type="Int32" Nullable="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
           <NavigationProperty Name="tbl_moneda" Relationship="KERMESSEModel.FK_tbl_tasacambio_tbl_moneda" FromRole="tbl_tasacambio" ToRole="tbl_moneda" />
           <NavigationProperty Name="tbl_moneda1" Relationship="KERMESSEModel.FK_tbl_tasacambio_tbl_moneda1" FromRole="tbl_tasacambio" ToRole="tbl_moneda" />
@@ -1509,13 +1568,13 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
         </EntityType>
         <EntityType Name="tbl_tasacambio_det">
           <Key>
-            <PropertyRef Name="id_tasacambio_det" />
+            <PropertyRef Name="id_tasaCambio_det" />
           </Key>
-          <Property Name="id_tasacambio_det" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_tasacambio" Type="Int32" Nullable="false" />
+          <Property Name="id_tasaCambio_det" Type="Int32" Nullable="false" />
+          <Property Name="id_tasaCambio" Type="Int32" Nullable="false" />
           <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="tipo_cambio" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
-          <Property Name="estado" Type="Int32" Nullable="false" />
+          <Property Name="tipoCambio" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+          <Property Name="estado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="tbl_tasacambio" Relationship="KERMESSEModel.FK_tbl_tasacambio_det_tbl_tasacambio" FromRole="tbl_tasacambio_det" ToRole="tbl_tasacambio" />
         </EntityType>
         <EntityType Name="tbl_usuario">
@@ -1523,13 +1582,12 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             <PropertyRef Name="id_usuario" />
           </Key>
           <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="pwd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pwd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
-          <Property Name="confirmarpwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tbl_kermesse" Relationship="KERMESSEModel.FK_tbl_kermesse_tbl_usuario" FromRole="tbl_usuario" ToRole="tbl_kermesse" />
           <NavigationProperty Name="tbl_kermesse1" Relationship="KERMESSEModel.FK_tbl_kermesse_tbl_usuario1" FromRole="tbl_usuario" ToRole="tbl_kermesse" />
           <NavigationProperty Name="tbl_kermesse2" Relationship="KERMESSEModel.FK_tbl_kermesse_tbl_usuario2" FromRole="tbl_usuario" ToRole="tbl_kermesse" />
@@ -1537,13 +1595,13 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
         </EntityType>
         <EntityType Name="view_moneda">
           <Key>
-            <PropertyRef Name="id_denominacion" />
+            <PropertyRef Name="id_Denominacion" />
             <PropertyRef Name="nombre" />
             <PropertyRef Name="signo" />
           </Key>
-          <Property Name="id_denominacion" Type="Int32" Nullable="false" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="signo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="id_Denominacion" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="signo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Vw_Arqueo">
           <Key>
@@ -1554,7 +1612,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             <PropertyRef Name="fecha_arqueo" />
             <PropertyRef Name="id_moneda" />
             <PropertyRef Name="moneda" />
-            <PropertyRef Name="id_denominacion" />
+            <PropertyRef Name="id_Denominacion" />
             <PropertyRef Name="valor" />
             <PropertyRef Name="id_arqueocaja_det" />
             <PropertyRef Name="cantidad" />
@@ -1567,59 +1625,29 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           <Property Name="gran_total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="fecha_arqueo" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="id_moneda" Type="Int32" Nullable="false" />
-          <Property Name="moneda" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="id_denominacion" Type="Int32" Nullable="false" />
-          <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="moneda" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_Denominacion" Type="Int32" Nullable="false" />
+          <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="id_arqueocaja_det" Type="Int32" Nullable="false" />
           <Property Name="cantidad" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="subtotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="estado" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="Vw_Arqueo1">
-          <Key>
-            <PropertyRef Name="id_arqueocaja" />
-            <PropertyRef Name="fecha_arqueo" />
-            <PropertyRef Name="gran_total" />
-            <PropertyRef Name="id_arqueocaja_det" />
-            <PropertyRef Name="cantidad" />
-            <PropertyRef Name="subtotal" />
-            <PropertyRef Name="id_kermesse" />
-            <PropertyRef Name="nombre" />
-            <PropertyRef Name="id_moneda" />
-            <PropertyRef Name="Expr1" />
-            <PropertyRef Name="id_denominacion" />
-            <PropertyRef Name="valor" />
-            <PropertyRef Name="valor_letras" />
-          </Key>
-          <Property Name="id_arqueocaja" Type="Int32" Nullable="false" />
-          <Property Name="fecha_arqueo" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="gran_total" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="id_arqueocaja_det" Type="Int32" Nullable="false" />
-          <Property Name="cantidad" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="subtotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="id_kermesse" Type="Int32" Nullable="false" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="id_moneda" Type="Int32" Nullable="false" />
-          <Property Name="Expr1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="id_denominacion" Type="Int32" Nullable="false" />
-          <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="valor_letras" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Vw_Den">
           <Key>
-            <PropertyRef Name="id_denominacion" />
+            <PropertyRef Name="id_Denominacion" />
             <PropertyRef Name="valor" />
             <PropertyRef Name="valor_letras" />
             <PropertyRef Name="id_moneda" />
             <PropertyRef Name="nombre" />
             <PropertyRef Name="signo" />
           </Key>
-          <Property Name="id_denominacion" Type="Int32" Nullable="false" />
-          <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="valor_letras" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="id_Denominacion" Type="Int32" Nullable="false" />
+          <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="valor_letras" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="id_moneda" Type="Int32" Nullable="false" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="signo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="signo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Vw_gastos_cat">
           <Key>
@@ -1639,67 +1667,53 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="fecha_fin" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="id_cat_gasto" Type="Int32" Nullable="false" />
-          <Property Name="nombre_cat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nombre_cat" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <Property Name="id_gasto" Type="Int32" Nullable="false" />
           <Property Name="fecha_gasto" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="concepto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="monto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="monto" Type="Double" Nullable="false" />
         </EntityType>
-        <EntityType Name="vw_ingresocomunidad">
+        <EntityType Name="vw_listaprecio">
           <Key>
-            <PropertyRef Name="id_ingresocom_det" />
-            <PropertyRef Name="total_bonos" />
-            <PropertyRef Name="cant_producto" />
-            <PropertyRef Name="id_ingresocom" />
-            <PropertyRef Name="kermesse" />
-            <PropertyRef Name="comunidad" />
+            <PropertyRef Name="id_listaprecio_det" />
+            <PropertyRef Name="nombre" />
             <PropertyRef Name="producto" />
-            <PropertyRef Name="bonos" />
-            <PropertyRef Name="denominacion" />
-            <PropertyRef Name="cantidad" />
-            <PropertyRef Name="subtotal" />
-            <PropertyRef Name="estado" />
+            <PropertyRef Name="precio_venta" />
+            <PropertyRef Name="id_listaprecio" />
             <PropertyRef Name="id_producto" />
-            <PropertyRef Name="id_comunidad" />
-            <PropertyRef Name="id_kermesse" />
-            <PropertyRef Name="id_bono" />
           </Key>
-          <Property Name="id_ingresocom_det" Type="Int32" Nullable="false" />
-          <Property Name="total_bonos" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="precio_producto" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="cant_producto" Type="Int32" Nullable="false" />
-          <Property Name="id_ingresocom" Type="Int32" Nullable="false" />
-          <Property Name="kermesse" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="comunidad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="producto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="bonos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="denominacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="cantidad" Type="Int32" Nullable="false" />
-          <Property Name="subtotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="estado" Type="Int32" Nullable="false" />
+          <Property Name="id_listaprecio_det" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="producto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="precio_venta" Type="Double" Nullable="false" />
+          <Property Name="id_listaprecio" Type="Int32" Nullable="false" />
           <Property Name="id_producto" Type="Int32" Nullable="false" />
-          <Property Name="id_comunidad" Type="Int32" Nullable="false" />
-          <Property Name="id_kermesse" Type="Int32" Nullable="false" />
-          <Property Name="id_bono" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Vw_Moneda">
           <Key>
-            <PropertyRef Name="id_denominacion" />
+            <PropertyRef Name="id_Denominacion" />
             <PropertyRef Name="valor" />
             <PropertyRef Name="valor_letras" />
             <PropertyRef Name="nombre" />
             <PropertyRef Name="Expr1" />
           </Key>
-          <Property Name="id_denominacion" Type="Int32" Nullable="false" />
-          <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="valor_letras" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="id_Denominacion" Type="Int32" Nullable="false" />
+          <Property Name="valor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="valor_letras" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Expr1" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_opciones">
+          <Key>
+            <PropertyRef Name="id_opciones" />
+            <PropertyRef Name="opcion" />
+          </Key>
+          <Property Name="id_opciones" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="opcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="vw_productos">
           <Key>
             <PropertyRef Name="nombre" />
-            <PropertyRef Name="desc_presentacion" />
             <PropertyRef Name="cantidad" />
             <PropertyRef Name="precio_venta" />
             <PropertyRef Name="comunidad" />
@@ -1707,14 +1721,50 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             <PropertyRef Name="id_producto" />
             <PropertyRef Name="estado" />
           </Key>
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="desc_presentacion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="desc_presentacion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="cantidad" Type="Int32" Nullable="false" />
-          <Property Name="precio_venta" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="precio_venta" Type="Double" Nullable="false" />
           <Property Name="comunidad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="catprod" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="id_producto" Type="Int32" Nullable="false" />
           <Property Name="estado" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_rol">
+          <Key>
+            <PropertyRef Name="id_rol" />
+            <PropertyRef Name="rol_desc" />
+          </Key>
+          <Property Name="id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rol_desc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vw_rol_opciones">
+          <Key>
+            <PropertyRef Name="id_rol_opcion" />
+            <PropertyRef Name="opcion" />
+            <PropertyRef Name="id_rol" />
+            <PropertyRef Name="rol_desc" />
+            <PropertyRef Name="id_opcion" />
+          </Key>
+          <Property Name="id_rol_opcion" Type="Int32" Nullable="false" />
+          <Property Name="opcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_rol" Type="Int32" Nullable="false" />
+          <Property Name="rol_desc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="id_opcion" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_rol_usuario">
+          <Key>
+            <PropertyRef Name="id_rol_usuario" />
+            <PropertyRef Name="id_usuario" />
+            <PropertyRef Name="usuario" />
+            <PropertyRef Name="rol_desc" />
+            <PropertyRef Name="id_rol" />
+          </Key>
+          <Property Name="id_rol_usuario" Type="Int32" Nullable="false" />
+          <Property Name="id_usuario" Type="Int32" Nullable="false" />
+          <Property Name="usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rol_desc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="id_rol" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_tbl_arqueocaja_det_tbl_arqueocaja">
           <End Type="KERMESSEModel.tbl_arqueocaja" Role="tbl_arqueocaja" Multiplicity="1" />
@@ -1728,7 +1778,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tbl_arqueocaja_tbl_kermesse1">
+        <Association Name="FK_tbl_arqueocaja_tbl_kermesse">
           <End Type="KERMESSEModel.tbl_kermesse" Role="tbl_kermesse" Multiplicity="1" />
           <End Type="KERMESSEModel.tbl_arqueocaja" Role="tbl_arqueocaja" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1776,7 +1826,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tbl_gastos_tbl_cat_gastos">
+        <Association Name="FK_tbl_gastos_tbl_control_gastos">
           <End Type="KERMESSEModel.tbl_cat_gastos" Role="tbl_cat_gastos" Multiplicity="1" />
           <End Type="KERMESSEModel.tbl_gastos" Role="tbl_gastos" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1892,7 +1942,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
               <PropertyRef Name="idparroquia" />
             </Principal>
             <Dependent Role="tbl_kermesse">
-              <PropertyRef Name="id_parroquia" />
+              <PropertyRef Name="idparroquia" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1909,7 +1959,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tbl_kermesse_tbl_usuario1">
-          <End Type="KERMESSEModel.tbl_usuario" Role="tbl_usuario" Multiplicity="0..1" />
+          <End Type="KERMESSEModel.tbl_usuario" Role="tbl_usuario" Multiplicity="1" />
           <End Type="KERMESSEModel.tbl_kermesse" Role="tbl_kermesse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_usuario">
@@ -1921,7 +1971,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_tbl_kermesse_tbl_usuario2">
-          <End Type="KERMESSEModel.tbl_usuario" Role="tbl_usuario" Multiplicity="0..1" />
+          <End Type="KERMESSEModel.tbl_usuario" Role="tbl_usuario" Multiplicity="1" />
           <End Type="KERMESSEModel.tbl_kermesse" Role="tbl_kermesse" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_usuario">
@@ -1988,30 +2038,30 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
               <PropertyRef Name="id_moneda" />
             </Principal>
             <Dependent Role="tbl_tasacambio">
-              <PropertyRef Name="id_monedaC" />
+              <PropertyRef Name="ind_monedaC" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tbl_rol_opcion_tbl_opciones">
+        <Association Name="FK_tbl_rol_opciones_tbl_opciones">
           <End Type="KERMESSEModel.tbl_opciones" Role="tbl_opciones" Multiplicity="1" />
-          <End Type="KERMESSEModel.tbl_rol_opcion" Role="tbl_rol_opcion" Multiplicity="*" />
+          <End Type="KERMESSEModel.tbl_rol_opciones" Role="tbl_rol_opciones" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_opciones">
               <PropertyRef Name="id_opciones" />
             </Principal>
-            <Dependent Role="tbl_rol_opcion">
+            <Dependent Role="tbl_rol_opciones">
               <PropertyRef Name="id_opcion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tbl_rol_opcion_tbl_rol">
+        <Association Name="FK_tbl_rol_opciones_tbl_rol">
           <End Type="KERMESSEModel.tbl_rol" Role="tbl_rol" Multiplicity="1" />
-          <End Type="KERMESSEModel.tbl_rol_opcion" Role="tbl_rol_opcion" Multiplicity="*" />
+          <End Type="KERMESSEModel.tbl_rol_opciones" Role="tbl_rol_opciones" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_rol">
               <PropertyRef Name="id_rol" />
             </Principal>
-            <Dependent Role="tbl_rol_opcion">
+            <Dependent Role="tbl_rol_opciones">
               <PropertyRef Name="id_rol" />
             </Dependent>
           </ReferentialConstraint>
@@ -2045,13 +2095,50 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           <End Type="KERMESSEModel.tbl_tasacambio_det" Role="tbl_tasacambio_det" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tbl_tasacambio">
-              <PropertyRef Name="id_tasacambio" />
+              <PropertyRef Name="id_tasaCambio" />
             </Principal>
             <Dependent Role="tbl_tasacambio_det">
-              <PropertyRef Name="id_tasacambio" />
+              <PropertyRef Name="id_tasaCambio" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vw_ingresocomunidad">
+          <Key>
+            <PropertyRef Name="id_ingresocom_det" />
+            <PropertyRef Name="total_bonos" />
+            <PropertyRef Name="cant_producto" />
+            <PropertyRef Name="id_ingresocom" />
+            <PropertyRef Name="kermesse" />
+            <PropertyRef Name="comunidad" />
+            <PropertyRef Name="producto" />
+            <PropertyRef Name="bonos" />
+            <PropertyRef Name="denominacion" />
+            <PropertyRef Name="cantidad" />
+            <PropertyRef Name="subtotal" />
+            <PropertyRef Name="estado" />
+            <PropertyRef Name="id_producto" />
+            <PropertyRef Name="id_comunidad" />
+            <PropertyRef Name="id_kermesse" />
+            <PropertyRef Name="id_bono" />
+          </Key>
+          <Property Name="id_ingresocom_det" Type="Int32" Nullable="false" />
+          <Property Name="total_bonos" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="precio_producto" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="cant_producto" Type="Int32" Nullable="false" />
+          <Property Name="id_ingresocom" Type="Int32" Nullable="false" />
+          <Property Name="kermesse" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="comunidad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="producto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="bonos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="denominacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cantidad" Type="Int32" Nullable="false" />
+          <Property Name="subtotal" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <Property Name="id_producto" Type="Int32" Nullable="false" />
+          <Property Name="id_comunidad" Type="Int32" Nullable="false" />
+          <Property Name="id_kermesse" Type="Int32" Nullable="false" />
+          <Property Name="id_bono" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2154,7 +2241,6 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           <EntitySetMapping Name="tbl_gastos">
             <EntityTypeMapping TypeName="KERMESSEModel.tbl_gastos">
               <MappingFragment StoreEntitySet="tbl_gastos">
-                <ScalarProperty Name="fecha_eliminacion" ColumnName="fecha_eliminacion" />
                 <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
                 <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
                 <ScalarProperty Name="usuario_eliminacion" ColumnName="usuario_eliminacion" />
@@ -2181,8 +2267,8 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
                 <ScalarProperty Name="usuario_modificacion" ColumnName="usuario_modificacion" />
                 <ScalarProperty Name="usuario_creacion" ColumnName="usuario_creacion" />
                 <ScalarProperty Name="total_bonos" ColumnName="total_bonos" />
-                <ScalarProperty Name="precio_producto" ColumnName="precio_producto" />
                 <ScalarProperty Name="cant_producto" ColumnName="cant_producto" />
+                <ScalarProperty Name="precio_producto" ColumnName="precio_producto" />
                 <ScalarProperty Name="id_producto" ColumnName="id_producto" />
                 <ScalarProperty Name="id_comunidad" ColumnName="id_comunidad" />
                 <ScalarProperty Name="id_kermesse" ColumnName="id_kermesse" />
@@ -2217,7 +2303,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
                 <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
                 <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="id_parroquia" ColumnName="id_parroquia" />
+                <ScalarProperty Name="idparroquia" ColumnName="idparroquia" />
                 <ScalarProperty Name="id_kermesse" ColumnName="id_kermesse" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2293,16 +2379,15 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
           <EntitySetMapping Name="tbl_rol">
             <EntityTypeMapping TypeName="KERMESSEModel.tbl_rol">
               <MappingFragment StoreEntitySet="tbl_rol">
-                <ScalarProperty Name="rol_desc" ColumnName="rol_desc" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="rol" ColumnName="rol" />
+                <ScalarProperty Name="rol_desc" ColumnName="rol_desc" />
                 <ScalarProperty Name="id_rol" ColumnName="id_rol" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbl_rol_opcion">
-            <EntityTypeMapping TypeName="KERMESSEModel.tbl_rol_opcion">
-              <MappingFragment StoreEntitySet="tbl_rol_opcion">
+          <EntitySetMapping Name="tbl_rol_opciones">
+            <EntityTypeMapping TypeName="KERMESSEModel.tbl_rol_opciones">
+              <MappingFragment StoreEntitySet="tbl_rol_opciones">
                 <ScalarProperty Name="id_opcion" ColumnName="id_opcion" />
                 <ScalarProperty Name="id_rol" ColumnName="id_rol" />
                 <ScalarProperty Name="id_rol_opcion" ColumnName="id_rol_opcion" />
@@ -2322,11 +2407,11 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             <EntityTypeMapping TypeName="KERMESSEModel.tbl_tasacambio">
               <MappingFragment StoreEntitySet="tbl_tasacambio">
                 <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="anio" ColumnName="anio" />
+                <ScalarProperty Name="año" ColumnName="año" />
                 <ScalarProperty Name="mes" ColumnName="mes" />
-                <ScalarProperty Name="id_monedaC" ColumnName="id_monedaC" />
+                <ScalarProperty Name="ind_monedaC" ColumnName="ind_monedaC" />
                 <ScalarProperty Name="id_monedaO" ColumnName="id_monedaO" />
-                <ScalarProperty Name="id_tasacambio" ColumnName="id_tasacambio" />
+                <ScalarProperty Name="id_tasaCambio" ColumnName="id_tasaCambio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2334,17 +2419,16 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
             <EntityTypeMapping TypeName="KERMESSEModel.tbl_tasacambio_det">
               <MappingFragment StoreEntitySet="tbl_tasacambio_det">
                 <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="tipo_cambio" ColumnName="tipo_cambio" />
+                <ScalarProperty Name="tipoCambio" ColumnName="tipoCambio" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="id_tasacambio" ColumnName="id_tasacambio" />
-                <ScalarProperty Name="id_tasacambio_det" ColumnName="id_tasacambio_det" />
+                <ScalarProperty Name="id_tasaCambio" ColumnName="id_tasaCambio" />
+                <ScalarProperty Name="id_tasaCambio_det" ColumnName="id_tasaCambio_det" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tbl_usuario">
             <EntityTypeMapping TypeName="KERMESSEModel.tbl_usuario">
               <MappingFragment StoreEntitySet="tbl_usuario">
-                <ScalarProperty Name="confirmarpwd" ColumnName="confirmarpwd" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="apellidos" ColumnName="apellidos" />
@@ -2360,7 +2444,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
               <MappingFragment StoreEntitySet="view_moneda">
                 <ScalarProperty Name="signo" ColumnName="signo" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="id_denominacion" ColumnName="id_denominacion" />
+                <ScalarProperty Name="id_Denominacion" ColumnName="id_Denominacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2372,7 +2456,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
                 <ScalarProperty Name="cantidad" ColumnName="cantidad" />
                 <ScalarProperty Name="id_arqueocaja_det" ColumnName="id_arqueocaja_det" />
                 <ScalarProperty Name="valor" ColumnName="valor" />
-                <ScalarProperty Name="id_denominacion" ColumnName="id_denominacion" />
+                <ScalarProperty Name="id_Denominacion" ColumnName="id_Denominacion" />
                 <ScalarProperty Name="moneda" ColumnName="moneda" />
                 <ScalarProperty Name="id_moneda" ColumnName="id_moneda" />
                 <ScalarProperty Name="fecha_arqueo" ColumnName="fecha_arqueo" />
@@ -2380,25 +2464,6 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
                 <ScalarProperty Name="id_arqueocaja" ColumnName="id_arqueocaja" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="id_kermesse" ColumnName="id_kermesse" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Vw_Arqueo1">
-            <EntityTypeMapping TypeName="KERMESSEModel.Vw_Arqueo1">
-              <MappingFragment StoreEntitySet="Vw_Arqueo1">
-                <ScalarProperty Name="valor_letras" ColumnName="valor_letras" />
-                <ScalarProperty Name="valor" ColumnName="valor" />
-                <ScalarProperty Name="id_denominacion" ColumnName="id_denominacion" />
-                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
-                <ScalarProperty Name="id_moneda" ColumnName="id_moneda" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="id_kermesse" ColumnName="id_kermesse" />
-                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
-                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-                <ScalarProperty Name="id_arqueocaja_det" ColumnName="id_arqueocaja_det" />
-                <ScalarProperty Name="gran_total" ColumnName="gran_total" />
-                <ScalarProperty Name="fecha_arqueo" ColumnName="fecha_arqueo" />
-                <ScalarProperty Name="id_arqueocaja" ColumnName="id_arqueocaja" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2410,7 +2475,7 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
                 <ScalarProperty Name="id_moneda" ColumnName="id_moneda" />
                 <ScalarProperty Name="valor_letras" ColumnName="valor_letras" />
                 <ScalarProperty Name="valor" ColumnName="valor" />
-                <ScalarProperty Name="id_denominacion" ColumnName="id_denominacion" />
+                <ScalarProperty Name="id_Denominacion" ColumnName="id_Denominacion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2427,6 +2492,81 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
                 <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="id_kermesse" ColumnName="id_kermesse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_listaprecio">
+            <EntityTypeMapping TypeName="KERMESSEModel.vw_listaprecio">
+              <MappingFragment StoreEntitySet="vw_listaprecio">
+                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+                <ScalarProperty Name="id_listaprecio" ColumnName="id_listaprecio" />
+                <ScalarProperty Name="precio_venta" ColumnName="precio_venta" />
+                <ScalarProperty Name="producto" ColumnName="producto" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_listaprecio_det" ColumnName="id_listaprecio_det" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vw_Moneda">
+            <EntityTypeMapping TypeName="KERMESSEModel.Vw_Moneda">
+              <MappingFragment StoreEntitySet="Vw_Moneda">
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="valor_letras" ColumnName="valor_letras" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="id_Denominacion" ColumnName="id_Denominacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_opciones">
+            <EntityTypeMapping TypeName="KERMESSEModel.vw_opciones">
+              <MappingFragment StoreEntitySet="vw_opciones">
+                <ScalarProperty Name="opcion" ColumnName="opcion" />
+                <ScalarProperty Name="id_opciones" ColumnName="id_opciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_productos">
+            <EntityTypeMapping TypeName="KERMESSEModel.vw_productos">
+              <MappingFragment StoreEntitySet="vw_productos">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+                <ScalarProperty Name="catprod" ColumnName="catprod" />
+                <ScalarProperty Name="comunidad" ColumnName="comunidad" />
+                <ScalarProperty Name="precio_venta" ColumnName="precio_venta" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="desc_presentacion" ColumnName="desc_presentacion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_rol">
+            <EntityTypeMapping TypeName="KERMESSEModel.vw_rol">
+              <MappingFragment StoreEntitySet="vw_rol">
+                <ScalarProperty Name="rol_desc" ColumnName="rol_desc" />
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_rol_opciones">
+            <EntityTypeMapping TypeName="KERMESSEModel.vw_rol_opciones">
+              <MappingFragment StoreEntitySet="vw_rol_opciones">
+                <ScalarProperty Name="id_opcion" ColumnName="id_opcion" />
+                <ScalarProperty Name="rol_desc" ColumnName="rol_desc" />
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="opcion" ColumnName="opcion" />
+                <ScalarProperty Name="id_rol_opcion" ColumnName="id_rol_opcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_rol_usuario">
+            <EntityTypeMapping TypeName="KERMESSEModel.vw_rol_usuario">
+              <MappingFragment StoreEntitySet="vw_rol_usuario">
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="rol_desc" ColumnName="rol_desc" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_rol_usuario" ColumnName="id_rol_usuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2450,31 +2590,6 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_productos' no tiene definida
                 <ScalarProperty Name="precio_producto" ColumnName="precio_producto" />
                 <ScalarProperty Name="total_bonos" ColumnName="total_bonos" />
                 <ScalarProperty Name="id_ingresocom_det" ColumnName="id_ingresocom_det" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Vw_Moneda">
-            <EntityTypeMapping TypeName="KERMESSEModel.Vw_Moneda">
-              <MappingFragment StoreEntitySet="Vw_Moneda">
-                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="valor_letras" ColumnName="valor_letras" />
-                <ScalarProperty Name="valor" ColumnName="valor" />
-                <ScalarProperty Name="id_denominacion" ColumnName="id_denominacion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vw_productos">
-            <EntityTypeMapping TypeName="KERMESSEModel.vw_productos">
-              <MappingFragment StoreEntitySet="vw_productos">
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="id_producto" ColumnName="id_producto" />
-                <ScalarProperty Name="catprod" ColumnName="catprod" />
-                <ScalarProperty Name="comunidad" ColumnName="comunidad" />
-                <ScalarProperty Name="precio_venta" ColumnName="precio_venta" />
-                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
-                <ScalarProperty Name="desc_presentacion" ColumnName="desc_presentacion" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -31,7 +31,6 @@ namespace KermesseApp.Controllers
             if (ModelState.IsValid)
             {
                 tbl_rol trol = new tbl_rol();
-                trol.rol = trl.rol;
                 trol.rol_desc = trl.rol_desc;
                 trol.estado = 1;
                 db.tbl_rol.Add(trol);
@@ -47,6 +46,8 @@ namespace KermesseApp.Controllers
             tbl_rol trol = new tbl_rol();
             trol = db.tbl_rol.Find(id);
             db.tbl_rol.Remove(trol);
+
+
 
             db.SaveChanges();
             var list = db.tbl_rol.ToList();
@@ -91,7 +92,6 @@ namespace KermesseApp.Controllers
                 }            
 
         }
-
         [HttpPost]
         public ActionResult FiltrarRol(String cadena)
         {
@@ -102,28 +102,36 @@ namespace KermesseApp.Controllers
             }
             else
             {
-                var listFiltrada = db.tbl_rol.Where(X => X.rol.Contains(cadena) || X.rol_desc.Contains(cadena) );
+                var listFiltrada = db.tbl_rol.Where(X => X.rol_desc.Contains(cadena));
                 return View("ListRol", listFiltrada);
             }
 
         }
 
-        public ActionResult VerRptRol(String tipo)
+        public ActionResult VerRptRol(string tipo, string cadena)
         {
             LocalReport rpt = new LocalReport();
             String mt, enc, f;
             String[] s;
             Warning[] w;
 
-            String ruta = Path.Combine(Server.MapPath("~/Reportes"), "rptRol.rdlc");
+            string ruta = Path.Combine(Server.MapPath("~/Reportes"), "rptRol.rdlc");
             rpt.ReportPath = ruta;
 
-            List<tbl_rol> listaRol = new List<tbl_rol>();
-            listaRol = db.tbl_rol.ToList();
+            ReportDataSource rd = null;
+            if (string.IsNullOrEmpty(cadena))
+            {
+                var lista = db.tbl_usuario.ToList();
+                rd = new ReportDataSource("dsRptRol", lista);
 
-            ReportDataSource rds = new ReportDataSource("dsRptRol", listaRol);
-            rpt.DataSources.Add(rds);
+            }
+            else
+            {
+                var lista = db.tbl_usuario.Where(x => x.usuario.Contains(cadena) || x.nombres.Contains(cadena) || x.email.Contains(cadena));
+                rd = new ReportDataSource("dsRptRol", lista);
+            }
 
+            rpt.DataSources.Add(rd);
             var b = rpt.Render(tipo, null, out mt, out enc, out f, out s, out w);
 
             return new FileContentResult(b, mt);

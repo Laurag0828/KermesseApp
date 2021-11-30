@@ -17,7 +17,7 @@ namespace KermesseApp.Models
         public int id_listaprecio_det { get; set; }
         public int id_listaprecio { get; set; }
         public int id_producto { get; set; }
-        public decimal precio_venta { get; set; }
+        public double precio_venta { get; set; }
     
         public virtual tbl_listaprecio tbl_listaprecio { get; set; }
         public virtual tbl_productos tbl_productos { get; set; }

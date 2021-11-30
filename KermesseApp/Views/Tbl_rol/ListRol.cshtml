@@ -1,55 +1,92 @@
-﻿@model IEnumerable<KermesseApp.Models.tbl_rol>
+﻿using KermesseApp.Models;
+
+    @{
+        /*Instanciamos objetos y variables */
+        KERMESSEEntities db = new KERMESSEEntities();
+        tbl_usuario tu = new tbl_usuario();
+        tbl_rol_usuario tru = new tbl_rol_usuario();
+        List<vw_rol_opciones> listopc = new List<vw_rol_opciones>();
+        Int32 idRol = 0;
+        String opcion = "";
+        Int32 longitud = 0;
+        Boolean acceso = false;
+
+        /* Obtenemos la sesion */
+        tu = Session["usuario"] as tbl_usuario;
+
+        /* Obtenemos el rol del usuario*/
+        tru = db.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+        idRol = tru.id_rol;
+        /* Obtenemos la lista de opciones del rol*/
+        listopc = db.vw_rol_opciones.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+        string url = HttpContext.Current.Request.Url.AbsoluteUri;
+        string[] separado = url.Split('/');
+        string opcionActual = separado[separado.Length - 1];
+
+        longitud = listopc.Count();//Obtenemos la cantidad de elementos
+        for (int i = 0; i < longitud; i++)
+        {
+            //obtenemos la columna opcion de la matriz y/o lista de elementos
+            opcion = listopc[i].opcion;
+            if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+            {
+                acceso = true; //ACCESO CONCEDIDO
+                break;
+            }
+        }
+        if (!acceso)
+        {
+            Response.Redirect("~/Home/Error");
+        }
+
+    }
+@model IEnumerable<KermesseApp.Models.tbl_rol>
 
 @{
     ViewBag.Title = "tbl_rol";
 }
 
-<h2>Lista de Roles</h2>
 
-<div class="btn-nuevo">
-    <a href="@Url.Action("VGuardarRol", "Tbl_rol")">
-        <button type="button" class="btn btn-outline-primary btn-md">
-            <i class="fas fa-plus"></i> Nuevo Rol
-        </button>
-    </a>
-</div>
+<p>
+    @Html.ActionLink("Nuevo Rol", "VGuardarRol")
+</p>
 
-@*Filtro de busqueda*@
+
 @using (Html.BeginForm("FiltrarRol", "Tbl_rol", FormMethod.Post))
 {
-    <div class="row">
-
-        <div class="form-group col-xs-4 col-md-4">
-
-            @Html.ActionLink("PDF", "#", new { tipo = "PDF" }, new { @class = "btn btn-warning" })
-            @Html.ActionLink("Word", "#", new { tipo = "Word" }, new { @class = "btn btn-info" })
-            @Html.ActionLink("Excel", "#", new { tipo = "Excel" }, new { @class = "btn btn-success" })
-
+    <div class="card-header">
+        <h2>Tablas de Roles</h2>
+    </div>
+    <div class="card-body form-horizontal container-fluid justify-content-center">
+        <div class="row">
+            <div class="form-group col-xs-8 col-md-8">
+                <span class="input-group">
+                    @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese aqui los datos de la busqueda" })
+                    <button type="submit" class="btn btn-success col-md-2">Buscar</button>
+                </span>
+            </div>
         </div>
 
-        <div class="form-group col-xs-8 col-md-8">
-            <div class="input-group busqueda">
-                @Html.TextBox("cadena", null, new { @class = "form-control col-md-6", @placeholder = "Buscar" })
-                <button type="submit" class="btn btn-light col-md-2">Buscar</button>
-            </div>
+        <div class="form-group col-xs-4 col-md-4">
+            @*Mandamos a llamar el reporte en los distintos formatos*@
+            @Html.ActionLink("PDF", "VerRptRol", new { tipo = "PDF", cadena = Request.Form["cadena"] }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Excel", "VerRptRol", new { tipo = "Excel" }, new { @class = "btn btn-success" })
+
+
         </div>
 
     </div>
 
 }
-<br />
-
-<table class="table table-bordered table-hover">
-    <tr class="table-primary">
-        <th>
-            @Html.DisplayNameFor(model => model.rol)
-        </th>
+<table class="table">
+    <tr>
         <th>
             @Html.DisplayNameFor(model => model.rol_desc)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.estado)
-        </th>*@
+                @Html.DisplayNameFor(model => model.estado)
+            </th>*@
         <th></th>
     </tr>
     @if (Model != null)
@@ -58,18 +95,15 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.rol)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.rol_desc)
                 </td>
                 @*<td>
                         @Html.DisplayFor(modelItem => item.estado)
                     </td>*@
-                <td class="col-4">
+                <td>
                     @Html.ActionLink("Editar", "EditRol", new { id = item.id_rol }, new { @Class = "btn btn-outline-success btn-sm" }) |
                     @Html.ActionLink("Ver", "VerRol", new { id = item.id_rol }, new { @Class = "btn btn-outline-info btn-sm" }) |
-                    @Html.ActionLink("Eliminar", "DeleteRol", new { id = item.id_rol }, new { @class = "btn btn-outline-danger btn-sm" }) 
+                    @Html.ActionLink("Eliminar", "DeleteRol", new { id = item.id_rol }, new { @class = "btn btn-outline-danger btn-sm" }) |
                     @*<a href="@Url.Action("DeleteRol", new { id = item.id_rol })" class=" btn btn-xs btn-danger">Eliminar </a>  |
                         <a href="@Url.Action("DeleteRol", new { id = item.id_rol })"><i class=" glyphicon glyphicon-trash" title="Eliminar"></i> </a>  |*@
                 </td>
@@ -77,4 +111,6 @@
         }
     }
 
+
 </table>
+

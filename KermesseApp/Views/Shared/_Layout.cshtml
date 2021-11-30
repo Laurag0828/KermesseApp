@@ -64,6 +64,13 @@
                             <a class="nav-link" href="/tbl_Bono/listar_Bono">Bono</a>
                         </li>
                         <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Lista Precio</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/tbl_listaprecio/ListListaPrecio">Lista de Precio</a>
+                                <a class="dropdown-item" href="/Tbl_listaprecio/VistaRptListaPrecio">Reportes Lista Precio</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Producto</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="/tbl_Producto/listar_Producto">Producto</a>
@@ -87,11 +94,25 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="/Tbl_usuario/ListUsuario">Usuario</a>
                                 <a class="dropdown-item" href="/Tbl_rol/ListRol">Rol</a>
-                                <a class="dropdown-item" href="/tbl_Opcion/listar_Opcion">Opciones</a>
-                                <a class="dropdown-item" href="/Tbl_rolusuario/ListRolUsuario">Rol Usuario</a>
+                                <a class="dropdown-item" href="/Tbl_Opciones/ListOpciones">Opciones</a>
+                                <a class="dropdown-item" href="/Tbl_rolusuario/ListarRolUsuario">Rol Usuario</a>
+                                <a class="dropdown-item" href="/Tbl_rolopciones/ListRolOpciones">Rol Opciones</a>
                                 <a class="dropdown-item" href="/Tbl_rolopciones/ListRolOpciones">Rol Opciones</a>
                             </div>
                         </li>
+
+                        <div class="navbar-collapse collapse col-md-2">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a href="@Url.Action("Logout", "tbl_usuario")">
+                                        <i class="glyphicon glyphicon-off"></i>
+                                        <span>
+                                            <strong>Cerrar Sesión</strong>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </ul>
                     @*<form class="d-flex">
                             <input class="form-control me-sm-2" type="text" placeholder="Search">
