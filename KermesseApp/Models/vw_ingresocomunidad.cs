@@ -27,5 +27,9 @@ namespace KermesseApp.Models
         public int cantidad { get; set; }
         public decimal subtotal { get; set; }
         public int estado { get; set; }
+        public int id_producto { get; set; }
+        public int id_comunidad { get; set; }
+        public int id_kermesse { get; set; }
+        public int id_bono { get; set; }
     }
 }

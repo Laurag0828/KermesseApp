@@ -19,8 +19,8 @@ namespace KermesseApp.Models
         {
             this.tbl_arqueocaja = new HashSet<tbl_arqueocaja>();
             this.tbl_gastos = new HashSet<tbl_gastos>();
-            this.tbl_listaprecio = new HashSet<tbl_listaprecio>();
             this.tbl_ingreso_com = new HashSet<tbl_ingreso_com>();
+            this.tbl_listaprecio = new HashSet<tbl_listaprecio>();
         }
     
         public int id_kermesse { get; set; }
@@ -42,12 +42,12 @@ namespace KermesseApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_gastos> tbl_gastos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_listaprecio> tbl_listaprecio { get; set; }
+        public virtual ICollection<tbl_ingreso_com> tbl_ingreso_com { get; set; }
+        public virtual tbl_parroquia tbl_parroquia { get; set; }
         public virtual tbl_usuario tbl_usuario { get; set; }
         public virtual tbl_usuario tbl_usuario1 { get; set; }
         public virtual tbl_usuario tbl_usuario2 { get; set; }
-        public virtual tbl_parroquia tbl_parroquia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_ingreso_com> tbl_ingreso_com { get; set; }
+        public virtual ICollection<tbl_listaprecio> tbl_listaprecio { get; set; }
     }
 }

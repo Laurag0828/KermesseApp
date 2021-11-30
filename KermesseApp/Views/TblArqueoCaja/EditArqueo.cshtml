@@ -1,0 +1,58 @@
+﻿@model KermesseApp.Models.tbl_arqueocaja
+
+@{
+    ViewBag.Title = "EditArqueo";
+}
+
+<div class="card border-secondary formulario">
+
+    @using (Html.BeginForm("UpdateArqueo", "TblArqueoCaja", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        
+        <div class="card-header">
+            <h2>Editar Arqueo</h2>
+        </div>
+
+        <div class="card-body form-horizontal container-fluid">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.id_arqueocaja)
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.id_kermesse, "Nombre Kermesse: ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.id_kermesse, null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.id_kermesse, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.fecha_arqueo, "Fecha de Arqueo: ", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fecha_arqueo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.fecha_arqueo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                @*@Html.LabelFor(model => model.gran_total, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.gran_total, new { htmlAttributes = new { @class = "form-control", @hidden = "true" } })
+                    @Html.ValidationMessageFor(model => model.gran_total, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <br />
+
+            <div class="form-group row justify-content-center">
+                <input type="submit" value="Guardar" class="btn btn-success col-md-2" />
+                <input type="reset" value="Cancelar" class="btn btn-danger col-md-2" />
+            </div>
+        </div>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Regresar", "ListArqueo")
+</div>

@@ -1,0 +1,49 @@
+﻿@model KermesseApp.Models.tbl_arqueocaja_det
+
+@{
+    ViewBag.Title = "VerDetalle";
+}
+
+<h2>Ver Detalle</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            Moneda: 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_moneda.nombre)
+        </dd>
+
+        <dt>
+            Valor en letras:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_denominacion.valor_letras)
+        </dd>
+
+        <dt>
+            Cantidad:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cantidad)
+        </dd>
+
+        <dt>
+            Subtotal:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.subtotal)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Regresar", "VerArqueo", new { id = Model.id_arqueocaja })
+</p>

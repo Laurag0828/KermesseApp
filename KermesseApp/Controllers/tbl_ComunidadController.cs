@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using KermesseApp.Models;
+using Microsoft.Reporting.WebForms;
 
 namespace KermesseApp.Models
 {
@@ -149,6 +151,37 @@ namespace KermesseApp.Models
 
                 return View("listar_Comunidad", list_encontrada);
             }
+        }
+
+        public ActionResult reporteComunidad(string tipo, string cadena)
+        {
+
+            LocalReport rpt = new LocalReport();
+            string mt, enc, f;
+            string[] s;
+            Warning[] w;
+
+            string ruta = Path.Combine(Server.MapPath("~/Reportes"), "rptComunidad.rdlc");
+            rpt.ReportPath = ruta;
+
+            ReportDataSource rd = null;
+            if (string.IsNullOrEmpty(cadena))
+            {
+                var lista = db.tbl_comunidad.Where(model => model.estado != 3);
+                rd = new ReportDataSource("dsComunidad", lista);
+            }
+            else
+            {
+                var lista = db.tbl_comunidad.Where(x => x.nombre.Contains(cadena) || x.desc_contribucion.Contains(cadena));
+                rd = new ReportDataSource("dsComunidad", lista);
+            }
+
+            rpt.DataSources.Add(rd);
+
+            var b = rpt.Render(tipo, null, out mt, out enc, out f, out s, out w);
+            return new FileContentResult(b, mt);
+
+            return View();
         }
     }
 }

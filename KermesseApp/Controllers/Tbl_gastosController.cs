@@ -64,12 +64,10 @@ namespace KermesseApp.Controllers
                 tgt.id_cat_gasto = tg.id_cat_gasto;
                 tgt.usuario_creacion = 1;
                 tgt.estado = 1;
-
                 db.tbl_gastos.Add(tgt);
                 db.SaveChanges();
-
                 ModelState.Clear();
-                return RedirectToAction("ListGastos");
+                //return RedirectToAction("ListGastos");
             }
 
             ViewBag.id_kermesse = new SelectList(db.tbl_kermesse, "id_kermesse", "nombre");
@@ -119,11 +117,13 @@ namespace KermesseApp.Controllers
         public ActionResult UpdateGasto(tbl_gastos tg) //Actualizamos el campo estado
         {
 
-            tg.estado = 2;
-            db.Entry(tg).State = EntityState.Modified;
-            db.SaveChanges();
+           
+                    tg.estado = 2;
+                    db.Entry(tg).State = EntityState.Modified;
+                    db.SaveChanges();
               
-            return RedirectToAction("ListGastos");
+                return RedirectToAction("ListGastos");
+           
 
         }
 

@@ -15,6 +15,7 @@ namespace KermesseApp.Controllers
 
         private KERMESSEEntities db = new KERMESSEEntities();
 
+        // GET: Tbl_cat_gastos
         public ActionResult ListaCatGastos() //Vista de Cat Gastos
         {
             return View(db.tbl_cat_gastos.ToList());
@@ -35,13 +36,12 @@ namespace KermesseApp.Controllers
                 tcatg.nombre_cat = tcg.nombre_cat;
                 tcatg.desc_cat = tcg.desc_cat;
                 tcatg.estado = 1;
-
                 db.tbl_cat_gastos.Add(tcatg);
                 db.SaveChanges();
             }
-
             ModelState.Clear();
-            return RedirectToAction("ListaCatGastos");
+
+            return View("GuardarCatGast");
         }
 
         public ActionResult DeleteCatGast(int id) //Metodo para eliminar
@@ -116,7 +116,7 @@ namespace KermesseApp.Controllers
 
         }
 
-        public ActionResult ReporteCatGast(string tipo)
+        public ActionResult ReporteCatGast(string tipo, string cadena)
         {
 
             LocalReport rpt = new LocalReport();
@@ -127,10 +127,18 @@ namespace KermesseApp.Controllers
             string ruta = Path.Combine(Server.MapPath("~/Reportes"), "rptCG.rdlc");
             rpt.ReportPath = ruta;
 
-            List<tbl_cat_gastos> lista = new List<tbl_cat_gastos>();
-            lista = db.tbl_cat_gastos.ToList();
+            ReportDataSource rd = null;
+            if (string.IsNullOrEmpty(cadena))
+            {
+                var lista = db.tbl_cat_gastos.ToList();
+                rd = new ReportDataSource("dsrptCG", lista);
+            }
+            else
+            {
+                var lista = db.tbl_cat_gastos.Where(x => x.nombre_cat.Contains(cadena) || x.desc_cat.Contains(cadena));
+                rd = new ReportDataSource("dsrptCG", lista);
+            }
 
-            ReportDataSource rd = new ReportDataSource("dsrptCG", lista);
             rpt.DataSources.Add(rd);
 
             var b = rpt.Render(tipo, null, out mt, out enc, out f, out s, out w);

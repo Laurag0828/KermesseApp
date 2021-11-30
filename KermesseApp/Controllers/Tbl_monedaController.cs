@@ -40,7 +40,8 @@ namespace KermesseApp.Controllers
                 db.SaveChanges();
             }
             ModelState.Clear();
-            return RedirectToAction("tbl_Moneda");
+
+            return View("GuardarMon");
         }
 
         public ActionResult DeleteMon(int id) //Metodo para eliminar
@@ -115,7 +116,7 @@ namespace KermesseApp.Controllers
 
         }
 
-        public ActionResult ReporteMon(string tipo)
+        public ActionResult ReporteMon(string tipo, string cadena)
         {
 
             LocalReport rpt = new LocalReport();
@@ -126,10 +127,18 @@ namespace KermesseApp.Controllers
             string ruta = Path.Combine(Server.MapPath("~/Reportes"), "rptMon.rdlc");
             rpt.ReportPath = ruta;
 
-            List<tbl_moneda> lista = new List<tbl_moneda>();
-            lista = db.tbl_moneda.ToList();
-
-            ReportDataSource rd = new ReportDataSource("dsrptMon", lista);
+            ReportDataSource rd = null;
+            if (string.IsNullOrEmpty(cadena))
+            {
+                var lista = db.tbl_moneda.ToList();
+                rd = new ReportDataSource("dsrptMon", lista);
+            }
+            else
+            {
+                var lista = db.tbl_moneda.Where(x => x.nombre.Contains(cadena) || x.signo.Contains(cadena));
+                rd = new ReportDataSource("dsrptMon", lista);
+            }
+            
             rpt.DataSources.Add(rd);
 
             var b = rpt.Render(tipo, null, out mt, out enc, out f, out s, out w);

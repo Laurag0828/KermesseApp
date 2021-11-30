@@ -1,38 +1,40 @@
-﻿@model IEnumerable<KermesseApp.Models.Vw_Arqueo>
+﻿@model IEnumerable<KermesseApp.Models.tbl_arqueocaja>
 
 @{
     ViewBag.Title = "ListArqueo";
 }
 
-<h2>Lista de Gastos</h2>
+<h2>Arqueo Caja</h2>
 
-<p>
-    @Html.ActionLink("Nuevo ", "GuardarArqueo")
-</p>
+<br>
+
+<a href="@Url.Action("GuardarArqueo", "TblArqueoCaja")">
+    <button type="button" class="btn btn-outline-primary btn-md">
+        <i class="fas fa-plus"></i> &nbsp;Nuevo
+    </button>
+</a>
+<br>
+<br>
 
 @using (Html.BeginForm("FiltroArqueo", "TblArqueoCaja", FormMethod.Post))
 {
     <div class="row">
 
+        <div class="form-group col-xs-4 col-md-4">
+
+
+        </div>
+
         <div class="form-group col-xs-8 col-md-8">
 
             @*<label for="cadena" class="form-label col-md-2">Busqueda: </label>*@
 
-            @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese los datos de busqueda" })
-
-            <span class="input-group">
-                <button type="submit" class="btn btn-block btn-success col-md-2">Buscar</button>
-            </span>
+            <div class="input-group busqueda">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-6", @placeholder = "Ingrese los datos de Busqueda" })
+                <button type="submit" class="btn btn-primary col-md-2">Buscar</button>
+            </div>
 
         </div>
-
-        @*<div class="form-group col-xs-4 col-md-4">
-
-                @Html.ActionLink("PDF", "ReporteG", new { tipo = "PDF" }, new { @class = "btn btn-default" })
-                @Html.ActionLink("Word", "ReporteG", new { tipo = "Word" }, new { @class = "btn btn-info" })
-                @Html.ActionLink("Excel", "ReporteG", new { tipo = "Excel" }, new { @class = "btn btn-success" })
-
-            </div>*@
 
     </div>
 }
@@ -41,72 +43,96 @@
 
 </div>
 
-<table class="table">
-    <tr>
+<table class="table table-bordered table-hover">
+    <tr class="table-primary">
         <th>
-            @Html.DisplayNameFor(model => model.fecha_arqueo)
+            Nombre de Kermesse
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.gran_total)
+            Total
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.cantidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.subtotal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.nombre)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Expr1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.valor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.valor_letras)
+            Fecha de Arqueo
         </th>
         <th>
             Acciones
         </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.fecha_arqueo)
+                @Html.DisplayFor(modelItem => item.tbl_kermesse.nombre)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.gran_total)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.cantidad)
+                @Html.DisplayFor(modelItem => item.fecha_arqueo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.subtotal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Expr1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.valor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.valor_letras)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "EditGastos", new { id = item.id_arqueocaja }, new { @class = "btn btn-xs btn-success" }) |
-                @Html.ActionLink("Ver", "VerGastos", new { id = item.id_arqueocaja }, new { @class = "btn btn-xs btn-primary" }) |
-                @Html.ActionLink("Eliminar", "DeleteGasto", new { id = item.id_arqueocaja }, new { @class = "btn btn-xs btn-danger" })
+                @Html.ActionLink("Editar", "EditArqueo", new { id = item.id_arqueocaja }, new { @class = "btn btn-outline-success btn-sm" }) |
+                @Html.ActionLink("Ver", "VerArqueo", new { id = item.id_arqueocaja }, new { @class = "btn btn-outline-info btn-sm" }) |
+                @Html.ActionLink("Eliminar", "DeleteArqueo", new { id = item.id_arqueocaja }, new { @class = "btn btn-outline-danger btn-sm" })
             </td>
         </tr>
     }
 
 </table>
+
+@*@if (Model.Count() != 0)
+    {
+        foreach (var item in Model)
+        {
+            <div class="panel-body">
+                <table class="table table-striped table-responsive">
+                    <tbody>
+                        <tr>
+                            <td>
+                                Nombre Kermesse: @item.nombre
+                            </td>
+                            <td>
+                                Fecha arqueo: @item.fecha_arqueo
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr>
+                                            <th>Moneda</th>
+                                            <th>Denominacion</th>
+                                            <th>Cantidad</th>
+                                            <th>Subtotal</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                        @{
+                                            var totalBill = 0;
+                                        }
+                                        @foreach (var order in Model)
+                                        {
+                                            <tr>
+                                                <td>@order.moneda</td>
+                                                <td>@order.valor</td>
+                                                <td>@order.cantidad</td>
+                                                <td>@order.subtotal</td>
+                                                <td>
+                                                    @Html.ActionLink("Editar", "EditGastos", new { id = order.id_arqueocaja }, new { @class = "btn btn-xs btn-success" }) |
+                                                    @Html.ActionLink("Ver", "VerGastos", new { id = order.id_arqueocaja }, new { @class = "btn btn-xs btn-primary" }) |
+                                                    @Html.ActionLink("Eliminar", "DeleteArqueo", new { id = order.id_arqueocaja }, new { @class = "btn btn-xs btn-danger" })
+                                                </td>
+                                            </tr>
+                                            totalBill = totalBill + @Convert.ToInt32(order.subtotal);
+                                        }
+                                    </tbody>
+                                </table>
+                                <span class="pull-right" style="margin-right:100px;"><strong>Total Bill :  </strong> @totalBill</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+    }*@
 

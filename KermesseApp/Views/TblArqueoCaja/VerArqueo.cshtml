@@ -1,0 +1,72 @@
+﻿@model IEnumerable<KermesseApp.Models.Vw_Arqueo>
+
+@{
+    ViewBag.Title = "VerArqueo";
+}
+
+<h2>Arqueo Detalle</h2>
+
+@using (Html.BeginForm("FiltroArqueo", "TblArqueoCaja", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="form-group col-xs-4 col-md-4">
+
+            @Html.ActionLink("PDF", "ReporteMon", new { tipo = "PDF" }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("Word", "ReporteMon", new { tipo = "Word" }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Excel", "ReporteMon", new { tipo = "Excel" }, new { @class = "btn btn-success" })
+
+        </div>
+
+        <div class="form-group col-xs-8 col-md-8">
+
+            @*<label for="cadena" class="form-label col-md-2">Busqueda: </label>*@
+
+            <div class="input-group busqueda">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-6", @placeholder = "Buscar" })
+                <button type="submit" class="btn btn-primary col-md-2">Buscar</button>
+            </div>
+
+        </div>
+
+    </div>
+}
+<br />
+
+<table class="table table-bordered table-hover">
+    <tr class="table-primary">
+        <th>Moneda</th>
+        <th>Denominación</th>
+        <th>Cantidad</th>
+        <th>SubTotal</th>
+        <th>Acciones</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(model => item.moneda)
+            </th>
+            <th>
+                @Html.DisplayFor(model => item.valor)
+            </th>
+            <th>
+                @Html.DisplayFor(model => item.cantidad)
+            </th>
+            <th>
+                @Html.DisplayFor(model => item.subtotal)
+            </th>
+            <td>
+                @Html.ActionLink("Editar", "EditArqueoD", new { id = item.id_arqueocaja_det }, new { @class = "btn btn-xs btn-outline-success" }) |
+                @Html.ActionLink("Ver", "VerDetalle", new { id = item.id_arqueocaja_det }, new { @class = "btn btn-xs btn-outline-info" }) |
+                @Html.ActionLink("Eliminar", "DeleteD", new { id = item.id_arqueocaja_det }, new { @class = "btn btn-xs btn-outline-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<p>
+    @Html.ActionLink("Regresar", "ListArqueo")
+</p>

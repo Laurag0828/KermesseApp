@@ -27,10 +27,10 @@ namespace KermesseApp.Models
         public int cant_producto { get; set; }
         public Nullable<decimal> precio_producto { get; set; }
         public decimal total_bonos { get; set; }
-        public Nullable<int> usuario_creacion { get; set; }
+        public int usuario_creacion { get; set; }
         public Nullable<int> usuario_modificacion { get; set; }
         public Nullable<int> usuario_eliminacion { get; set; }
-        public Nullable<System.DateTime> fecha_creacion { get; set; }
+        public System.DateTime fecha_creacion { get; set; }
         public Nullable<System.DateTime> fecha_modificacion { get; set; }
         public Nullable<System.DateTime> fecha_eliminacion { get; set; }
         public int estado { get; set; }

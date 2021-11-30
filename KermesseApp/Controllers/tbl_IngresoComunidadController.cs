@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 using KermesseApp.Models;
+using Microsoft.Reporting.WebForms;
+using System.IO;
+
 
 namespace KermesseApp.Controllers
 {
@@ -18,11 +21,20 @@ namespace KermesseApp.Controllers
             return View(db.tbl_ingreso_com.Where(model => model.estado != 3));
         }
 
+          public ActionResult VistaRptIngresoCom()
+        {
+
+            ViewBag.id_kermesse = new SelectList(db.tbl_kermesse.Where(model => model.estado != 3), "id_kermesse", "nombre");
+            ViewBag.id_comunidad = new SelectList(db.tbl_comunidad.Where(model => model.estado != 3), "id_comunidad", "nombre");
+
+            return View();
+        }
+
         public ActionResult actualizar_IngresoComunidad()
         {
-            ViewBag.id_kermesse = new SelectList(db.tbl_kermesse, "id_kermesse", "nombre");
-            ViewBag.id_comunidad = new SelectList(db.tbl_comunidad, "id_comunidad", "nombre");
-            ViewBag.id_producto = new SelectList(db.tbl_productos, "id_producto", "nombre");
+            ViewBag.id_kermesse = new SelectList(db.tbl_kermesse.Where(model => model.estado != 3), "id_kermesse", "nombre");
+            ViewBag.id_comunidad = new SelectList(db.tbl_comunidad.Where(model => model.estado != 3), "id_comunidad", "nombre");
+            ViewBag.id_producto = new SelectList(db.tbl_productos.Where(model => model.estado != 3), "id_producto", "nombre");
 
             return View();
         }
@@ -83,11 +95,11 @@ namespace KermesseApp.Controllers
         public ActionResult guardar_IngresoComunidad()
         {
 
-            ViewBag.id_kermesse = new SelectList(db.tbl_kermesse, "id_kermesse", "nombre");
-            ViewBag.id_comunidad = new SelectList(db.tbl_comunidad, "id_comunidad", "nombre");
-            ViewBag.id_producto = new SelectList(db.tbl_productos, "id_producto", "nombre");
+            ViewBag.id_kermesse = new SelectList(db.tbl_kermesse.Where(model => model.estado != 3), "id_kermesse", "nombre");
+            ViewBag.id_comunidad = new SelectList(db.tbl_comunidad.Where(model => model.estado != 3), "id_comunidad", "nombre");
+            ViewBag.id_producto = new SelectList(db.tbl_productos.Where(model => model.estado != 3), "id_producto", "nombre");
 
-            ViewBag.id_bono = new SelectList(db.tbl_bonos, "id_bono", "nombre");
+            ViewBag.id_bono = new SelectList(db.tbl_bonos.Where(model => model.estado != 3), "id_bono", "nombre");
 
             return View();
         }
@@ -97,11 +109,11 @@ namespace KermesseApp.Controllers
         public ActionResult guardar_IngresoComunidada(int kermesse, int comunidad, int producto, int cantidadp, int preciop, string total, tbl_ingresocom_det[] detalle)
         {
 
-            ViewBag.id_kermesse = new SelectList(db.tbl_kermesse, "id_kermesse", "nombre");
-            ViewBag.id_comunidad = new SelectList(db.tbl_comunidad, "id_comunidad", "nombre");
-            ViewBag.id_producto = new SelectList(db.tbl_productos, "id_producto", "nombre");
+            ViewBag.id_kermesse = new SelectList(db.tbl_kermesse.Where(model => model.estado != 3), "id_kermesse", "nombre");
+            ViewBag.id_comunidad = new SelectList(db.tbl_comunidad.Where(model => model.estado != 3), "id_comunidad", "nombre");
+            ViewBag.id_producto = new SelectList(db.tbl_productos.Where(model => model.estado != 3), "id_producto", "nombre");
 
-            ViewBag.id_bono = new SelectList(db.tbl_bonos, "id_bono", "nombre");
+            ViewBag.id_bono = new SelectList(db.tbl_bonos.Where(model => model.estado != 3), "id_bono", "nombre");
 
             string result = "Error! Order Is Not Complete!";
             tbl_ingreso_com ingreso = new tbl_ingreso_com();
@@ -187,8 +199,8 @@ namespace KermesseApp.Controllers
         public ActionResult actualizar_IngresoComDet()
         {
 
-            ViewBag.id_bono = new SelectList(db.tbl_bonos, "id_bono", "nombre");
-            ViewBag.id_ingresocom = new SelectList(db.tbl_ingreso_com, "id_ingresocom", "id_ingresocom");
+            ViewBag.id_bono = new SelectList(db.tbl_bonos.Where(model => model.estado != 3), "id_bono", "nombre");
+            ViewBag.id_ingresocom = new SelectList(db.tbl_ingreso_com.Where(model => model.estado != 3), "id_ingresocom", "id_ingresocom");
 
             return View();
         }
@@ -255,6 +267,29 @@ namespace KermesseApp.Controllers
 
             return RedirectToAction("ver_IngresoComDet", new { id = ticd.id_ingresocom, list });
             //return RedirectToAction("VerArqueo", list);
+        }
+
+        [HttpPost]
+        public ActionResult ReporteIngresoCom(tbl_ingreso_com tg)
+        {
+
+            LocalReport rpt = new LocalReport();
+            string mt, enc, f, tipo;
+            string[] s;
+            Warning[] w;
+
+            string ruta = Path.Combine(Server.MapPath("~/Reportes"), "rptIngCom.rdlc");
+            rpt.ReportPath = ruta;
+
+            var listafiltrada = db.vw_ingresocomunidad.Where(x => x.id_kermesse == tg.id_kermesse && x.id_comunidad == tg.id_comunidad && x.estado != 3);
+
+            ReportDataSource rd = new ReportDataSource("dsIngCom", listafiltrada);
+            rpt.DataSources.Add(rd);
+            tipo = "PDF";
+            var b = rpt.Render(tipo, null, out mt, out enc, out f, out s, out w);
+            return new FileContentResult(b, mt);
+
+            return View();
         }
 
     }

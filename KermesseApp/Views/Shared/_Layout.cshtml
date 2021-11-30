@@ -57,6 +57,7 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="/tbl_Comunidad/listar_Comunidad">Comunidad</a>
                                 <a class="dropdown-item" href="/tbl_IngresoComunidad/listar_IngresoComunidad">Ingreso comunidad</a>
+                                <a class="dropdown-item" href="/tbl_IngresoComunidad/VistaRptIngresoCom">Reporte Ingreso Comunidad</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -76,7 +77,9 @@
                                 <a class="dropdown-item" href="/Tbl_denominacion/ListDen">Denominación</a>
                                 <a class="dropdown-item" href="/Tbl_cat_gastos/ListaCatGastos">Categoría de gastos</a>
                                 <a class="dropdown-item" href="/Tbl_gastos/ListGastos">Control de gastos</a>
+                                <a class="dropdown-item" href="/Tbl_gastos/VistaRptGastos">Reporte de gastos</a>
                                 <a class="dropdown-item" href="/TblArqueoCaja/ListArqueo">Arqueo de caja</a>
+                                <a class="dropdown-item" href="/TblArqueoCaja/VistaRptArqueo">Reporte de Arqueo</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -121,46 +124,52 @@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 
+
+
 <script>
     $(document).ready(function () {
 
         eliminarfila();
     });
+
 </script>
 
 <script>
+
     function agregarfila() {
 
-        var bon = $('#bono option:selected').text();
-        var den = $('#denominacion').val();
-        var cant = $('#cant_bono').val();
+        var mon = $('#cbmoneda option:selected').text();
+        var sim = $('#simbol').text();
+        var den = $('#denominacion option:selected').text();
+        var idden = $('#denominacion').val();
+        var cant = $('#cantidad').val();
         var subtotal = $('#valor').val();
-        var idbon = $('#bono').val();
+        var idmon = $('#cbmoneda').val();
 
         console.log(subtotal);
 
-        var m1 = document.getElementById("bono").value;
-        var m2 = document.getElementById("cant_bono").value;
+        var m1 = document.getElementById("denominacion").value;
+        var m2 = document.getElementById("cantidad").value;
         var sub = parseFloat(den) * parseFloat(m2);
 
         document.getElementById("tablaprueba").insertRow(-1).innerHTML =
-            '<td>' + bon + '</td>' +
-            '<td>' + den + '</td>' +
+            '<td>' + mon + '</td>' +
+            '<td>' + sim + '' + den + '</td>' +
             '<td>' + cant + '</td>' +
-            '<td>' + sub + '</td>' +
+            '<td>' + sim + '' + sub + '</td>' +
+            '<td hidden>' + idden + '</td>' +
             '<td hidden>' + sub + '</td>' +
-            '<td hidden>' + idbon + '</td>' +
+            '<td hidden>' + idmon + '</td>' +
             '<td><button type="button" class="btn btn-sm btn-danger borrar"><i class="fas fa-trash-alt"></i></button></td>';
 
         calcularTotal();
         clearItem();
-
     }
 
     function clearItem() {
-        $("#bono").val('');
+        $("#cbmoneda").val('');
         $("#denominacion").val('');
-        $("#cant_bono").val('');
+        $("#cantidad").val('');
 
     }
 
@@ -179,23 +188,24 @@
         $.each($("#tablaprueba tbody tr"), function () {
 
             if ($(this).find('td:eq(0)').html() === undefined) {
-                console.log("Este está nulo")
+                console.log("Esta nulo")
             } else {
-                var subtotal = $(this).find('td:eq(4)').html()
+                var subtotal = $(this).find('td:eq(5)').html()
                 console.log(subtotal);
                 calcular += parseFloat(subtotal);
             }
+
         });
 
         $("#valor").val(calcular);
     }
 
-    function saveIngresoCom(data) {
+    function ArqueoCaja(data) {
         return $.ajax({
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             type: 'POST',
-            url: "/tbl_IngresoComunidad/guardar_IngresoComunidada",
+            url: "/TblArqueoCaja/GuardarArqueoA",
             data: data,
             success: function (result) {
                 alert(result);
@@ -207,7 +217,7 @@
         });
     }
 
-    $("#saveIngresoCom").click(function (e) {
+    $("#ArqueoCaja").click(function (e) {
         e.preventDefault();
 
         var detailArr = [];
@@ -216,38 +226,35 @@
         $.each($("#tablaprueba tbody tr"), function () {
 
             if ($(this).find('td:eq(0)').html() === undefined) {
-                console.log("Este está nulo")
+                console.log("Este es nulo")
             } else {
                 detailArr.push({
-                    id_bono: $(this).find('td:eq(5)').html(),
-                    denominacion: $(this).find('td:eq(1)').html(),
+                    id_moneda: $(this).find('td:eq(6)').html(),
+                    id_denominacion: $(this).find('td:eq(4)').html(),
                     cantidad: $(this).find('td:eq(2)').html(),
-                    subtotal: $(this).find('td:eq(4)').html()
+                    subtotal: $(this).find('td:eq(5)').html()
                 });
             }
-
-        });
+        })
 
         console.log(detailArr);
 
         var data = JSON.stringify({
             kermesse: $("#kermesse").val(),
-            comunidad: $("#comunidad").val(),
-            producto: $("#producto").val(),
-            cantidadp: $("#cant_prod").val(),
-            preciop: $("#precio_prod").val(),
+            fecha_arqueo: $("#fecha").val(),
             total: $("#valor").val(),
             detalle: detailArr
         });
 
         console.log(data);
 
-        $.when(saveIngresoCom(data)).then(function (response) {
+        $.when(ArqueoCaja(data)).then(function (response) {
             console.log(response);
         }).fail(function (err) {
             console.log(err);
-        });
+        })
     });
+
 </script>
 
 </html>

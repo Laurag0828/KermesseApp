@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 using KermesseApp.Models;
+using Microsoft.Reporting.WebForms;
+using System.IO;
 
 namespace KermesseApp.Controllers
 {
@@ -153,6 +155,37 @@ namespace KermesseApp.Controllers
 
                 return View("listar_Parroquia", list_encontrada);
             }
+        }
+
+        public ActionResult reporteParroquia(string tipo, string cadena)
+        {
+
+            LocalReport rpt = new LocalReport();
+            string mt, enc, f;
+            string[] s;
+            Warning[] w;
+
+            string ruta = Path.Combine(Server.MapPath("~/Reportes"), "rptParroquia.rdlc");
+            rpt.ReportPath = ruta;
+
+            ReportDataSource rd = null;
+            if (string.IsNullOrEmpty(cadena))
+            {
+                var lista = db.tbl_parroquia.Where(model => model.estado != 3);
+                rd = new ReportDataSource("dsParroquia", lista);
+            }
+            else
+            {
+                var lista = db.tbl_parroquia.Where(x => x.nombre.Contains(cadena) || x.parroco.Contains(cadena));
+                rd = new ReportDataSource("dsParroquia", lista);
+            }
+
+            rpt.DataSources.Add(rd);
+
+            var b = rpt.Render(tipo, null, out mt, out enc, out f, out s, out w);
+            return new FileContentResult(b, mt);
+
+            return View();
         }
     }
 }

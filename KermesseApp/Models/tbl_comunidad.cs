@@ -17,8 +17,8 @@ namespace KermesseApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tbl_comunidad()
         {
-            this.tbl_productos = new HashSet<tbl_productos>();
             this.tbl_ingreso_com = new HashSet<tbl_ingreso_com>();
+            this.tbl_productos = new HashSet<tbl_productos>();
         }
     
         public int id_comunidad { get; set; }
@@ -28,8 +28,8 @@ namespace KermesseApp.Models
         public int estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbl_productos> tbl_productos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_ingreso_com> tbl_ingreso_com { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbl_productos> tbl_productos { get; set; }
     }
 }

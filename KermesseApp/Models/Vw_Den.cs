@@ -12,13 +12,13 @@ namespace KermesseApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_rol_opciones
+    public partial class Vw_Den
     {
-        public int id_rol_opcion { get; set; }
-        public int id_rol { get; set; }
-        public int id_opcion { get; set; }
-    
-        public virtual tbl_opciones tbl_opciones { get; set; }
-        public virtual tbl_rol tbl_rol { get; set; }
+        public int id_denominacion { get; set; }
+        public decimal valor { get; set; }
+        public string valor_letras { get; set; }
+        public int id_moneda { get; set; }
+        public string nombre { get; set; }
+        public string signo { get; set; }
     }
 }

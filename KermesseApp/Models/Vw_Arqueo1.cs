@@ -12,18 +12,20 @@ namespace KermesseApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_arqueocaja_det
+    public partial class Vw_Arqueo1
     {
-        public int id_arqueocaja_det { get; set; }
         public int id_arqueocaja { get; set; }
-        public int id_moneda { get; set; }
-        public int id_denominacion { get; set; }
+        public System.DateTime fecha_arqueo { get; set; }
+        public decimal gran_total { get; set; }
+        public int id_arqueocaja_det { get; set; }
         public decimal cantidad { get; set; }
         public decimal subtotal { get; set; }
-        public Nullable<int> estado { get; set; }
-    
-        public virtual tbl_arqueocaja tbl_arqueocaja { get; set; }
-        public virtual tbl_denominacion tbl_denominacion { get; set; }
-        public virtual tbl_moneda tbl_moneda { get; set; }
+        public int id_kermesse { get; set; }
+        public string nombre { get; set; }
+        public int id_moneda { get; set; }
+        public string Expr1 { get; set; }
+        public int id_denominacion { get; set; }
+        public decimal valor { get; set; }
+        public string valor_letras { get; set; }
     }
 }

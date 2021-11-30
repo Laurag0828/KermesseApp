@@ -57,7 +57,7 @@ namespace KermesseApp.Controllers
 
             ViewBag.id_moneda = new SelectList(db.tbl_moneda, "id_moneda", "nombre");
 
-            return RedirectToAction("ListDen");
+            return View("GuardarDen");
         }
 
         public ActionResult DeleteDen(int id) //Metodo para eliminar
@@ -131,6 +131,37 @@ namespace KermesseApp.Controllers
                 return View("ListDen", listFiltrada);
             }
 
+        }
+
+        public ActionResult ReporteDen(string tipo, string cadena)
+        {
+
+            LocalReport rpt = new LocalReport();
+            string mt, enc, f;
+            string[] s;
+            Warning[] w;
+
+            string ruta = Path.Combine(Server.MapPath("~/Reportes"), "rptden.rdlc");
+            rpt.ReportPath = ruta;
+
+            ReportDataSource rd = null;
+            if (string.IsNullOrEmpty(cadena))
+            {
+                var lista = db.Vw_Den.ToList();
+                rd = new ReportDataSource("dsrptDen", lista);
+            }
+            else
+            {
+                var lista = db.Vw_Den.Where(x => x.nombre.Contains(cadena) || x.valor_letras.Contains(cadena));
+                rd = new ReportDataSource("dsrptDen", lista);
+            }
+
+            rpt.DataSources.Add(rd);
+
+            var b = rpt.Render(tipo, null, out mt, out enc, out f, out s, out w);
+            return new FileContentResult(b, mt);
+
+            return View();
         }
     }
 }

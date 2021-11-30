@@ -1,0 +1,29 @@
+﻿@model KermesseApp.Models.vw_ingresocomunidad
+
+@{
+    ViewBag.Title = "VistaRptIngresoCom";
+}
+
+<h2>Reporte de Ingreso Comunidad</h2>
+
+@using (Html.BeginForm("ReporteIngresoCom", "tbl_IngresoComunidad", FormMethod.Post))
+{
+<div class="container">
+
+    <div class="form-group">
+        <label>Seleccione la Kermesse: </label>
+        @Html.DropDownListFor(model => model.id_kermesse, ViewBag.id_kermesse as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-select" })
+    </div>
+
+    <div class="form-group">
+        <label>Seleccione la Comunidad: </label>
+        @Html.DropDownListFor(model => model.id_comunidad, ViewBag.id_comunidad as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-select" })
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Generar Reporte</button>
+        <button type="reset" class="btn btn-danger">Cancelar</button>
+    </div>
+
+</div>}
+

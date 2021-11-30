@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using KermesseApp.Models;
+using Microsoft.Reporting.WebForms;
 
 namespace KermesseApp.Controllers
 {
@@ -147,6 +149,60 @@ namespace KermesseApp.Controllers
                 var list_encontrada = db.tbl_cat_producto.Where(x => (x.nombre.Contains(Cadena) || x.descripcion.Contains(Cadena)) && x.estado != 3);
                 return View("listar_CatProducto", list_encontrada);
             }
+        }
+
+        [HttpPost]
+        public ActionResult reporteCatProd(string tipo)
+        {
+
+            LocalReport rpt = new LocalReport();
+            string mt, enc, f;
+            string[] s;
+            Warning[] w;
+
+            string ruta = Path.Combine(Server.MapPath("~/Reportes"), "rptCatProd.rdlc");
+            rpt.ReportPath = ruta;
+
+            var list = db.tbl_cat_producto.Where(model => model.estado != 3);
+
+            ReportDataSource rd = new ReportDataSource("dsCatProd", list);
+            rpt.DataSources.Add(rd);
+
+            var b = rpt.Render(tipo, null, out mt, out enc, out f, out s, out w);
+            return new FileContentResult(b, mt);
+
+            return View();
+        }
+
+        public ActionResult reporteCatProd(string tipo, string cadena)
+        {
+
+            LocalReport rpt = new LocalReport();
+            string mt, enc, f;
+            string[] s;
+            Warning[] w;
+
+            string ruta = Path.Combine(Server.MapPath("~/Reportes"), "rptCatProd.rdlc");
+            rpt.ReportPath = ruta;
+
+            ReportDataSource rd = null;
+            if (string.IsNullOrEmpty(cadena))
+            {
+                var lista = db.tbl_cat_producto.Where(model => model.estado != 3);
+                rd = new ReportDataSource("dsCatProd", lista);
+            }
+            else
+            {
+                var lista = db.tbl_cat_producto.Where(x => x.nombre.Contains(cadena) || x.descripcion.Contains(cadena));
+                rd = new ReportDataSource("dsCatProd", lista);
+            }
+
+            rpt.DataSources.Add(rd);
+
+            var b = rpt.Render(tipo, null, out mt, out enc, out f, out s, out w);
+            return new FileContentResult(b, mt);
+
+            return View();
         }
     }
 }

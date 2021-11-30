@@ -25,7 +25,7 @@ namespace KermesseApp.Models
         public System.DateTime fecha_arqueo { get; set; }
         public decimal gran_total { get; set; }
         public int usuario_creacion { get; set; }
-        public System.DateTime fecha_creacion { get; set; }
+        public Nullable<System.DateTime> fecha_creacion { get; set; }
         public Nullable<int> usuario_modificacion { get; set; }
         public Nullable<System.DateTime> fecha_modificacion { get; set; }
         public Nullable<int> usuario_eliminacion { get; set; }

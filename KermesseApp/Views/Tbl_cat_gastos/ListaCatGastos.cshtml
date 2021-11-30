@@ -21,7 +21,7 @@
 
         <div class="form-group col-xs-4 col-md-4">
 
-            @Html.ActionLink("PDF", "ReporteCatGast", new { tipo = "PDF" }, new { @class = "btn btn-warning" })
+            @Html.ActionLink("PDF", "ReporteCatGast", new { tipo = "PDF", cadena = Request.Form["cadena"] }, new { @class = "btn btn-warning" })
             @Html.ActionLink("Word", "ReporteCatGast", new { tipo = "Word" }, new { @class = "btn btn-info" })
             @Html.ActionLink("Excel", "ReporteCatGast", new { tipo = "Excel" }, new { @class = "btn btn-success" })
 
