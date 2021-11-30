@@ -10,7 +10,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{BEFE720D-C887-4037-A7A2-5CAEC1F81ACB}</ProjectGuid>
+    <ProjectGuid>{3B44C7B9-B99A-4214-A89A-898FFA699A85}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -20,7 +20,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44324</IISExpressSSLPort>
+    <IISExpressSSLPort>44356</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -153,20 +153,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TblArqueoCajaController.cs" />
-    <Compile Include="Controllers\tbl_BonoController.cs" />
-    <Compile Include="Controllers\tbl_CatProductoController.cs" />
-    <Compile Include="Controllers\Tbl_cat_gastosController.cs" />
-    <Compile Include="Controllers\tbl_ComunidadController.cs" />
-    <Compile Include="Controllers\Tbl_denominacionController.cs" />
-    <Compile Include="Controllers\Tbl_gastosController.cs" />
-    <Compile Include="Controllers\tbl_IngresoComunidadController.cs" />
-    <Compile Include="Controllers\tbl_listaprecioController.cs" />
-    <Compile Include="Controllers\Tbl_monedaController.cs" />
-    <Compile Include="Controllers\tbl_OpcionController.cs" />
+    <Compile Include="Controllers\Tbl_listaprecioController.cs" />
     <Compile Include="Controllers\Tbl_opcionesController.cs" />
-    <Compile Include="Controllers\tbl_ParroquiaController.cs" />
-    <Compile Include="Controllers\tbl_ProductoController.cs" />
     <Compile Include="Controllers\Tbl_rolController.cs" />
     <Compile Include="Controllers\Tbl_rolopcionesController.cs" />
     <Compile Include="Controllers\Tbl_rolusuarioController.cs" />
@@ -174,108 +162,120 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelKermesse.Context.cs">
+    <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelKermesse.Context.tt</DependentUpon>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelKermesse.cs">
+    <Compile Include="Models\Model1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelKermesse.Designer.cs">
+    <Compile Include="Models\Model1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelKermesse.edmx</DependentUpon>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_arqueocaja.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_arqueocaja_det.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_bonos.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbl_cat_gastos.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_cat_producto.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_comunidad.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbl_control_gastos.cs" />
+    <Compile Include="Models\tbl_control_gastos.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbl_denominacion.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_gastos.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_ingresocom_det.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_ingreso_com.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_kermesse.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_listaprecio.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_listaprecio_det.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_moneda.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_opciones.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_parroquia.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_productos.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_rol.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbl_rol_opcion.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+    <Compile Include="Models\tbl_rol_opciones.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbl_rol_opciones.cs" />
     <Compile Include="Models\tbl_rol_usuario.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_tasacambio.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_tasacambio_det.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_usuario.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Vw_Arqueo.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+    <Compile Include="Models\vw_listaprecio.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Vw_gastos_cat.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+    <Compile Include="Models\vw_opciones.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\vw_ingresocomunidad.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+    <Compile Include="Models\vw_rol.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\vw_productos.cs">
-      <DependentUpon>ModelKermesse.tt</DependentUpon>
+    <Compile Include="Models\vw_rol_opciones.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_rol_usuario.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reportes\dsRpt.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsRpt.xsd</DependentUpon>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -286,41 +286,41 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\imagenes\Arqueo.png" />
-    <Content Include="Content\imagenes\Bono.png" />
-    <Content Include="Content\imagenes\CatGastos.png" />
-    <Content Include="Content\imagenes\CatProductos.png" />
-    <Content Include="Content\imagenes\Comunidad.png" />
-    <Content Include="Content\imagenes\ControlGastos.png" />
-    <Content Include="Content\imagenes\Denominacion.png" />
     <Content Include="Content\imagenes\estilos.css" />
     <Content Include="Content\imagenes\Gastos.png" />
-    <Content Include="Content\imagenes\Header.png" />
-    <Content Include="Content\imagenes\Iglesia.png" />
     <Content Include="Content\imagenes\Ingresos.png" />
-    <Content Include="Content\imagenes\Kermesse-.png" />
-    <Content Include="Content\imagenes\Moneda.png" />
-    <Content Include="Content\imagenes\Opcion.png" />
-    <Content Include="Content\imagenes\Parroquia-Icon.png" />
-    <Content Include="Content\imagenes\Parroquia.png" />
+    <Content Include="Content\imagenes\Kermesse.png" />
     <Content Include="Content\imagenes\Opciones.png" />
+    <Content Include="Content\imagenes\Parroquia.png" />
     <Content Include="Content\imagenes\Productos.png" />
     <Content Include="Content\imagenes\Rol.png" />
     <Content Include="Content\imagenes\Seguridad.png" />
-    <Content Include="Content\imagenes\Usuario-icon.png" />
-    <Content Include="Content\imagenes\IngresoCom.png" />
-    <Content Include="Content\imagenes\Usuario.png" />
+    <Content Include="Content\imagenes\User.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\ModelKermesse.Context.tt">
+    <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelKermesse.edmx</DependentUpon>
-      <LastGenOutput>ModelKermesse.Context.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ModelKermesse.tt">
+    <Content Include="Models\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelKermesse.edmx</DependentUpon>
-      <LastGenOutput>ModelKermesse.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -338,18 +338,16 @@
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
-    <EntityDeploy Include="Models\ModelKermesse.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelKermesse.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ModelKermesse.edmx.diagram">
-      <DependentUpon>ModelKermesse.edmx</DependentUpon>
+    <Content Include="Reportes\dsRpt.xsc">
+      <DependentUpon>dsRpt.xsd</DependentUpon>
+    </Content>
+    <None Include="Reportes\dsRpt.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsRpt.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reportes\dsRpt.xss">
+      <DependentUpon>dsRpt.xsd</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -391,12 +389,26 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\tbl_listaprecio\VGuardarListaPrecio.cshtml" />
+    <Content Include="Views\Tbl_usuario\ListUsuario.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Tbl_opciones\ListOpciones.cshtml" />
+    <Content Include="Views\Tbl_rol\ListRol.cshtml" />
+    <Content Include="Views\Tbl_usuario\VGuardarUsuario.cshtml" />
+    <Content Include="Views\Tbl_usuario\Details.cshtml" />
+    <Content Include="Views\Tbl_rol\VGuardarRol.cshtml" />
+    <Content Include="Views\Tbl_opciones\VGuardarOpciones.cshtml" />
+    <Content Include="Views\Tbl_usuario\VerUsuario.cshtml" />
+    <Content Include="Views\Tbl_usuario\EditUsuario.cshtml" />
+    <Content Include="Views\Tbl_rol\VerRol.cshtml" />
+    <Content Include="Views\Tbl_rol\EditRol.cshtml" />
+    <Content Include="Views\Tbl_opciones\EditOpciones.cshtml" />
+    <Content Include="Views\Tbl_opciones\VerOpciones.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -406,87 +418,24 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\tbl_Bono\editar_Bono.cshtml" />
-    <Content Include="Views\tbl_Bono\guardar_Bono.cshtml" />
-    <Content Include="Views\tbl_Bono\listar_Bono.cshtml" />
-    <Content Include="Views\tbl_Bono\ver_Bono.cshtml" />
-    <Content Include="Views\tbl_CatProducto\editar_CatProducto.cshtml" />
-    <Content Include="Views\tbl_CatProducto\guardar_CatProducto.cshtml" />
-    <Content Include="Views\tbl_CatProducto\listar_CatProducto.cshtml" />
-    <Content Include="Views\tbl_CatProducto\ver_CatProducto.cshtml" />
-    <Content Include="Views\tbl_Comunidad\editar_Comunidad.cshtml" />
-    <Content Include="Views\tbl_Comunidad\guardar_Comunidad.cshtml" />
-    <Content Include="Views\tbl_Comunidad\listar_Comunidad.cshtml" />
-    <Content Include="Views\tbl_Comunidad\ver_Comunidad.cshtml" />
-    <Content Include="Views\tbl_Opcion\editar_Opcion.cshtml" />
-    <Content Include="Views\tbl_Opcion\guardar_Opcion.cshtml" />
-    <Content Include="Views\tbl_Opcion\listar_Opcion.cshtml" />
-    <Content Include="Views\tbl_Opcion\ver_Opcion.cshtml" />
-    <Content Include="Views\tbl_Parroquia\editar_Parroquia.cshtml" />
-    <Content Include="Views\tbl_Parroquia\guardar_Parroquia.cshtml" />
-    <Content Include="Views\tbl_Parroquia\listar_Parroquia.cshtml" />
-    <Content Include="Views\tbl_Parroquia\ver_Parroquia.cshtml" />
-    <Content Include="Views\tbl_Producto\editar_Producto.cshtml" />
-    <Content Include="Views\tbl_Producto\guardar_Producto.cshtml" />
-    <Content Include="Views\tbl_Producto\listar_Producto.cshtml" />
-    <Content Include="Views\tbl_Producto\ver_Producto.cshtml" />
-    <Content Include="Views\tbl_IngresoComunidad\listar_IngresoComunidad.cshtml" />
-    <Content Include="Views\tbl_IngresoComunidad\guardar_IngresoComunidad.cshtml" />
-    <Content Include="Views\TblArqueoCaja\GuardarArqueo.cshtml" />
-    <Content Include="Views\TblArqueoCaja\ListArqueo.cshtml" />
-    <Content Include="Views\Tbl_cat_gastos\EditCatGast.cshtml" />
-    <Content Include="Views\Tbl_cat_gastos\GuardarCatGast.cshtml" />
-    <Content Include="Views\Tbl_cat_gastos\ListaCatGastos.cshtml" />
-    <Content Include="Views\Tbl_cat_gastos\VerCatGast.cshtml" />
-    <Content Include="Views\tbl_denominacion\EditDen.cshtml" />
-    <Content Include="Views\tbl_denominacion\GuardarDen.cshtml" />
-    <Content Include="Views\tbl_denominacion\ListDen.cshtml" />
-    <Content Include="Views\tbl_denominacion\tbl_Denominacion.cshtml" />
-    <Content Include="Views\tbl_denominacion\VerDen.cshtml" />
-    <Content Include="Views\Tbl_gastos\EditGastos.cshtml" />
-    <Content Include="Views\Tbl_gastos\GuardarGastos.cshtml" />
-    <Content Include="Views\Tbl_gastos\ListGastos.cshtml" />
-    <Content Include="Views\Tbl_gastos\VerGastos.cshtml" />
-    <Content Include="Views\Tbl_gastos\VistaRptGastos.cshtml" />
-    <Content Include="Views\Tbl_moneda\EditMon.cshtml" />
-    <Content Include="Views\Tbl_moneda\GuardarMon.cshtml" />
-    <Content Include="Views\Tbl_moneda\tbl_Moneda.cshtml" />
-    <Content Include="Views\Tbl_moneda\VerMon.cshtml" />
     <Content Include="Views\tbl_listaprecio\ListListaPrecio.cshtml" />
-    <Content Include="Views\tbl_listaprecio\VGuardarListaPrecio.cshtml" />
-    <Content Include="Views\Tbl_opciones\EditOpciones.cshtml" />
-    <Content Include="Views\Tbl_opciones\ListOpciones.cshtml" />
-    <Content Include="Views\Tbl_opciones\tbl_opciones.cshtml" />
-    <Content Include="Views\Tbl_opciones\VerOpciones.cshtml" />
-    <Content Include="Views\Tbl_opciones\VGuardarOpciones.cshtml" />
-    <Content Include="Views\Tbl_rolopciones\EditRolOpciones.cshtml" />
+    <Content Include="Views\tbl_listaprecio\ListListaPrecioDet.cshtml" />
+    <Content Include="Views\tbl_listaprecio\EditarListaPrecio.cshtml" />
+    <Content Include="Views\tbl_listaprecio\EditarListaPrecioDet.cshtml" />
+    <Content Include="Views\tbl_listaprecio\VGuardarListaPrecioDet.cshtml" />
+    <Content Include="Views\Tbl_rolusuario\ListarRolUsuario.cshtml" />
+    <Content Include="Views\Tbl_rolusuario\VerRolus.cshtml" />
+    <Content Include="Views\Tbl_rolusuario\EditRolUs.cshtml" />
+    <Content Include="Views\Tbl_rolusuario\CreateRolUs.cshtml" />
+    <Content Include="Views\Tbl_rolusuario\DeleteRolUs.cshtml" />
     <Content Include="Views\Tbl_rolopciones\ListRolOpciones.cshtml" />
-    <Content Include="Views\Tbl_rolopciones\Tbl_rolopciones.cshtml" />
     <Content Include="Views\Tbl_rolopciones\VerRolOpciones.cshtml" />
-    <Content Include="Views\Tbl_rolopciones\VistaInsertRolOpciones.cshtml" />
-    <Content Include="Views\Tbl_rolusuario\EditRolUsuario.cshtml" />
-    <Content Include="Views\Tbl_rolusuario\ListRolUsuario.cshtml" />
-    <Content Include="Views\Tbl_rolusuario\Tbl_rolusuario.cshtml" />
-    <Content Include="Views\Tbl_rolusuario\tbl_rol_usuario.cshtml" />
-    <Content Include="Views\Tbl_rolusuario\VerRolUsuario.cshtml" />
-    <Content Include="Views\Tbl_rolusuario\VGuardarRolUsuario.cshtml" />
-    <Content Include="Views\Tbl_rolusuario\VistaInsertRolUsuario.cshtml" />
-    <Content Include="Views\Tbl_rol\EditRol.cshtml" />
-    <Content Include="Views\Tbl_rol\ListRol.cshtml" />
-    <Content Include="Views\Tbl_rol\VerRol.cshtml" />
-    <Content Include="Views\Tbl_rol\VGuardarRol.cshtml" />
-    <Content Include="Views\Tbl_usuario\Details.cshtml" />
-    <Content Include="Views\Tbl_usuario\EditUsuario.cshtml" />
-    <Content Include="Views\Tbl_usuario\gugasardarUsuario.cshtml" />
-    <Content Include="Views\Tbl_usuario\ListUsuario.cshtml" />
-    <Content Include="Views\Tbl_usuario\tbl_opciones.cshtml" />
-    <Content Include="Views\Tbl_usuario\VerUsuario.cshtml" />
-    <Content Include="Views\Tbl_usuario\VGuardarUsuario.cshtml" />
-    <Content Include="Views\Tbl_usuario\View.cshtml" />
-    <Content Include="Views\tbl_IngresoComunidad\editar_IngresoComunidad.cshtml" />
-    <Content Include="Views\tbl_IngresoComunidad\ver_IngresoComDet.cshtml" />
-    <Content Include="Views\tbl_IngresoComunidad\editar_IngresoComDet.cshtml" />
-    <Content Include="Views\tbl_IngresoComunidad\ver_Detalle.cshtml" />
+    <Content Include="Views\Tbl_rolopciones\CreateRolOpciones.cshtml" />
+    <Content Include="Views\Tbl_rolopciones\EditRolOpciones.cshtml" />
+    <Content Include="Views\Tbl_rolopciones\DeleteRolOpciones.cshtml" />
+    <Content Include="Views\Tbl_usuario\ViewLogin.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\tbl_listaprecio\VistaRptListaPrecio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -497,11 +446,19 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.d.ts" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reportes\rptFiltraListaPrecio.rdlc" />
+    <EmbeddedResource Include="Reportes\rptOpciones.rdlc" />
+    <EmbeddedResource Include="Reportes\rptRol.rdlc" />
+    <EmbeddedResource Include="Reportes\rptRolOpc.rdlc" />
+    <EmbeddedResource Include="Reportes\rptRolUs.rdlc" />
+    <EmbeddedResource Include="Reportes\rptUsuario.rdlc" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -520,9 +477,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>59505</DevelopmentServerPort>
+          <DevelopmentServerPort>56975</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44324/</IISUrl>
+          <IISUrl>https://localhost:44356/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

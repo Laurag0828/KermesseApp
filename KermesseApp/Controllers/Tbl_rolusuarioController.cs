@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using KermesseApp.Models;
@@ -9,99 +12,131 @@ using System.Data.Entity;
 using Microsoft.Reporting.WebForms;
 using System.IO;
 
+
 namespace KermesseApp.Controllers
 {
     public class Tbl_rolusuarioController : Controller
     {
-        private KERMESSEEntities db = new KERMESSEEntities();
-        // GET: Tbl_rolusuario
-        public ActionResult ListRolUsuario()
+        private KERMESSEEntities4 db = new KERMESSEEntities4();
+
+        // GET: tbl_rol_usuario
+        public ActionResult ListarRolUsuario
+            ()
         {
-            return View(db.tbl_rol_usuario.ToList());
-        }
-        public ActionResult VGuardarRolUsuario()
-        {
-            return View();
+            var tbl_rol_usuario = db.tbl_rol_usuario.Include(t => t.tbl_rol).Include(t => t.tbl_usuario);
+            return View(tbl_rol_usuario.ToList());
         }
 
-        public ActionResult VistaInsertRolUsuario()
+        // GET: tbl_rol_usuario/Details/5
+        public ActionResult VerRolUs(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbl_rol_usuario tbl_rol_usuario = db.tbl_rol_usuario.Find(id);
+            if (tbl_rol_usuario == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tbl_rol_usuario);
+        }
+
+        // GET: tbl_rol_usuario/Create
+        public ActionResult CreateRolUs()
         {
             ViewBag.id_rol = new SelectList(db.tbl_rol, "id_rol", "rol_desc");
             ViewBag.id_usuario = new SelectList(db.tbl_usuario, "id_usuario", "usuario");
             return View();
         }
 
+        // POST: tbl_rol_usuario/Create
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult GuardarRolUsuario(tbl_rol_usuario trolu)
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateRolUs([Bind(Include = "id_rol_usuario,id_usuario,id_rol")] tbl_rol_usuario tbl_rol_usuario)
         {
             if (ModelState.IsValid)
             {
-                tbl_rol_usuario trolus = new tbl_rol_usuario();
-                trolus.id_rol = trolu.id_rol;
-                trolus.id_usuario = trolu.id_usuario;
-                db.tbl_rol_usuario.Add(trolus);
+                db.tbl_rol_usuario.Add(tbl_rol_usuario);
                 db.SaveChanges();
-                ModelState.Clear();
+                return RedirectToAction("ListarRolUsuario");
             }
-            
-           
 
-            ViewBag.id_rol = new SelectList(db.tbl_rol, "id_rol", "rol_desc");
-            ViewBag.id_usuario = new SelectList(db.tbl_usuario, "id_usuario", "usuario");
-            return View("VistaInsertRolUsuario");
+            ViewBag.id_rol = new SelectList(db.tbl_rol, "id_rol", "rol_desc", tbl_rol_usuario.id_rol);
+            ViewBag.id_usuario = new SelectList(db.tbl_usuario, "id_usuario", "usuario", tbl_rol_usuario.id_usuario);
+            return View(tbl_rol_usuario);
         }
 
-  
-        public ActionResult DeleteRolUsuario(int id)
+        // GET: tbl_rol_usuario/Edit/5
+        public ActionResult EditRolUs(int? id)
         {
-            tbl_rol_usuario tus = new tbl_rol_usuario();
-            tus = db.tbl_rol_usuario.Find(id);
-            int idrolusuario = tus.id_rol_usuario;
-            db.tbl_rol_usuario.Remove(tus);
-            db.SaveChanges();
-
-            var list = db.tbl_rol_usuario.Where(model => model.id_rol_usuario == idrolusuario);
-            return View("ListRolUsuario", list);
-        }
-
-       
-        public ActionResult VerRolUsuario(int id)
-        {
-            var RolUsuario = db.tbl_rol_usuario.Where(x => x.id_rol_usuario == id).First();
-            return View(RolUsuario);
-        }
-
-        public ActionResult EditRolUsuario(int id)
-        {
+            if (id == null)
             {
-                tbl_rol_usuario tru = db.tbl_rol_usuario.Find(id);
-
-                ViewBag.id_rol = new SelectList(db.tbl_rol, "id_rol", "rol_desc");
-                ViewBag.id_usuario = new SelectList(db.tbl_usuario, "id_usuario", "usuario");
-
-                return View(tru);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
+            tbl_rol_usuario tbl_rol_usuario = db.tbl_rol_usuario.Find(id);
+            if (tbl_rol_usuario == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.id_rol = new SelectList(db.tbl_rol, "id_rol", "rol_desc", tbl_rol_usuario.id_rol);
+            ViewBag.id_usuario = new SelectList(db.tbl_usuario, "id_usuario", "usuario", tbl_rol_usuario.id_usuario);
+            return View(tbl_rol_usuario);
         }
 
+        // POST: tbl_rol_usuario/Edit/5
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult UpdRolUsuario(tbl_rol_usuario to)
+        [ValidateAntiForgeryToken]
+        public ActionResult EditRolUs([Bind(Include = "id_rol_usuario,id_usuario,id_rol")] tbl_rol_usuario tbl_rol_usuario)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    db.Entry(to).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
-                return RedirectToAction("ListRolUsuario");
+                db.Entry(tbl_rol_usuario).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("ListarRolUsuario");
             }
-            catch
+            ViewBag.id_rol = new SelectList(db.tbl_rol, "id_rol", "rol_desc", tbl_rol_usuario.id_rol);
+            ViewBag.id_usuario = new SelectList(db.tbl_usuario, "id_usuario", "usuario", tbl_rol_usuario.id_usuario);
+            return View(tbl_rol_usuario);
+        }
+
+        // GET: tbl_rol_usuario/Delete/5
+        public ActionResult DeleteRolUs(int? id)
+        {
+            if (id == null)
             {
-                return View();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            tbl_rol_usuario tbl_rol_usuario = db.tbl_rol_usuario.Find(id);
+            if (tbl_rol_usuario == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tbl_rol_usuario);
+        }
 
+        // POST: tbl_rol_usuario/Delete/5
+        [HttpPost, ActionName("DeleteRolUs")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            tbl_rol_usuario tbl_rol_usuario = db.tbl_rol_usuario.Find(id);
+            db.tbl_rol_usuario.Remove(tbl_rol_usuario);
+            db.SaveChanges();
+            return RedirectToAction("ListarRolUsuario");
+        }
 
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
         [HttpPost]
@@ -110,37 +145,34 @@ namespace KermesseApp.Controllers
             if (String.IsNullOrEmpty(cadena))
             {
                 var list = db.tbl_rol_usuario.ToList();
-                return View("ListRolUsuario", list);
+                return View("ListRolUs", list);
             }
             else
             {
                 var listFiltrada = db.tbl_rol_usuario.Where(X => X.tbl_rol.rol_desc.Contains(cadena));
-                return View("ListRolUsuario", listFiltrada);
+                return View("ListRolUs", listFiltrada);
             }
 
         }
-
-        public ActionResult VerRptRolUsuario(String tipo)
+        public ActionResult VerRptRolUs(String tipo)
         {
             LocalReport rpt = new LocalReport();
             String mt, enc, f;
             String[] s;
             Warning[] w;
 
-            String ruta = Path.Combine(Server.MapPath("~/Reportes"), "rptRolUsuario.rdlc");
+            String ruta = Path.Combine(Server.MapPath("~/Reportes"), "rptRolUs.rdlc");
             rpt.ReportPath = ruta;
 
-            List<tbl_rol_usuario> listaRolUsuario = new List<tbl_rol_usuario>();
-            listaRolUsuario = db.tbl_rol_usuario.ToList();
+            List<vw_rol_usuario> lis = new List<vw_rol_usuario>();
+            lis = db.vw_rol_usuario.ToList();
 
-            ReportDataSource rds = new ReportDataSource("dsRptRolUsuario", listaRolUsuario);
+            ReportDataSource rds = new ReportDataSource("dsRptRolUs", lis);
             rpt.DataSources.Add(rds);
 
             var b = rpt.Render(tipo, null, out mt, out enc, out f, out s, out w);
 
             return new FileContentResult(b, mt);
         }
-
-
     }
 }

@@ -20,8 +20,8 @@ namespace KermesseApp.Models
             this.tbl_arqueocaja_det = new HashSet<tbl_arqueocaja_det>();
         }
     
-        public int id_denominacion { get; set; }
-        public int id_moneda { get; set; }
+        public int id_Denominacion { get; set; }
+        public int idmoneda { get; set; }
         public decimal valor { get; set; }
         public string valor_letras { get; set; }
         public int estado { get; set; }

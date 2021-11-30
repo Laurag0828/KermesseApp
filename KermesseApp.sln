@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KermesseApp", "KermesseApp\KermesseApp.csproj", "{BEFE720D-C887-4037-A7A2-5CAEC1F81ACB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KermesseApp", "KermesseApp\KermesseApp.csproj", "{3B44C7B9-B99A-4214-A89A-898FFA699A85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BEFE720D-C887-4037-A7A2-5CAEC1F81ACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BEFE720D-C887-4037-A7A2-5CAEC1F81ACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BEFE720D-C887-4037-A7A2-5CAEC1F81ACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BEFE720D-C887-4037-A7A2-5CAEC1F81ACB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B44C7B9-B99A-4214-A89A-898FFA699A85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B44C7B9-B99A-4214-A89A-898FFA699A85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B44C7B9-B99A-4214-A89A-898FFA699A85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B44C7B9-B99A-4214-A89A-898FFA699A85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {82D2EDBE-D9AE-4D55-834C-441EE0A311F4}
+		SolutionGuid = {7635B3D5-F0FC-4FD8-9EB6-CC7BE2843291}
 	EndGlobalSection
 EndGlobal

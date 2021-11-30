@@ -25,7 +25,7 @@ namespace KermesseApp.Models
     
         public int id_moneda { get; set; }
         public string nombre { get; set; }
-        public string signo { get; set; }
+        public string simbolo { get; set; }
         public int estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -19,16 +19,15 @@ namespace KermesseApp.Models
         public int id_cat_gasto { get; set; }
         public System.DateTime fecha_gasto { get; set; }
         public string concepto { get; set; }
-        public decimal monto { get; set; }
+        public double monto { get; set; }
         public int estado { get; set; }
         public int usuario_creacion { get; set; }
-        public Nullable<int> usuario_modificacion { get; set; }
-        public Nullable<int> usuario_eliminacion { get; set; }
-        public Nullable<System.DateTime> fecha_creacion { get; set; }
-        public Nullable<System.DateTime> fecha_modificacion { get; set; }
-        public Nullable<System.DateTime> fecha_eliminacion { get; set; }
+        public int usuario_modificacion { get; set; }
+        public int usuario_eliminacion { get; set; }
+        public System.DateTime fecha_creacion { get; set; }
+        public System.DateTime fecha_modificacion { get; set; }
     
-        public virtual tbl_cat_gastos tbl_cat_gastos { get; set; }
+        public virtual tbl_control_gastos tbl_control_gastos { get; set; }
         public virtual tbl_kermesse tbl_kermesse { get; set; }
     }
 }

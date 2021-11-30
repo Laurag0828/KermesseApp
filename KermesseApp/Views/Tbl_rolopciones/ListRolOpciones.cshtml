@@ -1,35 +1,90 @@
-﻿@model IEnumerable<KermesseApp.Models.tbl_rol_opciones>
+﻿@using KermesseApp.Models;
 
 @{
-    ViewBag.Title = "ListRolOpciones";
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities4 db = new KERMESSEEntities4();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<vw_rol_opciones> listopc = new List<vw_rol_opciones>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = db.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = db.vw_rol_opciones.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string[] separado = url.Split('/');
+    string opcionActual = separado[separado.Length - 1];
+
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+
+}
+@model IEnumerable<KermesseApp.Models.tbl_rol_opciones>
+
+@{
+    ViewBag.Title = "Index";
 }
 
-<h2>ListRolOpciones</h2>
-<h3>Buscar Rol Opciones</h3>
+
 
 @using (Html.BeginForm("FiltrarRolOpciones", "Tbl_rolopciones", FormMethod.Post))
 {
-    <div class="row">
-        <div class="form-group col-xs-8 col-md-8">
-            @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese aqui los datos de la busqueda" })
-            <span class="input-group">
-                <button type="submit" class="btn btn-block btn-success col-md-2">Buscar</button>
-            </span>
+    <div class="card-header">
+        <h2>Tablas de roles y opciones</h2>
+    </div>
+    <div class="card-body form-horizontal container-fluid justify-content-center">
+        <div class="row">
+            <div class="form-group col-xs-8 col-md-8">
+                <span class="input-group">
+                    @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese aqui los datos de la busqueda" })
+                    <button type="submit" class="btn btn-success col-md-2">Buscar</button>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group col-xs-4 col-md-4">
+            @*Mandamos a llamar el reporte en los distintos formatos*@
+            @Html.ActionLink("PDF", "VerRptRolOpc", new { tipo = "PDF" }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Excel", "VerRptRolOpc", new { tipo = "Excel" }, new { @class = "btn btn-success" })
+
+
+
         </div>
 
     </div>
 }
-
 <p>
-    @Html.ActionLink("Nueva Rol Opcion", "VistaInsertRolOpciones")
+    @Html.ActionLink("Crear rol de opciones", "CreateRolOpciones")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.tbl_opciones.opcion)
+            @Html.DisplayNameFor(model => model.tbl_rol.rol_desc)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tbl_rol.rol_desc)
+            @Html.DisplayNameFor(model => model.tbl_opciones.opcion)
         </th>
         <th></th>
     </tr>
@@ -38,15 +93,15 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.tbl_opciones.opcion)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.tbl_rol.rol_desc)
             </td>
             <td>
-                @Html.ActionLink("Editar", "EditRolOpciones", new { id = item.id_rol }, new { @Class = "btn btn-xs btn-warning" })  |
-                @Html.ActionLink("Ver", "VerRolOpciones", new { id = item.id_rol }, new { @Class = "btn btn-xs btn-default" }) | |
-                @Html.ActionLink("Eliminar", "DeleteRolOpciones", new { id = item.id_rol }, new { @class = "btn btn-xs btn-danger" })
+                @Html.DisplayFor(modelItem => item.tbl_opciones.opcion)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "EditRolOpciones", new { id = item.id_rol_opcion }, new { @Class = "btn btn-outline-success btn-sm" }) |
+                @Html.ActionLink("Ver", "VerRolOpciones", new { id = item.id_rol_opcion }, new { @Class = "btn btn-outline-info btn-sm" }) |
+                @Html.ActionLink("Eliminar", "DeleteRolOpciones", new { id = item.id_rol_opcion }, new { @class = "btn btn-outline-danger btn-sm" })
             </td>
         </tr>
     }

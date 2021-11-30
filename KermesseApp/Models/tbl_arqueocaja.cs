@@ -20,10 +20,10 @@ namespace KermesseApp.Models
             this.tbl_arqueocaja_det = new HashSet<tbl_arqueocaja_det>();
         }
     
-        public int id_arqueocaja { get; set; }
-        public int id_kermesse { get; set; }
-        public System.DateTime fecha_arqueo { get; set; }
-        public decimal gran_total { get; set; }
+        public int id_ArqueoCaja { get; set; }
+        public int idkermesse { get; set; }
+        public System.DateTime fechaArqueo { get; set; }
+        public decimal granTotal { get; set; }
         public int usuario_creacion { get; set; }
         public System.DateTime fecha_creacion { get; set; }
         public Nullable<int> usuario_modificacion { get; set; }

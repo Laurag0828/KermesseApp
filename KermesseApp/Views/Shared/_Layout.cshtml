@@ -53,20 +53,18 @@
                             <a class="nav-link" href="#">Kermesse</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Comunidad</a>
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Reportes M.D</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/tbl_Comunidad/listar_Comunidad">Comunidad</a>
-                                <a class="dropdown-item" href="/tbl_IngresoComunidad/listar_IngresoComunidad">Ingreso comunidad</a>
+                                <a class="dropdown-item" href="/Tbl_listaprecio/VistaRptListaPrecio">Reportes Lista Precio</a>
                             </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/tbl_Bono/listar_Bono">Bono</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Producto</a>
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Lista Precio</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/tbl_Producto/listar_Producto">Producto</a>
-                                <a class="dropdown-item" href="/tbl_CatProducto/listar_CatProducto">Categoría de productos</a>
+                                <a class="dropdown-item" href="/tbl_listaprecio/ListListaPrecio">Lista de Precio</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -84,11 +82,24 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="/Tbl_usuario/ListUsuario">Usuario</a>
                                 <a class="dropdown-item" href="/Tbl_rol/ListRol">Rol</a>
-                                <a class="dropdown-item" href="/tbl_Opcion/listar_Opcion">Opciones</a>
-                                <a class="dropdown-item" href="/Tbl_rolusuario/ListRolUsuario">Rol Usuario</a>
+                                <a class="dropdown-item" href="/Tbl_Opciones/ListOpciones">Opciones</a>
+                                <a class="dropdown-item" href="/Tbl_rolusuario/ListarRolUsuario">Rol Usuario</a>
                                 <a class="dropdown-item" href="/Tbl_rolopciones/ListRolOpciones">Rol Opciones</a>
                             </div>
                         </li>
+
+                        <div class="navbar-collapse collapse col-md-2">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a href="@Url.Action("Logout", "tbl_usuario")">
+                                        <i class="glyphicon glyphicon-off"></i>
+                                        <span>
+                                            <strong>Cerrar Sesión</strong>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
                     </ul>
                     @*<form class="d-flex">
                             <input class="form-control me-sm-2" type="text" placeholder="Search">
@@ -120,134 +131,4 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-
-<script>
-    $(document).ready(function () {
-
-        eliminarfila();
-    });
-</script>
-
-<script>
-    function agregarfila() {
-
-        var bon = $('#bono option:selected').text();
-        var den = $('#denominacion').val();
-        var cant = $('#cant_bono').val();
-        var subtotal = $('#valor').val();
-        var idbon = $('#bono').val();
-
-        console.log(subtotal);
-
-        var m1 = document.getElementById("bono").value;
-        var m2 = document.getElementById("cant_bono").value;
-        var sub = parseFloat(den) * parseFloat(m2);
-
-        document.getElementById("tablaprueba").insertRow(-1).innerHTML =
-            '<td>' + bon + '</td>' +
-            '<td>' + den + '</td>' +
-            '<td>' + cant + '</td>' +
-            '<td>' + sub + '</td>' +
-            '<td hidden>' + sub + '</td>' +
-            '<td hidden>' + idbon + '</td>' +
-            '<td><button type="button" class="btn btn-sm btn-danger borrar"><i class="fas fa-trash-alt"></i></button></td>';
-
-        calcularTotal();
-        clearItem();
-
-    }
-
-    function clearItem() {
-        $("#bono").val('');
-        $("#denominacion").val('');
-        $("#cant_bono").val('');
-
-    }
-
-    function eliminarfila() {
-        $(document).on('click', '.borrar', function (event) {
-            event.preventDefault();
-            $(this).closest('tr').remove();
-            calcularTotal();
-        });
-    }
-
-    function calcularTotal() {
-
-        var calcular = 0.00;
-
-        $.each($("#tablaprueba tbody tr"), function () {
-
-            if ($(this).find('td:eq(0)').html() === undefined) {
-                console.log("Este está nulo")
-            } else {
-                var subtotal = $(this).find('td:eq(4)').html()
-                console.log(subtotal);
-                calcular += parseFloat(subtotal);
-            }
-        });
-
-        $("#valor").val(calcular);
-    }
-
-    function saveIngresoCom(data) {
-        return $.ajax({
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            type: 'POST',
-            url: "/tbl_IngresoComunidad/guardar_IngresoComunidada",
-            data: data,
-            success: function (result) {
-                alert(result);
-                location.reload();
-            },
-            error: function () {
-                alert("Error!")
-            }
-        });
-    }
-
-    $("#saveIngresoCom").click(function (e) {
-        e.preventDefault();
-
-        var detailArr = [];
-        detailArr.length = 0;
-
-        $.each($("#tablaprueba tbody tr"), function () {
-
-            if ($(this).find('td:eq(0)').html() === undefined) {
-                console.log("Este está nulo")
-            } else {
-                detailArr.push({
-                    id_bono: $(this).find('td:eq(5)').html(),
-                    denominacion: $(this).find('td:eq(1)').html(),
-                    cantidad: $(this).find('td:eq(2)').html(),
-                    subtotal: $(this).find('td:eq(4)').html()
-                });
-            }
-
-        });
-
-        console.log(detailArr);
-
-        var data = JSON.stringify({
-            kermesse: $("#kermesse").val(),
-            comunidad: $("#comunidad").val(),
-            producto: $("#producto").val(),
-            cantidadp: $("#cant_prod").val(),
-            preciop: $("#precio_prod").val(),
-            total: $("#valor").val(),
-            detalle: detailArr
-        });
-
-        console.log(data);
-
-        $.when(saveIngresoCom(data)).then(function (response) {
-            console.log(response);
-        }).fail(function (err) {
-            console.log(err);
-        });
-    });
-</script>
-
 </html>

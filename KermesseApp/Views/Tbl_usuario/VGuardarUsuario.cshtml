@@ -1,76 +1,95 @@
-﻿@model KermesseApp.Models.tbl_usuario
+﻿@using KermesseApp.Models;
 
 @{
-    ViewBag.Title = "Usuario";
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities4 ke = new KERMESSEEntities4();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<vw_rol_opciones> listopc = new List<vw_rol_opciones>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = ke.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = ke.vw_rol_opciones.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string[] separado = url.Split('/');
+    string opcionActual = separado[separado.Length - 1];
+
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+
+
+}
+@model KermesseApp.Models.tbl_usuario
+
+@{
+    ViewBag.Title = "guardarUsuario";
 }
 
-<div class="card border-secondary formulario">
-    @using (Html.BeginForm("GuardarUsuario", "Tbl_usuario", FormMethod.Post))
-    {
-        <div class="card-header">
-            <h2>Nuevo Usuario</h2>
+<h1>Guardar Usuario</h1>
+
+@using (Html.BeginForm("GuardarUsuario", "Tbl_usuario", FormMethod.Post))
+{
+    <div class="container">
+        <div class="form-group">
+            <label> Usuario:</label>
+            @Html.ValidationMessageFor(x => x.usuario, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(x => x.usuario, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>Contraseña: ‏‏‎‎</label>
+            <p></p>
+            @Html.PasswordFor(x => x.pwd)
+            @Html.ValidationMessageFor(x => x.pwd, "", new { @class = "error" })
+            <p></p>
         </div>
 
-        <div class="card-body form-horizontal container-fluid">
-            <div class="form-group row">
-                <label class="col-md-2"> Usuario:</label>
-                <div class="col-md-10">
-                    @Html.ValidationMessageFor(x => x.usuario, "", new { @class = "text-danger" })
-                    @Html.TextBoxFor(x => x.usuario, new { @class = "form-control" })
-                </div>
-            </div>
+        <div class="form-group">
+            <label>Repetir Contraseña‎ </label>
+            <p></p>
+            @Html.PasswordFor(x => x.confirmarpwd)
+            @Html.ValidationMessageFor(x => x.confirmarpwd, "", new { @class = "error" })
 
-            <div class="form-group row">
-                <label class="col-md-2"> Nombres del Usuario: </label>
-                <div class="col-md-10">
-                    @Html.ValidationMessageFor(x => x.nombres, "", new { @class = "text-danger" })
-                    @Html.TextBoxFor(x => x.nombres, new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-md-2"> Apellidos del Usuario: </label>
-                <div class="col-md-10">
-                    @Html.ValidationMessageFor(x => x.apellidos, "", new { @class = "text-danger" })
-                    @Html.TextBoxFor(x => x.apellidos, new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-md-2"> Correo del usuario: </label>
-                <div class="col-md-10">
-                    @Html.ValidationMessageFor(x => x.email, "", new { @class = "text-danger" })
-                    @Html.TextBoxFor(x => x.email, new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-md-2">Contraseña: ‏‏‎‎</label>
-                <div class="col-md-10">
-                    @Html.PasswordFor(x => x.pwd, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => x.pwd, "", new { @class = "error" })
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-md-2">Repetir Contraseña:‎ </label>
-                <div class="col-md-10">
-                    @Html.PasswordFor(x => x.confirmarpwd, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(x => x.confirmarpwd, "", new { @class = "error" })
-                </div>
-            </div>
-
-            <br />
-
-            <div class="form-group row justify-content-center">
-                <input type="submit" value="Guardar" class="btn btn-success col-md-2" />
-                <input type="reset" value="Cancelar" class="btn btn-danger col-md-2" />
-            </div>
         </div>
+        <div class="form-group">
+            <label> Nombres del Usuario</label>
+            @Html.ValidationMessageFor(x => x.nombres, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(x => x.nombres, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label> Correo del usuario:</label>
+            @Html.ValidationMessageFor(x => x.email, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(x => x.email, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Guardar </button>
+            <button type="reset" class="btn btn-danger">Cancelar </button>
+        </div>
+    </div>
 
-    }
-</div>
-
+}
 <div>
     @Html.ActionLink("Regresar", "ListUsuario")
 </div>

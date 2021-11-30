@@ -1,0 +1,42 @@
+﻿@using KermesseApp.Models;
+@model KermesseApp.Models.tbl_rol_usuario
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>¿Borrar este Rol?</h3>
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_rol.rol_desc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_rol.rol_desc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_usuario.usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbl_usuario.usuario)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="BORRAR" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

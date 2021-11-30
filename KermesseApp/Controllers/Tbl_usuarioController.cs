@@ -14,16 +14,19 @@ namespace KermesseApp.Controllers
 {
     public class Tbl_usuarioController : Controller
     {
-        private KERMESSEEntities db = new KERMESSEEntities();
-
+        private KERMESSEEntities4 db = new KERMESSEEntities4();
+        // GET: Tbl_usuario
         public ActionResult ListUsuario() //METODO PARA INVOCAR LA VISTA
         {
             return View(db.tbl_usuario.ToList()); //RETORNA LA VISTA
         }
-
         public ActionResult VGuardarUsuario() //METODO PARA INVOCAR LA VISTA QUE REGISTRA UN NUEVO USUARIO
         {
             return View(); //RETORNA LA VISTA
+        }
+        public ActionResult ViewLogin()
+        {
+            return View();
         }
 
 
@@ -35,7 +38,6 @@ namespace KermesseApp.Controllers
                 tbl_usuario tbus = new tbl_usuario();
                 tbus.usuario = tus.usuario;
                 tbus.nombres = tus.nombres;
-                tbus.apellidos = tus.apellidos;
                 tbus.pwd = tus.pwd;
                 tbus.confirmarpwd = tus.pwd;
                 tbus.email = tus.email;
@@ -45,7 +47,9 @@ namespace KermesseApp.Controllers
 
             }
             ModelState.Clear();
-            return RedirectToAction("ListUsuario");
+            return View("VGuardarUsuario"); //RETORNA LA VISTA VACIA PARA GUARDAR UNA CATEGORIA
+
+
 
         }
 
@@ -55,6 +59,8 @@ namespace KermesseApp.Controllers
             tbl_usuario tus = new tbl_usuario();
             tus = db.tbl_usuario.Find(id);
             db.tbl_usuario.Remove(tus);
+
+
 
             db.SaveChanges();
             var list = db.tbl_usuario.ToList();
@@ -91,14 +97,15 @@ namespace KermesseApp.Controllers
                 {
                     db.Entry(tu).State = EntityState.Modified;
                     db.SaveChanges();
-                }
-                return RedirectToAction("ListUsuario");
             }
+            return RedirectToAction("ListUsuario");
+        }
             catch
             {
                 return View();
             }
 
+ 
         }
 
         [HttpPost]
@@ -111,32 +118,75 @@ namespace KermesseApp.Controllers
             }
             else
             {
-                var listFiltrada = db.tbl_usuario.Where(X => X.nombres.Contains(cadena) || X.apellidos.Contains(cadena) || X.usuario.Contains(cadena));
+                var listFiltrada = db.tbl_usuario.Where(X => X.nombres.Contains(cadena) || X.usuario.Contains(cadena));
                 return View("ListUsuario",listFiltrada);
             }
           
         }
 
-        public ActionResult VerRptUsuario(String tipo)
+        public ActionResult VerRptUsuario(string tipo, string cadena)
         {
             LocalReport rpt = new LocalReport();
             String mt, enc, f;
             String[] s;
             Warning[] w;
 
-            String ruta = Path.Combine(Server.MapPath("~/Reportes"), "rptUsuario.rdlc");
+            string ruta = Path.Combine(Server.MapPath("~/Reportes"), "rptUsuario.rdlc");
             rpt.ReportPath = ruta;
 
-            List<tbl_usuario> listaUsuario = new List<tbl_usuario>();
-            listaUsuario = db.tbl_usuario.ToList();
+            ReportDataSource rd = null;
+            if(string.IsNullOrEmpty(cadena))
+            {
+                var lista = db.tbl_usuario.ToList();
+                rd = new ReportDataSource("dsRptUsuario", lista);
 
-            ReportDataSource rds = new ReportDataSource("dsRptUsuario", listaUsuario);
-            rpt.DataSources.Add(rds);
+            }
+            else
+            {
+                var lista = db.tbl_usuario.Where(x => x.usuario.Contains(cadena) || x.nombres.Contains(cadena) || x.email.Contains(cadena));
+                rd = new ReportDataSource("dsRptUsuario", lista);
+            }
 
+            rpt.DataSources.Add(rd);
             var b = rpt.Render(tipo, null, out mt, out enc, out f, out s, out w);
 
             return new FileContentResult(b, mt);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string username, string password)
+        {
+            if (String.IsNullOrEmpty(username) && String.IsNullOrEmpty(password))
+            {
+                return View("ViewLogin");
+            }
+            else
+            {
+                var objeto = db.tbl_usuario.Where(x => x.usuario.Equals(username) && x.pwd.Equals(password)).FirstOrDefault();
+                if (objeto != null)
+                {
+                    Session["usuario"] = objeto;
+                    return Redirect("~/Home/Index");
+                    //return RedirectToRoute("Default", new { controller = "Home", action = "Index" });
+                    //return this.RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewBag.error = "¡Los datos de accesos son incorrectos, por favor intente nuevamente!";
+                    return View("ViewLogin");
+                }
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            Session.Remove("usuario");
+            return Redirect("~/tbl_usuario/ViewLogin");
+            //return View("ViewLogin");
+        }
+
 
     }
 }

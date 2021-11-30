@@ -1,0 +1,85 @@
+﻿@using KermesseApp.Models;
+
+@{
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities4 db = new KERMESSEEntities4();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<vw_rol_opciones> listopc = new List<vw_rol_opciones>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = db.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = db.vw_rol_opciones.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string[] separado = url.Split('/');
+    string opcionActual = separado[separado.Length - 1];
+
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+
+}
+@model KermesseApp.Models.tbl_listaprecio_det
+
+@{
+    ViewBag.Title = "Editar detalle de la lista de precio";
+}
+
+<h2>Editar Lista de Precio</h2>
+
+@using (Html.BeginForm("ActualizarListaPrecioDet", "Tbl_listaprecio", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <h4>Tabla Lista Precio Detalle</h4>
+    <hr />
+
+    <div class="container">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id_listaprecio_det)
+        @Html.HiddenFor(model => model.id_listaprecio)
+        @{
+            int id = Model.id_listaprecio;
+        }
+
+        <div class="form-group">
+            <label class="form-label mt-2 row">Producto: </label>
+            @Html.DropDownListFor(model => model.id_producto, ViewBag.id_producto as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-select" })
+            @Html.ValidationMessageFor(model => model.id_producto, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.precio_venta, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.precio_venta, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.precio_venta, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="container mt-3 col-xs-1" align="center">
+            <div class="form-group">
+                <input type="submit" value="Guardar cambios" class="btn btn-success" id="btnGuardar" />
+                <a href="@Url.Action("ListListaPrecioDet", new {id})"><i class="btn btn-primary">Regresar</i></a>
+            </div>
+        </div>
+    </div>
+}

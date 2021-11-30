@@ -14,10 +14,10 @@ namespace KermesseApp.Models
     
     public partial class tbl_arqueocaja_det
     {
-        public int id_arqueocaja_det { get; set; }
-        public int id_arqueocaja { get; set; }
-        public int id_moneda { get; set; }
-        public int id_denominacion { get; set; }
+        public int idArqueoCaja_Det { get; set; }
+        public int idArqueoCaja { get; set; }
+        public int idmoneda { get; set; }
+        public int idDenominacion { get; set; }
         public decimal cantidad { get; set; }
         public decimal subtotal { get; set; }
     

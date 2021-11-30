@@ -1,0 +1,122 @@
+﻿@using KermesseApp.Models;
+
+@{
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities4 db = new KERMESSEEntities4();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<vw_rol_opciones> listopc = new List<vw_rol_opciones>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = db.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = db.vw_rol_opciones.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string[] separado = url.Split('/');
+    string opcionActual = separado[separado.Length - 1];
+
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+
+}
+
+@model IEnumerable<KermesseApp.Models.tbl_listaprecio_det>
+
+@{
+    ViewBag.Title = "ListListaPrecioDet";
+}
+
+<h2> Listas de Precio</h2>
+
+
+<div class="form-group col-xs-4 col-md-4">
+    @*Mandamos a llamar el reporte en los distintos formatos*@
+    @Html.ActionLink("PDF", "", new { tipo = "PDF" }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Excel", "", new { tipo = "Excel" }, new { @class = "btn btn-success" })
+
+
+
+</div>
+
+@{
+    var id = Request.Params["id"];
+    int n = 0;
+    int idListaPrecio = 0;
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_productos.nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.precio_venta)
+        </th>
+        <th></th>
+    </tr>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (n == 0)
+            {
+                <p>
+                    <a href="@Url.Action("VGuardarListaPrecioDet", new { id = item.id_listaprecio})"><i class="btn btn-primary">Nuevo Detalle</i></a>
+                </p>
+
+                n++;
+                idListaPrecio = item.id_listaprecio;
+
+                using (Html.BeginForm("FiltrarListaPrecioDet", "Tbl_listaprecio", FormMethod.Post))
+                {
+                    <div class="row">
+                        <div class="form-group col-xs-8 col-md-8">
+                            <span class="input-group">
+                                @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese aquí los datos de la búsqueda" })
+                                @Html.Hidden("id", new { value = idListaPrecio })
+                                <button type="submit" class="btn btn-success col-md-2">Buscar</button>
+                            </span>
+                        </div>
+                    </div>
+                }
+
+                <div class="row"></div>
+            }
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_productos.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.precio_venta)
+                </td>
+
+                <td>
+                    <a href="@Url.Action("EditarListaPrecioDet", new { id = item.id_listaprecio_det})"><i class="btn btn-outline-info">Editar</i></a>  |
+                    <a href="@Url.Action("EliminarListaPrecioDet", new { id = item.id_listaprecio_det})"><i class="btn btn-outline-danger">Eliminar</i></a>
+                </td>
+            </tr>
+        }
+    <tbody>
+</table>
